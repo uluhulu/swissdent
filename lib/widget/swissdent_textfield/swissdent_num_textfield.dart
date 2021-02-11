@@ -4,10 +4,12 @@ import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.d
 
 class SwissdentNumTextField extends StatefulWidget {
   final Function(String unmaskedText) onNumberType;
+  final bool readOnly;
 
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
+    this.readOnly,
   }) : super(key: key);
 
   @override
@@ -50,6 +52,7 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
       controller: controller,
       suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
+      readOnly: widget.readOnly,
     );
   }
 }

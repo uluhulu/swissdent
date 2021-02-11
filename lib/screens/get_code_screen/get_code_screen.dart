@@ -8,7 +8,7 @@ import 'package:swissdent/widget/registration_background/registration_background
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
-import 'package:swissdent/screens/get_code_screen/widget/registration_title.dart';
+import 'package:swissdent/widget/registration_title/registration_title.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/blue_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
@@ -27,7 +27,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return RegistrationScreenBloc();
+        return GetCodeScreenBloc();
       },
       child: Scaffold(
         body: Stack(
@@ -52,13 +52,8 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<RegistrationScreenBloc, RegistrationScreenState>(
+    return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
-        // if (state is TimerCancelState){
-        //   setState(() {
-        //     timer.cancel();
-        //   });
-        // }
       },
       builder: (BuildContext context, state) {
         return Column(
@@ -108,7 +103,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               BlueButton(
                 buttonText: "Далее",
                 isAvaliable: state.getCodeButtonIsAvaliable,
-                sendGetCodeEvent: () {
+                onTap: () {
                   // sendGetCodeEvent(context);
                 },
               )
@@ -116,7 +111,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               BlueButton(
                 buttonText: getCodeText,
                 isAvaliable: state.getCodeButtonIsAvaliable,
-                sendGetCodeEvent: () {
+                onTap: () {
                   sendGetCodeEvent(context);
                 },
               ),
@@ -137,7 +132,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     BuildContext context,
     String number,
   ) {
-    BlocProvider.of<RegistrationScreenBloc>(context).add(
+    BlocProvider.of<GetCodeScreenBloc>(context).add(
       TypeNumberEvent(number),
     );
   }
@@ -145,7 +140,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   void sendGetCodeEvent(
     BuildContext context,
   ) {
-    BlocProvider.of<RegistrationScreenBloc>(context).add(
+    BlocProvider.of<GetCodeScreenBloc>(context).add(
       GetCodeEvent(),
     );
   }
@@ -154,7 +149,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     BuildContext context,
     String code,
   ) {
-    BlocProvider.of<RegistrationScreenBloc>(context).add(
+    BlocProvider.of<GetCodeScreenBloc>(context).add(
       TypeSmsCodeEvent(code),
     );
   }

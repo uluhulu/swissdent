@@ -11,18 +11,28 @@ class SwissdentTextField extends StatelessWidget {
   final Widget suffixWidget;
   final TextStyle hintStyle;
   final bool isVisible;
+  final bool obscureText;
   final TextInputType keyboardType;
+  final FocusNode focusNode;
+  final bool autofocus;
+  final bool readOnly;
+  final Function(String text) onSubmitted;
 
   SwissdentTextField({
     Key key,
     this.maxLength = 100,
     this.formatter,
+    this.obscureText = false,
     this.controller,
     this.hintText = "",
     this.suffixWidget,
     this.hintStyle,
     this.isVisible = false,
     this.keyboardType = TextInputType.text,
+    this.focusNode,
+    this.autofocus = false,
+    this.onSubmitted,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -48,7 +58,12 @@ class SwissdentTextField extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 23.0),
               child: TextField(
+                onSubmitted:onSubmitted ?? (text){},
+                autofocus: autofocus,
+                focusNode: focusNode ?? FocusNode(),
                 keyboardType: keyboardType,
+                obscureText: obscureText,
+                readOnly: readOnly,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -58,6 +73,7 @@ class SwissdentTextField extends StatelessWidget {
                   contentPadding: EdgeInsets.all(0),
                   hintText: hintText,
                   hintStyle: hintStyle,
+
                   counter: Container(
                     height: 1,
                   ),
@@ -66,7 +82,8 @@ class SwissdentTextField extends StatelessWidget {
                 style: boldStyle,
                 controller: controller ?? TextEditingController(),
                 inputFormatters: [
-                  formatter,
+                  if(formatter != null)
+                    formatter
                 ],
               ),
             ),

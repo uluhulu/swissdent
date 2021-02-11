@@ -6,13 +6,13 @@ import 'package:swissdent/constants/styles.dart';
 class BlueButton extends StatelessWidget {
   final String buttonText;
   final bool isAvaliable;
-  final Function() sendGetCodeEvent;
+  final Function() onTap;
 
   const BlueButton({
     Key key,
     this.buttonText,
     this.isAvaliable = false,
-    this.sendGetCodeEvent,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class BlueButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50.0),
         ),
-        onPressed: isAvaliable ? () => sendGetCodeEvent() : null,
+        onPressed: isAvaliable ? () => onTap() : null,
         child: Text(
           buttonText,
           style: semiBold17WhiteStyle,

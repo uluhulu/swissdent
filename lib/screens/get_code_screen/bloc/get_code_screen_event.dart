@@ -1,25 +1,25 @@
-class RegistrationScreenEvent {}
+class GetCodeScreenEvent {}
 
-class TypeNumberEvent extends RegistrationScreenEvent {
+class TypeNumberEvent extends GetCodeScreenEvent {
   final String number;
 
   TypeNumberEvent(this.number);
 }
 
-class TypeSmsCodeEvent extends RegistrationScreenEvent {
+class TypeSmsCodeEvent extends GetCodeScreenEvent {
   final String code;
 
   TypeSmsCodeEvent(this.code);
 }
 
-class GetCodeEvent extends RegistrationScreenEvent {}
+class GetCodeEvent extends GetCodeScreenEvent {}
 
-class UpdateTimerEvent extends RegistrationScreenEvent {
+class UpdateTimerEvent extends GetCodeScreenEvent {
   final int seconds;
 
   UpdateTimerEvent(this.seconds);
 }
 
-class CheckSmsCodeEvent extends RegistrationScreenEvent {}
+class CheckSmsCodeEvent extends GetCodeScreenEvent {}
 
-class NavigateNextScreenEvent extends RegistrationScreenEvent {}
+class NavigateNextScreenEvent extends GetCodeScreenEvent {}

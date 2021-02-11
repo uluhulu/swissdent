@@ -22,4 +22,5 @@ final normal15StyleGrey = normalStyle.copyWith(fontSize: 15, color: registration
 final normal15StyleBlue = normalStyle.copyWith(fontSize: 15, color: registrationTermOfUseBlueColor);
 final semiBold24Style = semiBoldStyle.copyWith(fontSize: 24);
 final semiBold17Style = semiBoldStyle.copyWith(fontSize: 17, color: registrationDescriptionColor);
+final semiBold17BlackStyle = semiBoldStyle.copyWith(fontSize: 17, color: registrationCreatePasswordTextColor);
 final semiBold17WhiteStyle = semiBoldStyle.copyWith(fontSize: 17, color: buttonTextColor);

@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_state.dart';
 
-class RegistrationScreenBloc
-    extends Bloc<RegistrationScreenEvent, RegistrationScreenState> {
+class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   String phoneNumber = '';
   String smsCode = '';
   bool getCodeButtonIsAvaliable = false;
@@ -17,8 +16,8 @@ class RegistrationScreenBloc
   Timer _timer;
   int _seconds = 45;
 
-  RegistrationScreenBloc()
-      : super(RegistrationScreenState(
+  GetCodeScreenBloc()
+      : super(GetCodeScreenState(
           getCodeButtonIsAvaliable: false,
           timerAvaliable: false,
           seconds: 45,
@@ -29,8 +28,8 @@ class RegistrationScreenBloc
   }
 
   @override
-  Stream<RegistrationScreenState> mapEventToState(
-    RegistrationScreenEvent event,
+  Stream<GetCodeScreenState> mapEventToState(
+    GetCodeScreenEvent event,
   ) async* {
     yield* mapTypeNumberEvent(event);
     yield* mapTimerEvent(event);
@@ -39,13 +38,13 @@ class RegistrationScreenBloc
   }
 
   @override
-  Stream<RegistrationScreenState> mapTypeNumberEvent(
-    RegistrationScreenEvent event,
+  Stream<GetCodeScreenState> mapTypeNumberEvent(
+    GetCodeScreenEvent event,
   ) async* {
     if (event is TypeNumberEvent) {
       phoneNumber = event.number;
       codeButtonAvaliableCheck();
-      yield RegistrationScreenState(
+      yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
         seconds: _seconds,
@@ -56,8 +55,8 @@ class RegistrationScreenBloc
   }
 
   @override
-  Stream<RegistrationScreenState> mapGetCodeEvent(
-    RegistrationScreenEvent event,
+  Stream<GetCodeScreenState> mapGetCodeEvent(
+    GetCodeScreenEvent event,
   ) async* {
     if (event is GetCodeEvent) {
       getCodeButtonIsAvaliable = false;
@@ -67,11 +66,11 @@ class RegistrationScreenBloc
   }
 
   @override
-  Stream<RegistrationScreenState> mapTimerEvent(
-    RegistrationScreenEvent event,
+  Stream<GetCodeScreenState> mapTimerEvent(
+    GetCodeScreenEvent event,
   ) async* {
     if (event is UpdateTimerEvent) {
-      yield RegistrationScreenState(
+      yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
         seconds: event.seconds,
@@ -82,13 +81,13 @@ class RegistrationScreenBloc
   }
 
   @override
-  Stream<RegistrationScreenState> mapTypeSmsCodeEvent(
-    RegistrationScreenEvent event,
+  Stream<GetCodeScreenState> mapTypeSmsCodeEvent(
+    GetCodeScreenEvent event,
   ) async* {
     if (event is TypeSmsCodeEvent) {
       smsCode = event.code;
       smsCodeCheck();
-      yield RegistrationScreenState(
+      yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
         seconds: _seconds,

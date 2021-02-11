@@ -1,11 +1,11 @@
-class RegistrationScreenState {
+class GetCodeScreenState {
   final bool getCodeButtonIsAvaliable;
   final bool timerAvaliable;
   final int seconds;
   final bool smsCodeIsAvaliable;
   final bool nextButtonIsVisible;
 
-  RegistrationScreenState({
+  GetCodeScreenState({
     this.getCodeButtonIsAvaliable,
     this.timerAvaliable,
     this.seconds,
@@ -14,4 +14,4 @@ class RegistrationScreenState {
   });
 }
 
-class NavigateNextScreenState extends RegistrationScreenState {}
+class NavigateNextScreenState extends GetCodeScreenState {}

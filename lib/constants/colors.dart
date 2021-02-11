@@ -16,6 +16,7 @@ final registrationTermOfUseGreyColor = palete['gray2'];
 final registrationTermOfUseBlueColor = palete['dark'];
 final registrationTimerColor = palete['alarm'];
 final registrationTimerColorBlack = palete['black'];
+final registrationCreatePasswordTextColor = palete['black'];
 
 final palete = {
   'alarm' : Color(0xffEC2424),
