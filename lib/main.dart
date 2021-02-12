@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
 import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen.dart';
+import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
 import 'package:swissdent/widget/blue_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';

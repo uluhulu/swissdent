@@ -4,12 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
-import 'package:swissdent/screens/registration_screen/bloc/registration_screen_bloc.dart';
-import 'package:swissdent/screens/registration_screen/bloc/registration_screen_event.dart';
-import 'package:swissdent/screens/registration_screen/bloc/registration_screen_state.dart';
-import 'package:swissdent/screens/registration_screen/widgets/password_bottom_sheet.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_bloc.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
+import 'package:swissdent/screens/registration_screen/widgets/bottom_sheet/password_bottom_sheet.dart';
 import 'package:swissdent/screens/registration_screen/widgets/registration_social_icon.dart';
 import 'package:swissdent/screens/registration_screen/widgets/registration_with_accounts.dart';
+import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
+import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/blue_button.dart';
 import 'package:swissdent/widget/registration_background/registration_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
@@ -51,7 +54,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context){
+      create: (BuildContext context) {
         return RegistrationScreenBloc();
       },
       child: Scaffold(
@@ -77,102 +80,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<RegistrationScreenBloc,RegistrationScreenState>(
-      listener: (BuildContext context, state){},
-      builder: (BuildContext context, state){
+    return BlocConsumer<RegistrationScreenBloc, RegistrationScreenState>(
+      listener: (BuildContext context, state) {},
+      builder: (BuildContext context, state) {
         return Column(
           children: [
             RegistrationTitle(),
-            SizedBox(
-              height: 80,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: SwissdentDefaultTextField(
-                hint: nameHint,
-                focusNode: name,
-                onSubmitted: (text) {
-                  onSubmitted(context, surname);
-                },
-                onType: (name) {
-                  sendTypeNameEvent(context, name);
-                },
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: SwissdentDefaultTextField(
-                hint: surnameHint,
-                focusNode: surname,
-                onSubmitted: (text) {
-                  onSubmitted(context, email);
-                },
-                onType: (surname){
-                  sendTypeSurnameEvent(context, surname);
-                },
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: SwissdentNumTextField(
-                readOnly: true,
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: SwissdentTextField(
-                formatter: FilteringTextInputFormatter.deny(RegExp(
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')),
-                hintText: emailHint,
-                hintStyle: normal15Style,
-                focusNode: email,
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 80),
+            _buildRegistrationTextFields(context),
+            SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23),
               child: RegistrationWithAccounts(),
             ),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SocialIcon(
-                  path: iconFacebook,
-                  onIconTap: () {},
-                ),
-                SizedBox(
-                  width: 32,
-                ),
-                SocialIcon(
-                  path: iconGoogle,
-                  onIconTap: () {},
-                ),
-                SizedBox(
-                  width: 32,
-                ),
-                SocialIcon(
-                  path: iconVk,
-                  onIconTap: () {},
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 32,
-            ),
+            SizedBox(height: 24),
+            _buildSocialMediaIcons(context),
+            SizedBox(height: 32),
             BlueButton(
               isAvaliable: state is RegistrationButtonActive ? true : false,
               buttonText: registrationText,
@@ -184,15 +107,89 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ],
         );
       },
+    );
+  }
 
+  Widget _buildRegistrationTextFields(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: SwissdentDefaultTextField(
+            hint: nameHint,
+            focusNode: name,
+            onSubmitted: (text) {
+              onSubmitted(context, surname);
+            },
+            onType: (name) {
+              sendTypeNameEvent(context, name);
+            },
+          ),
+        ),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: SwissdentDefaultTextField(
+            hint: surnameHint,
+            focusNode: surname,
+            onSubmitted: (text) {
+              onSubmitted(context, email);
+            },
+            onType: (surname) {
+              sendTypeSurnameEvent(context, surname);
+            },
+          ),
+        ),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: SwissdentNumTextField(
+            readOnly: true,
+          ),
+        ),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: SwissdentDefaultTextField(
+            hint: emailHint,
+            focusNode: email,
+            onType: (email) {
+              sendTypeEmailEvent(context, email);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSocialMediaIcons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SocialIcon(
+          path: iconFacebook,
+          onIconTap: () {},
+        ),
+        SizedBox(width: 32),
+        SocialIcon(
+          path: iconGoogle,
+          onIconTap: () {},
+        ),
+        SizedBox(width: 32),
+        SocialIcon(
+          path: iconVk,
+          onIconTap: () {},
+        ),
+      ],
     );
   }
 
   void showPasswordBottomSheet(BuildContext blocContext) {
     showModalBottomSheet<void>(
-      context: context,
+      isScrollControlled: true,
+      context: blocContext,
       builder: (BuildContext context) {
-        return PasswordBottomSheet(blocContext: blocContext,);
+        return PasswordBottomSheet();
       },
     );
   }
@@ -201,15 +198,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  void sendTypeNameEvent(BuildContext context, String name){
-    BlocProvider.of<RegistrationScreenBloc>(context).add(
-      TypeNameEvent(name)
-    );
-  }
-  void sendTypeSurnameEvent(BuildContext context, String surname){
-    BlocProvider.of<RegistrationScreenBloc>(context).add(
-        TypeSurnameEvent(surname)
-    );
+  void sendTypeNameEvent(BuildContext context, String name) {
+    BlocProvider.of<RegistrationScreenBloc>(context).add(TypeNameEvent(name));
   }
 
+  void sendTypeEmailEvent(BuildContext context, String email) {
+    BlocProvider.of<RegistrationScreenBloc>(context).add(TypeEmailEvent(email));
+  }
+
+  void sendTypeSurnameEvent(BuildContext context, String surname) {
+    BlocProvider.of<RegistrationScreenBloc>(context)
+        .add(TypeSurnameEvent(surname));
+  }
 }

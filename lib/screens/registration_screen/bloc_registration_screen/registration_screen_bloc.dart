@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swissdent/screens/registration_screen/bloc/registration_screen_state.dart';
-import 'package:swissdent/screens/registration_screen/bloc/registration_screen_event.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
+import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
 
 class RegistrationScreenBloc
     extends Bloc<RegistrationScreenEvent, RegistrationScreenState> {
   String name = '';
   String surname = '';
   String password = '';
+  String email = '';
   String passwordConfirmation = '';
 
   RegistrationScreenBloc() : super(RegistrationScreenState());
@@ -16,6 +17,7 @@ class RegistrationScreenBloc
       RegistrationScreenEvent event) async* {
     yield* mapTypeNameEvent(event);
     yield* mapTypeSurNameEvent(event);
+
   }
 
   Stream<RegistrationScreenState> mapTypeNameEvent(
@@ -33,21 +35,13 @@ class RegistrationScreenBloc
       yield registrationValidation();
     }
   }
+  Stream<RegistrationScreenState> mapTypeEmailEvent(
+      RegistrationScreenEvent event) async* {
+    if (event is TypeEmailEvent) {
+      email = event.email;
+    }
+  }
 
-  Stream<RegistrationScreenState> mapTypePasswordEvent(
-      RegistrationScreenEvent event) async* {
-    if (event is TypePasswordEvent) {
-      password = event.password;
-      yield passwordValidation();
-    }
-  }
-  Stream<RegistrationScreenState> mapTypePasswordConfirmationEvent(
-      RegistrationScreenEvent event) async* {
-    if (event is TypePasswordConfirmation) {
-      passwordConfirmation = event.passwordConfirmation;
-      yield passwordValidation();
-    }
-  }
 
   RegistrationScreenState registrationValidation() {
     if (name.isNotEmpty && surname.isNotEmpty) {
@@ -55,10 +49,5 @@ class RegistrationScreenBloc
     }
     return RegistrationButtonNotActive();
   }
-  RegistrationScreenState passwordValidation() {
-    if (password == passwordConfirmation) {
-      return NavigateNext();
-    }
-    return PaswordNotConfirmed();
-  }
+
 }
