@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       children: [
         SplashWave(),
-        SplashLogo(),
+        SplashLogo(imageWidth: 170, imageHeight: 154, textWidth: 195, textHeight: 48,sizedBoxHeight: 25.85,offset: -100,),
       ],
     );
   }

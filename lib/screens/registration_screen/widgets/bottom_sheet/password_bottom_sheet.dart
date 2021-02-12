@@ -7,6 +7,7 @@ import 'package:swissdent/screens/registration_screen/bloc_registration_screen/r
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
 import 'package:swissdent/screens/registration_screen/widgets/bottom_sheet/bloc/bottom_sheet_state.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
+import 'package:swissdent/screens/splash_screen/splash_screen_registration/splash_screen_registration.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_password_textfield.dart';
@@ -120,7 +121,7 @@ class _PasswordBottomSheetState extends State<PasswordBottomSheet> {
   void navigateToNextScreen() {
     Navigator.of(context).pushAndRemoveUntil(
       buildRoute(
-        SplashScreen(),
+        SplashScreenRegistration(),
       ),
       (route) => false,
     );

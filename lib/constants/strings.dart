@@ -17,3 +17,4 @@ final registrationText = 'Зарегистрироваться';
 final createPasswordText = 'Придумайте пароль';
 final passwordText = 'Пароль';
 final repeatPasswordText = 'Повторите пароль';
+final successfulRegistration = 'Вы успешно зарегестрировались!';

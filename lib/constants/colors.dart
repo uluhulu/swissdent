@@ -9,6 +9,7 @@ final textFieldColor = palete['white'];
 final textFieldBorderColor = palete['gray3'];
 final cursorColor = palete['gray3'];
 final whiteGradientColor = palete['white'];
+final successfulRegistrationTextColor = palete['white'];
 final buttonTextColor = palete['white'];
 final blueGradientColor = palete['alice blue'];
 final registrationDescriptionColor = palete['gray2'];

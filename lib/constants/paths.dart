@@ -7,3 +7,5 @@ final iconGoogle = "assets/icons/icon_google.png";
 final iconVk = "assets/icons/icon_vk.png";
 final iconVisibilityOn = "assets/icons/icon_visibility_on.png";
 final iconVisibilityOff = "assets/icons/icon_visibility_off.png";
+
+final bitbucketpass = '2ZDhuFha9NjLw83urtBD';

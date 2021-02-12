@@ -24,3 +24,4 @@ final semiBold24Style = semiBoldStyle.copyWith(fontSize: 24);
 final semiBold17Style = semiBoldStyle.copyWith(fontSize: 17, color: registrationDescriptionColor);
 final semiBold17BlackStyle = semiBoldStyle.copyWith(fontSize: 17, color: registrationCreatePasswordTextColor);
 final semiBold17WhiteStyle = semiBoldStyle.copyWith(fontSize: 17, color: buttonTextColor);
+final semiBold24WhiteStyle = semiBoldStyle.copyWith(fontSize: 24, color: successfulRegistrationTextColor,height: 1);
