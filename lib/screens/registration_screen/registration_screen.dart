@@ -130,8 +130,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: SwissdentTextField(
-                formatter: FilteringTextInputFormatter.deny(RegExp(
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')),
                 hintText: emailHint,
                 hintStyle: normal15Style,
                 focusNode: email,

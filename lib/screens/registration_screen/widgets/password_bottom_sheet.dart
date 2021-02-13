@@ -64,7 +64,7 @@ class _PasswordBottomSheetState extends State<PasswordBottomSheet> {
     BlocProvider.of<RegistrationScreenBloc>(context)
         .add(TypePasswordEvent(password));
   }
-  void TypePasswordConfirmation(BuildContext context, String passwordConfirmation) {
+  void typePasswordConfirmation(BuildContext context, String passwordConfirmation) {
     BlocProvider.of<RegistrationScreenBloc>(context)
         .add(TypePasswordEvent(passwordConfirmation));
   }
