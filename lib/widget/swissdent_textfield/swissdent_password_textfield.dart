@@ -7,10 +7,12 @@ import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.d
 class SwissdentPasswordField extends StatefulWidget {
   final Function(String password) onPasswordType;
   final String hintText;
+  final FocusNode focusNode;
+  final Function(String text) onSubmitted;
 
   const SwissdentPasswordField({
     Key key,
-    this.onPasswordType, this.hintText,
+    this.onPasswordType, this.hintText, this.focusNode, this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -31,8 +33,15 @@ class _SwissdentPasswordFieldState extends State<SwissdentPasswordField> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SwissdentTextField(
+      focusNode: widget.focusNode,
       maxLength: 16,
       controller: controller,
       isVisible: true,
@@ -41,6 +50,7 @@ class _SwissdentPasswordFieldState extends State<SwissdentPasswordField> {
       keyboardType: TextInputType.text,
       hintText: widget.hintText,
       hintStyle: normal15Style,
+      onSubmitted: widget.onSubmitted,
     );
   }
 

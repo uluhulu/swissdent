@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
-import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
-import 'package:swissdent/screens/registration_screen/registration_screen.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen.dart';
-import 'package:swissdent/widget/blue_button.dart';
-import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
-import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
-import 'package:swissdent/widget/swissdent_textfield/swissdent_sms_code_textfield.dart';
-
-import 'constants/colors.dart';
+import 'package:swissdent/screens/main_menu_screen/main_menu_screen.dart';
+import 'package:swissdent/screens/main_menu_screen/widget/user_card/user_card.dart';
+import 'package:swissdent/screens/main_menu_screen/widget/user_card/widget/user_info/circle_avatar.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +28,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: RegistrationScreen(),
+        home: MainMenuScreen(),
       ),
     );
   }

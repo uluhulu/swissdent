@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
-import 'package:swissdent/widget/registration_background/registration_background.dart';
+import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
@@ -35,7 +35,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             SingleChildScrollView(
               child: Stack(
                 children: [
-                  RegistrationBackground(),
+                  GradientBackground(),
                   RegistrationWave(),
                 ],
               ),
@@ -53,22 +53,17 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
-      listener: (BuildContext context, state) {
-      },
+      listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         return Column(
           children: [
             RegistrationTitle(),
-            SizedBox(
-              height: 24,
-            ),
+            SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 23.0),
               child: RegistrationDescription(),
             ),
-            SizedBox(
-              height: 80,
-            ),
+            SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
@@ -77,9 +72,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 },
               ),
             ),
-            SizedBox(
-              height: 16,
-            ),
+            SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentSmsCodeTextField(
@@ -89,19 +82,15 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 },
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
+            SizedBox(height: 8),
             Opacity(
               opacity: state.timerAvaliable ? 1 : 0,
               child: RegistrationCountdown(timerCount: state.seconds),
             ),
-            SizedBox(
-              height: 11,
-            ),
+            SizedBox(height: 11),
             if (state.nextButtonIsVisible)
               BlueButton(
-                buttonText: "Далее",
+                buttonText: goNextText,
                 isAvaliable: state.getCodeButtonIsAvaliable,
                 onTap: () {
                   // sendGetCodeEvent(context);
@@ -115,9 +104,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                   sendGetCodeEvent(context);
                 },
               ),
-            SizedBox(
-              height: 80,
-            ),
+            SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),

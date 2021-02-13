@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 
 class SwissdentDefaultTextField extends StatefulWidget {
@@ -36,6 +37,7 @@ class _SwissdentDefaultTextFieldState extends State<SwissdentDefaultTextField> {
       focusNode: widget.focusNode,
       controller: controller,
       hintText: widget.hint,
+      hintStyle: normal15Style,
       keyboardType: TextInputType.text,
       onSubmitted: widget.onSubmitted,
     );
