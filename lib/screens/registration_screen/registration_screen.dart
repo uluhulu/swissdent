@@ -14,7 +14,7 @@ import 'package:swissdent/screens/registration_screen/widgets/registration_with_
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/blue_button.dart';
-import 'package:swissdent/widget/registration_background/registration_background.dart';
+import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/registration_title/registration_title.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
@@ -63,7 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SingleChildScrollView(
               child: Stack(
                 children: [
-                  RegistrationBackground(),
+                  GradientBackground(),
                   RegistrationWave(),
                 ],
               ),

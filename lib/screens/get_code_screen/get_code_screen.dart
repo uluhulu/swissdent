@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
-import 'package:swissdent/widget/registration_background/registration_background.dart';
+import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
@@ -35,7 +35,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             SingleChildScrollView(
               child: Stack(
                 children: [
-                  RegistrationBackground(),
+                  GradientBackground(),
                   RegistrationWave(),
                 ],
               ),
