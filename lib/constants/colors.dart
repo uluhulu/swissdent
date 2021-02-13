@@ -25,6 +25,8 @@ final userCardColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final mainMenuBackgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
+final stageCardSeparatorColor = palete['gray4'];
+final stageCardBorderColor = palete['gray4'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
@@ -39,6 +41,7 @@ final palete = {
   'gray2': Color(0xff747A7C),
   'gray3': Color(0xffC2C8CA),
   'gray4': Color(0xffE1E7E9),
+  'gray5': Color(0xff929A9C),
   'white': Color(0xffffffff),
   'solitude': Color(0xffFAFBFC),
   'alice blue': Color(0xffE0EFF5),
