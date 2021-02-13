@@ -44,3 +44,6 @@ final treatmentCostTitle = 'Стоимость лечения';
 final treatmentDiscountTitle = 'С учетом скидки';
 final documentsTitle = 'Документы для налоговой';
 final personalDocumentTitle = 'Личный кабинет';
+final price = 'Стоимость';
+final discount = 'Скидка';
+final total = 'Итог';

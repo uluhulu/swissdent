@@ -49,4 +49,22 @@ final cartItemsMockList = [
     productAmount: '2',
     photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
   ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
 ];

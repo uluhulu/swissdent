@@ -31,6 +31,7 @@ final productDescriptionColor = palete['alarm'];
 final stageCardSeparatorColor = palete['gray4'];
 final stageCardBorderColor = palete['gray4'];
 final appbarColor = palete['solitude'];
+final cartTotalBoardColor = palete['solitude'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
