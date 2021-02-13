@@ -25,6 +25,7 @@ final personalCabinet = 'Личный кабинет';
 final services = 'Услуги';
 final products = 'Товары';
 final team = 'Команда';
+final cart = '"Корзина"';
 final help = 'Помощь';
 final emergencyCallButton = 'Экстренный звонок в клинику';
 final completeTreatmentCardName = 'Пройденное лечение';

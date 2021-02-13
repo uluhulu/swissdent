@@ -22,10 +22,12 @@ final registrationCreatePasswordTextColor = palete['black'];
 final backLeadingButtonColor = palete['blue'];
 final circleAvatarColor = palete['light_with_opacity'];
 final userCardColor = palete['solitude'];
+final cartBackgroundColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final mainMenuBackgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
 final emergencyCallButtonColor = palete['alarm'];
+final productDescriptionColor = palete['alarm'];
 final stageCardSeparatorColor = palete['gray4'];
 final stageCardBorderColor = palete['gray4'];
 
