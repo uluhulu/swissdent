@@ -59,7 +59,7 @@ final normal16StyleBlack = normalStyle.copyWith(
 );
 
 final normal16StyleBlack600 = normal16StyleBlack.copyWith(
- fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w600,
 );
 
 final bold17BlackStyle = boldStyle.copyWith(
@@ -81,6 +81,10 @@ final semiBold17WhiteStyle = semiBoldStyle.copyWith(
 final bold18BlackStyle = boldStyle.copyWith(
   fontSize: 18,
   color: palete['dark'],
+);
+final bold18BlackGrey = boldStyle.copyWith(
+  fontSize: 18,
+  color: palete['gray3'],
 );
 
 final bold20BlackStyle = boldStyle.copyWith(
