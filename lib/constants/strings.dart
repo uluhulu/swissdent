@@ -1,7 +1,8 @@
 final splashText = 'ШВЕЙЦАРСКАЯ СТОМАТОЛОГИЯ';
 final smsConfirmationHintText = 'Введите смс-код';
 final registrationTitle = 'Регистрация';
-final registrationDescription = 'Введите номер мобильного телефона. Для регистрации заполните код, присланный в SMS';
+final registrationDescription =
+    'Введите номер мобильного телефона. Для регистрации заполните код, присланный в SMS';
 final getCodeText = 'Получить код';
 final goNextText = 'Далее';
 final useOfTermText1 = 'Запросив код, пользователь принимает ';
@@ -12,7 +13,8 @@ final timerCountdownText2 = ' секунд';
 final nameHint = 'Имя';
 final surnameHint = 'Фамилия';
 final emailHint = 'Email';
-final registrationWithAccountsHint = 'Или зарегестрируйтесь с помощью аккаунта в соц.сети';
+final registrationWithAccountsHint =
+    'Или зарегестрируйтесь с помощью аккаунта в соц.сети';
 final registrationText = 'Зарегистрироваться';
 final createPasswordText = 'Придумайте пароль';
 final mainMenu = 'Главное меню';
@@ -37,3 +39,8 @@ final orhopedicStageCardTitle = 'Этап ортопедический';
 final preventiveStageCardTitle = 'Этап профилактический';
 final preventiveStageCardSubtitle = 'врач ';
 final stageTitle = 'Этап ';
+final rubPrefix = 'руб';
+final treatmentCostTitle = 'Стоимость лечения';
+final treatmentDiscountTitle = 'С учетом скидки';
+final documentsTitle = 'Документы для налоговой';
+final personalDocumentTitle = 'Личный кабинет';

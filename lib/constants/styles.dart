@@ -80,13 +80,18 @@ final semiBold17WhiteStyle = semiBoldStyle.copyWith(
   fontSize: 17,
   color: palete['white'],
 );
-final bold18BlackStyle = boldStyle.copyWith(
-  fontSize: 18,
-  color: palete['dark'],
+
+final bold18Style = boldStyle.copyWith(fontSize: 18);
+
+final bold18Black = bold18Style.copyWith(
+  color: palete['black'],
 );
-final bold18BlackGrey = boldStyle.copyWith(
-  fontSize: 18,
+final bold18Grey = bold18Style.copyWith(
   color: palete['gray3'],
+);
+
+final bold18Blue = bold18Style.copyWith(
+  color: palete['blue'],
 );
 
 final bold20BlackStyle = boldStyle.copyWith(

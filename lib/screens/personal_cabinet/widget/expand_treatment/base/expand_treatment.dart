@@ -14,10 +14,14 @@ class ExpandTreatment extends StatefulWidget {
   ///body of expand card
   final Widget expandableBody;
 
+  ///expand listener
+  final VoidCallback onExpandListener;
+
   const ExpandTreatment({
     Key key,
     this.cardName,
     this.expandableBody,
+    this.onExpandListener,
   }) : super(key: key);
 
   @override
@@ -49,6 +53,7 @@ class _ExpandTreatmentState extends State<ExpandTreatment>
     _expandableController.addListener(() {
       if (_expandableController.expanded) {
         _animationController.forward();
+        widget.onExpandListener();
       } else {
         _animationController.reverse();
       }
@@ -69,13 +74,15 @@ class _ExpandTreatmentState extends State<ExpandTreatment>
     return ExpandableNotifier(
       child: ScrollOnExpand(
         scrollOnExpand: true,
-        scrollOnCollapse: false,
+        scrollOnCollapse: true,
+
         child: ExpandablePanel(
           controller: _expandableController,
           theme: ExpandableThemeData(
             headerAlignment: ExpandablePanelHeaderAlignment.center,
             tapBodyToCollapse: true,
             iconColor: Colors.black.withOpacity(0.4),
+            scrollAnimationDuration: Duration(milliseconds: 200),
             hasIcon: false,
           ),
           builder: (_, collapsed, expanded) {

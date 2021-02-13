@@ -15,16 +15,21 @@ class CompleteTreatment extends StatelessWidget {
   ///cost of treatment
   final double treatmentCost;
 
+  ///expand listener
+  final VoidCallback onExpandListener;
+
   const CompleteTreatment({
     Key key,
     this.treatmentDate,
     this.treatmentName,
     this.treatmentCost,
+    this.onExpandListener,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ExpandTreatment(
+      onExpandListener: onExpandListener,
       cardName: completeTreatmentCardName,
       expandableBody: CompletedTreatmentCardBody(
         treatmentDate: treatmentDate,

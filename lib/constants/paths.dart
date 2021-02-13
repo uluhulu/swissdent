@@ -19,6 +19,9 @@ final iconHelp = "assets/icons/icon_help.png";
 final iconBack = "assets/icons/icon_back.png";
 final iconMinus = "assets/icons/icon_minus.png";
 final iconPlus = "assets/icons/icon_plus.png";
+final iconDocument = "assets/icons/icon_document.png";
+final iconJews = "assets/icons/icon_jews.png";
+final teethmapDemo = "assets/images/img_teethmap_demo.png";
 
 
 final bitbucketpass = '2ZDhuFha9NjLw83urtBD';

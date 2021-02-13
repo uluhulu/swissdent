@@ -52,7 +52,7 @@ class StageCard extends StatelessWidget {
   Widget _buildTitle() {
     return Text(
       title,
-      style: bold18BlackStyle,
+      style: bold18Black,
     );
   }
 

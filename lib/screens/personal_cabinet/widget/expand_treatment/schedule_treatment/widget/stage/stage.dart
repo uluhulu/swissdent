@@ -22,7 +22,7 @@ class Stage extends StatelessWidget {
       ),
       child: Text(
         '$stageTitle$stageNum',
-        style: bold18BlackGrey,
+        style: bold18Grey,
       ),
     );
   }
