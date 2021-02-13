@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/util/money_formatter.dart';
 
 ///surgical table
 ///todo link of figma
@@ -38,7 +39,7 @@ class SurgicalTable extends StatelessWidget {
         SizedBox(width: 30),
         _buildColumn(
           totalCostColumnName,
-          '$totalCost',
+          '${formatMoney(totalCost)}',
         ),
       ],
     );

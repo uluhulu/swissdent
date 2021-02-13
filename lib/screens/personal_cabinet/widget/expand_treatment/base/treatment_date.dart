@@ -13,7 +13,7 @@ class TreatmentDate extends StatelessWidget {
   const TreatmentDate({
     Key key,
     this.treatmentDate,
-    this.isDateRed,
+    this.isDateRed = false,
   }) : super(key: key);
 
   @override

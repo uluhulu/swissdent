@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/base/treatment_date.dart';
+import 'package:swissdent/util/money_formatter.dart';
 
 ///Completed Treatmen tCard Body
 ///todo figma link
@@ -48,7 +49,7 @@ class CompletedTreatmentCardBody extends StatelessWidget {
 
   Widget _buildTreatmentCost() {
     return Text(
-      '$treatmentCost',
+      '${formatMoney(treatmentCost)}',
       style: normal15StyleGrey5,
     );
   }
