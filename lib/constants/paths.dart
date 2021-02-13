@@ -11,6 +11,9 @@ final iconVisibilityOff = "assets/icons/icon_visibility_off.png";
 final iconChat = "assets/icons/icon_chat.png";
 final iconCamera = "assets/icons/icon_camera.png";
 final iconCartArrow = "assets/icons/icon_cart_arrow.png";
+final iconDocument = "assets/icons/icon_document.png";
+final iconJews = "assets/icons/icon_jews.png";
+final teethmapDemo = "assets/images/img_teethmap_demo.png";
 
 
 final bitbucketpass = '2ZDhuFha9NjLw83urtBD';

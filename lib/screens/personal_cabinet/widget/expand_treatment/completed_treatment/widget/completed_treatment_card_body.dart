@@ -43,7 +43,7 @@ class CompletedTreatmentCardBody extends StatelessWidget {
   Widget _buildTreatmentName() {
     return Text(
       treatmentName,
-      style: bold18BlackStyle,
+      style: bold18Black,
     );
   }
 

@@ -27,6 +27,7 @@ final mainMenuBackgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
 final stageCardSeparatorColor = palete['gray4'];
 final stageCardBorderColor = palete['gray4'];
+final appbarColor = palete['solitude'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
