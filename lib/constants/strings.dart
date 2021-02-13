@@ -27,4 +27,6 @@ final teethColumnName = 'Зубы';
 final teethCountColumnName = 'Кол-во единиц';
 final totalCostColumnName = 'Итого стоимость';
 final orhopedicStageCardTitle = 'Этап ортопедический';
+final preventiveStageCardTitle = 'Этап профилактический';
+final preventiveStageCardSubtitle = 'врач ';
 final stageTitle = 'Этап ';

@@ -4,6 +4,7 @@ import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/base/expand_treatment.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage/stage.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/stage_orhtopedic_card.dart';
+import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_preventive_card/stage_preventive_card.dart';
 
 /// schedule treatment expand
 /// todo figma link
@@ -19,6 +20,8 @@ class ScheduleTreatment extends StatelessWidget {
           StageOrthopedicCard(
             surgialTemplateList: surgicalTemplateMockList,
           ),
+          SizedBox(height: 32),
+          StagePreventiveCard(doctorName: "Писечкина"),
         ],
       ),
     );
