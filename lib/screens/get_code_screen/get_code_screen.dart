@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
@@ -10,7 +11,7 @@ import 'package:swissdent/screens/get_code_screen/widget/registration_descriptio
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
 import 'package:swissdent/widget/registration_title/registration_title.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
-import 'package:swissdent/widget/blue_button.dart';
+import 'package:swissdent/widget/swissdent_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_sms_code_textfield.dart';
 
@@ -89,7 +90,8 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             ),
             SizedBox(height: 11),
             if (state.nextButtonIsVisible)
-              BlueButton(
+              SwissdentButton(
+                buttonColor: codeButtonColor,
                 buttonText: goNextText,
                 isAvaliable: state.getCodeButtonIsAvaliable,
                 onTap: () {
@@ -97,7 +99,8 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 },
               )
             else
-              BlueButton(
+              SwissdentButton(
+                buttonColor: codeButtonColor,
                 buttonText: getCodeText,
                 isAvaliable: state.getCodeButtonIsAvaliable,
                 onTap: () {

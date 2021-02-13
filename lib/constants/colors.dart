@@ -24,6 +24,7 @@ final userCardColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final mainMenuBackgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
+final emergencyCallButtonColor = palete['alarm'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

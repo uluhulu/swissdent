@@ -11,6 +11,11 @@ final iconVisibilityOff = "assets/icons/icon_visibility_off.png";
 final iconChat = "assets/icons/icon_chat.png";
 final iconCamera = "assets/icons/icon_camera.png";
 final iconCartArrow = "assets/icons/icon_cart_arrow.png";
+final iconPerson = "assets/icons/icon_person.png";
+final iconServices = "assets/icons/icon_services.png";
+final iconProducts = "assets/icons/icon_products.png";
+final iconTeam = "assets/icons/icon_team.png";
+final iconHelp = "assets/icons/icon_help.png";
 
 
 final bitbucketpass = '2ZDhuFha9NjLw83urtBD';
