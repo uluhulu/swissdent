@@ -24,7 +24,10 @@ class PaymentInfoBoard extends StatelessWidget {
 
   Widget _buildBody() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 15.5),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 21,
+        vertical: 15.5,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -33,9 +36,11 @@ class PaymentInfoBoard extends StatelessWidget {
             width: 22,
             height: 22,
           ),
-          SizedBox(width: 8.45,),
+          SizedBox(
+            width: 8.45,
+          ),
           Container(
-            width: 271,
+            width: 270,
             height: 36,
             child: Text(
               paymentInfoText,

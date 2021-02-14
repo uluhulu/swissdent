@@ -16,7 +16,7 @@ class CartTotalBoard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(
-          bottom: 60.0,
+          bottom: 44.0,
           left: 16,
           right: 16,
         ),
@@ -28,7 +28,8 @@ class CartTotalBoard extends StatelessWidget {
             _buildCostRow(discount, 600),
             SizedBox(height: 53),
             _buildTotalRow(),
-
+            SizedBox
+              (height: 48,),
             PaymentInfoBoard(),
           ],
         ),
