@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/screens/cart_screen/cart_screen.dart';
+import 'package:swissdent/screens/main_menu_screen/main_menu_screen.dart';
+import 'package:swissdent/screens/main_menu_screen/widget/user_card/user_card.dart';
+import 'package:swissdent/screens/main_menu_screen/widget/user_card/widget/user_info/circle_avatar.dart';
 import 'package:swissdent/screens/personal_cabinet/personal_cabinet_screen.dart';
 
 void main() {
@@ -26,8 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: MainMenuScreen(),
-        home: PersonalCabinetScreen(),
+        home: CartScreen(),
       ),
     );
   }

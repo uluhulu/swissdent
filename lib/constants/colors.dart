@@ -22,12 +22,17 @@ final registrationCreatePasswordTextColor = palete['black'];
 final backLeadingButtonColor = palete['blue'];
 final circleAvatarColor = palete['light_with_opacity'];
 final userCardColor = palete['solitude'];
+final cartBackgroundColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final mainMenuBackgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
+final emergencyCallButtonColor = palete['alarm'];
+final productDescriptionColor = palete['alarm'];
 final stageCardSeparatorColor = palete['gray4'];
 final stageCardBorderColor = palete['gray4'];
 final appbarColor = palete['solitude'];
+final cartTotalBoardColor = palete['solitude'];
+final paymentInfoBoardColor = palete['cosmic latte'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
@@ -46,4 +51,5 @@ final palete = {
   'white': Color(0xffffffff),
   'solitude': Color(0xffFAFBFC),
   'alice blue': Color(0xffE0EFF5),
+  'cosmic latte': Color(0xffE9FFEE),
 };

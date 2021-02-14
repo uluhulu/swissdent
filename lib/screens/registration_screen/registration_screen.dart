@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
@@ -13,10 +14,10 @@ import 'package:swissdent/screens/registration_screen/widgets/registration_socia
 import 'package:swissdent/screens/registration_screen/widgets/registration_with_accounts.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
 import 'package:swissdent/util/route_builder.dart';
-import 'package:swissdent/widget/blue_button.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/registration_title/registration_title.dart';
+import 'package:swissdent/widget/swissdent_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_default_textfield.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
@@ -96,7 +97,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(height: 24),
             _buildSocialMediaIcons(context),
             SizedBox(height: 32),
-            BlueButton(
+            SwissdentButton(
+              buttonColor: codeButtonColor,
               isAvaliable: state is RegistrationButtonActive ? true : false,
               buttonText: registrationText,
               onTap: () {

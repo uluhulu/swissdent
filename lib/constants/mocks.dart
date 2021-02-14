@@ -1,4 +1,6 @@
+import 'package:swissdent/screens/cart_screen/widget/product_card/product_card.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/widget/surgical_template/surgical_template.dart';
+import 'package:swissdent/util/money_formatter.dart';
 
 final surgicalTemplateMockList = [
   SurgicalTemplate(
@@ -25,5 +27,44 @@ final surgicalTemplateMockList = [
       '24',
     ],
     totalCost: 100000,
+  ),
+];
+
+final cartItemsMockList = [
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
+  ),
+  ProductCard(
+    productCost: 1200,
+    productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+    productAmount: '2',
+    photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
   ),
 ];

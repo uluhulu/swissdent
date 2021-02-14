@@ -11,9 +11,18 @@ final iconVisibilityOff = "assets/icons/icon_visibility_off.png";
 final iconChat = "assets/icons/icon_chat.png";
 final iconCamera = "assets/icons/icon_camera.png";
 final iconCartArrow = "assets/icons/icon_cart_arrow.png";
+final iconPerson = "assets/icons/icon_person.png";
+final iconServices = "assets/icons/icon_services.png";
+final iconProducts = "assets/icons/icon_products.png";
+final iconTeam = "assets/icons/icon_team.png";
+final iconHelp = "assets/icons/icon_help.png";
+final iconBack = "assets/icons/icon_back.png";
+final iconMinus = "assets/icons/icon_minus.png";
+final iconPlus = "assets/icons/icon_plus.png";
 final iconDocument = "assets/icons/icon_document.png";
 final iconJews = "assets/icons/icon_jews.png";
 final teethmapDemo = "assets/images/img_teethmap_demo.png";
+final iconLightBulb = "assets/icons/icon_light_bulb.png";
 
 
 final bitbucketpass = '2ZDhuFha9NjLw83urtBD';
