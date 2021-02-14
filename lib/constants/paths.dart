@@ -24,6 +24,6 @@ final iconDocument = "assets/icons/icon_document.png";
 final iconJews = "assets/icons/icon_jews.png";
 final teethmapDemo = "assets/images/img_teethmap_demo.png";
 final iconLightBulb = "assets/icons/icon_light_bulb.png";
-
+final iconPlayerButton = "assets/icons/icon_player_button.png";
 
 final bitbucketpass = '2ZDhuFha9NjLw83urtBD';

@@ -1,3 +1,5 @@
+import 'package:swissdent/util/money_formatter.dart';
+
 final splashText = 'ШВЕЙЦАРСКАЯ СТОМАТОЛОГИЯ';
 final smsConfirmationHintText = 'Введите смс-код';
 final registrationTitle = 'Регистрация';
@@ -47,8 +49,13 @@ final personalCabinetTitle = 'Личный кабинет';
 final price = 'Стоимость';
 final discount = 'Скидка';
 final total = 'Итог';
-final paymentInfoText = 'Оплата и получение товара производится в офисе стоматологии';
+final paymentInfoText =
+    'Оплата и получение товара производится в офисе стоматологии';
 final snapshotsScreenTitle = 'Снимки';
 final servicesScreenTitle = 'Услуги';
 final userProfileTitle = "Ваш профиль";
 final commonData = "Общие данные";
+
+String serviceCost(double amount) {
+  return 'от ${formatMoney(amount)} $rubPrefix';
+}
