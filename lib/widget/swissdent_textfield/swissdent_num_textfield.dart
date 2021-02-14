@@ -9,7 +9,7 @@ class SwissdentNumTextField extends StatefulWidget {
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
-    this.readOnly,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override

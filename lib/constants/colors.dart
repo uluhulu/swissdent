@@ -34,6 +34,7 @@ final appbarColor = palete['solitude'];
 final cartTotalBoardColor = palete['solitude'];
 final paymentInfoBoardColor = palete['cosmic latte'];
 final snapshotCardColor = palete['solitude'];
+final userProfilePhotoIconBackgroundColor = palete['blue'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
