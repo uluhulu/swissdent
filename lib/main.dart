@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/screens/personal_cabinet/personal_cabinet_screen.dart';
+import 'package:swissdent/screens/services_screen/services_screen.dart';
 import 'package:swissdent/screens/snapshots_screen/snapshots_screen.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: SnapshotsScreen(),
+        home: ServicesScreen(),
       ),
     );
   }
