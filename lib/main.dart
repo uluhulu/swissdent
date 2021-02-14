@@ -3,6 +3,8 @@ import 'package:swissdent/screens/personal_cabinet/personal_cabinet_screen.dart'
 import 'package:swissdent/screens/services_screen/services_screen.dart';
 import 'package:swissdent/screens/snapshots_screen/snapshots_screen.dart';
 
+import 'screens/user_profile_screen/user_profile_screen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: ServicesScreen(),
+        home: UserProfileScreen(),
       ),
     );
   }
