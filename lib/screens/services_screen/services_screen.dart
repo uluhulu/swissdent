@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
-import 'package:swissdent/screens/services_screen/widget/service_expand_card.dart';
+import 'package:swissdent/screens/services_screen/widget/player/player.dart';
+import 'package:swissdent/screens/services_screen/widget/service_expand.dart';
+import 'package:swissdent/screens/services_screen/widget/service_expand_card/service_expand_card.dart';
 import 'package:swissdent/widget/appbar.dart';
 import 'package:swissdent/widget/chat_button.dart';
 
@@ -30,14 +32,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
   Widget _buildBody() {
     return ListView(
       children: [
-        ServiceExpandCard(
-          cardName: "Терапия",
-          expandableBody: Container(
-            width: 100,
-            height: 200,
-            color: Colors.blue,
-          ),
-          onExpandListener: () {},
+        ServiceExpand(
+          title: "Терапия",
+          videoUrl: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
         ),
       ],
     );

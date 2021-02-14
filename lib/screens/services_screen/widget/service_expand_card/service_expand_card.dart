@@ -9,8 +9,8 @@ import 'package:swissdent/constants/styles.dart';
 ///expandable card for service
 ///todo figma link
 class ServiceExpandCard extends StatefulWidget {
-  /// expand listener for card
-  final VoidCallback onExpandListener;
+  /// collapse listener for card
+  final VoidCallback onCollapseListener;
 
   /// card of service
   final String cardName;
@@ -20,7 +20,7 @@ class ServiceExpandCard extends StatefulWidget {
 
   const ServiceExpandCard({
     Key key,
-    this.onExpandListener,
+    this.onCollapseListener,
     this.cardName,
     this.expandableBody,
   }) : super(key: key);
@@ -54,9 +54,9 @@ class _ServiceExpandCardState extends State<ServiceExpandCard>
     _expandableController.addListener(() {
       if (_expandableController.expanded) {
         _animationController.forward();
-        widget.onExpandListener();
       } else {
         _animationController.reverse();
+        widget.onCollapseListener();
       }
     });
   }
@@ -119,15 +119,10 @@ class _ServiceExpandCardState extends State<ServiceExpandCard>
         hasIcon: false,
       ),
       builder: (_, collapsed, expanded) {
-        return Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
-          child: Expandable(
-            collapsed: collapsed,
-            expanded: expanded,
-            theme: const ExpandableThemeData(crossFadePoint: 0),
-          ),
+        return Expandable(
+          collapsed: collapsed,
+          expanded: expanded,
+          theme: const ExpandableThemeData(crossFadePoint: 0),
         );
       },
       header: _buildCardHeader(),
