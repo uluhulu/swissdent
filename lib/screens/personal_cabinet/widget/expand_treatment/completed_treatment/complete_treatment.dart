@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/strings.dart';
-import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/base/expand_treatment.dart';
+import 'package:swissdent/widget/expandable/expand_without_header.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/completed_treatment/widget/completed_treatment_card_body.dart';
 
 ///complete treatment expandable card
@@ -15,26 +15,24 @@ class CompleteTreatment extends StatelessWidget {
   ///cost of treatment
   final double treatmentCost;
 
-  ///expand listener
-  final VoidCallback onExpandListener;
-
   const CompleteTreatment({
     Key key,
     this.treatmentDate,
     this.treatmentName,
     this.treatmentCost,
-    this.onExpandListener,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ExpandTreatment(
-      onExpandListener: onExpandListener,
+    return ExpandWithoutHeader(
       cardName: completeTreatmentCardName,
-      expandableBody: CompletedTreatmentCardBody(
-        treatmentDate: treatmentDate,
-        treatmentName: treatmentName,
-        treatmentCost: treatmentCost,
+      expandableBody: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: CompletedTreatmentCardBody(
+          treatmentDate: treatmentDate,
+          treatmentName: treatmentName,
+          treatmentCost: treatmentCost,
+        ),
       ),
     );
   }

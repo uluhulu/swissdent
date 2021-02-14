@@ -47,14 +47,6 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
             treatmentCost: 999.00,
           ),
           ScheduleTreatment(
-            onExpandListener: () async {
-              // await Future.delayed(Duration(milliseconds: 600));
-              scrollController.animateTo(
-                450,
-                duration: Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            },
           ),
         ],
       ),

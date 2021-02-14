@@ -53,6 +53,7 @@ final paymentInfoText =
     'Оплата и получение товара производится в офисе стоматологии';
 final snapshotsScreenTitle = 'Снимки';
 final servicesScreenTitle = 'Услуги';
+final searchBarHint = 'Поиск';
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';

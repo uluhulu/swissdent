@@ -5,30 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/styles.dart';
 
-///Expand treatment cart
+///Expand without header
 ///todo figma link
-class ExpandTreatment extends StatefulWidget {
+class ExpandWithoutHeader extends StatefulWidget {
   ///name of treatment
   final String cardName;
 
   ///body of expand card
   final Widget expandableBody;
 
-  ///expand listener
-  final VoidCallback onExpandListener;
 
-  const ExpandTreatment({
+  const ExpandWithoutHeader({
     Key key,
     this.cardName,
     this.expandableBody,
-    this.onExpandListener,
   }) : super(key: key);
 
   @override
-  _ExpandTreatmentState createState() => _ExpandTreatmentState();
+  _ExpandWithoutHeaderState createState() => _ExpandWithoutHeaderState();
 }
 
-class _ExpandTreatmentState extends State<ExpandTreatment>
+class _ExpandWithoutHeaderState extends State<ExpandWithoutHeader>
     with TickerProviderStateMixin {
   ExpandableController _expandableController;
   AnimationController _animationController;
@@ -53,7 +50,6 @@ class _ExpandTreatmentState extends State<ExpandTreatment>
     _expandableController.addListener(() {
       if (_expandableController.expanded) {
         _animationController.forward();
-        widget.onExpandListener();
       } else {
         _animationController.reverse();
       }
@@ -72,29 +68,24 @@ class _ExpandTreatmentState extends State<ExpandTreatment>
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
+      controller: _expandableController,
       child: ScrollOnExpand(
         scrollOnExpand: true,
         scrollOnCollapse: true,
-
         child: ExpandablePanel(
-          controller: _expandableController,
           theme: ExpandableThemeData(
             headerAlignment: ExpandablePanelHeaderAlignment.center,
             tapBodyToCollapse: true,
             iconColor: Colors.black.withOpacity(0.4),
             scrollAnimationDuration: Duration(milliseconds: 200),
             hasIcon: false,
+            useInkWell: false,
           ),
           builder: (_, collapsed, expanded) {
-            return Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: Expandable(
-                collapsed: collapsed,
-                expanded: expanded,
-                theme: const ExpandableThemeData(crossFadePoint: 0),
-              ),
+            return Expandable(
+              collapsed: collapsed,
+              expanded: expanded,
+              theme: const ExpandableThemeData(crossFadePoint: 0),
             );
           },
           header: _buildCardHeader(),
@@ -109,9 +100,12 @@ class _ExpandTreatmentState extends State<ExpandTreatment>
       padding: EdgeInsets.all(16),
       child: Row(
         children: [
-          Text(
-            widget.cardName,
-            style: bold20BlackStyle,
+          Container(
+            width: 232,
+            child: Text(
+              widget.cardName,
+              style: bold20BlackStyle,
+            ),
           ),
           Spacer(),
           RotationTransition(
