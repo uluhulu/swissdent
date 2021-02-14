@@ -36,4 +36,4 @@ final rubPrefix = 'руб';
 final treatmentCostTitle = 'Стоимость лечения';
 final treatmentDiscountTitle = 'С учетом скидки';
 final documentsTitle = 'Документы для налоговой';
-final personalDocumentTitle = 'Личный кабинет';
+final personalCabinetTitle = 'Личный кабинет';
