@@ -93,7 +93,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               SwissdentButton(
                 buttonColor: codeButtonColor,
                 buttonText: goNextText,
-                isAvaliable: state.getCodeButtonIsAvaliable,
+                isAvaliable: state.nextButtonIsVisible,
                 onTap: () {
                   // sendGetCodeEvent(context);
                 },
