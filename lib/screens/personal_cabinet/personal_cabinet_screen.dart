@@ -8,6 +8,7 @@ import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/compl
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/schedule_treatment.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/stage_orhtopedic_card.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/widget/surgical_template/surgical_template.dart';
+import 'package:swissdent/widget/appbar.dart';
 
 import '../../constants/colors.dart';
 
@@ -24,7 +25,11 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(),
+      appBar: buildAppbar(
+        titleText: personalCabinetTitle,
+        action: _buildJewsButton(),
+        onBackCallback: () {},
+      ),
       body: ListView(
         physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         controller: scrollController,
@@ -42,7 +47,7 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
             treatmentCost: 999.00,
           ),
           ScheduleTreatment(
-            onExpandListener: () async{
+            onExpandListener: () async {
               // await Future.delayed(Duration(milliseconds: 600));
               scrollController.animateTo(
                 450,
@@ -52,29 +57,6 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
             },
           ),
         ],
-      ),
-    );
-  }
-
-  PreferredSizeWidget _buildAppbar() {
-    return AppBar(
-      backgroundColor: appbarColor,
-      elevation: 0,
-      title: Text(
-        personalDocumentTitle,
-        style: bold17BlackStyle,
-      ),
-      actions: [
-        _buildJewsButton(),
-      ],
-      leading: CupertinoButton(
-        onPressed: () {
-          ///todo go back
-        },
-        child: Icon(
-          Icons.arrow_back_ios_rounded,
-          color: backLeadingButtonColor,
-        ),
       ),
     );
   }
