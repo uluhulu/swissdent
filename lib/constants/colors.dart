@@ -32,6 +32,7 @@ final stageCardSeparatorColor = palete['gray4'];
 final stageCardBorderColor = palete['gray4'];
 final appbarColor = palete['solitude'];
 final cartTotalBoardColor = palete['solitude'];
+final paymentInfoBoardColor = palete['cosmic latte'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
@@ -50,4 +51,5 @@ final palete = {
   'white': Color(0xffffffff),
   'solitude': Color(0xffFAFBFC),
   'alice blue': Color(0xffE0EFF5),
+  'cosmic latte': Color(0xffE9FFEE),
 };

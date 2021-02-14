@@ -5,7 +5,7 @@ import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/cart_screen/widget/product_card/product_card.dart';
-import 'package:swissdent/screens/cart_screen/widget/product_card/widget/cart_total_board.dart';
+import 'package:swissdent/screens/cart_screen/widget/cart_total_board.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/separator.dart';
 import 'package:swissdent/util/money_formatter.dart';
 

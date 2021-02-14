@@ -47,3 +47,4 @@ final personalDocumentTitle = 'Личный кабинет';
 final price = 'Стоимость';
 final discount = 'Скидка';
 final total = 'Итог';
+final paymentInfoText = 'Оплата и получение товара производится в офисе стоматологии';
