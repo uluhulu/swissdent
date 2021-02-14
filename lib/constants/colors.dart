@@ -24,7 +24,7 @@ final circleAvatarColor = palete['light_with_opacity'];
 final userCardColor = palete['solitude'];
 final cartBackgroundColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
-final mainMenuBackgroundColor = palete['gray4'];
+final backgroundColor = palete['gray4'];
 final cartInfoSeparatorColor = palete['gray4'];
 final emergencyCallButtonColor = palete['alarm'];
 final productDescriptionColor = palete['alarm'];
@@ -33,6 +33,7 @@ final stageCardBorderColor = palete['gray4'];
 final appbarColor = palete['solitude'];
 final cartTotalBoardColor = palete['solitude'];
 final paymentInfoBoardColor = palete['cosmic latte'];
+final snapshotCardColor = palete['solitude'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

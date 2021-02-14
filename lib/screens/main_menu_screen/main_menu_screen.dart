@@ -18,7 +18,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainMenuBackgroundColor,
+      backgroundColor: backgroundColor,
       body: _buildBody(),
     );
   }

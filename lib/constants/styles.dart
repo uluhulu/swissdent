@@ -31,11 +31,11 @@ final normal12StyleGrey = normalStyle.copyWith(
   color: palete['gray1'],
 );
 
-
 final bold14Style = boldStyle.copyWith(fontSize: 14);
 
 final normal15Style = normalStyle.copyWith(fontSize: 15);
-final bold15StyleBlack = boldStyle.copyWith(fontSize: 15,color: palete['black']);
+final bold15StyleBlack =
+    boldStyle.copyWith(fontSize: 15, color: palete['black']);
 
 final normal15StyleGrey = normal15Style.copyWith(
   color: palete['gray2'],
@@ -49,6 +49,7 @@ final normal15StyleGrey5 = normal15Style.copyWith(
 final normal15StyleBlue = normal15Style.copyWith(
   color: palete['dark'],
 );
+
 final normal16StyleBlue = normalStyle.copyWith(
   fontSize: 16,
   color: palete['dark'],
@@ -66,6 +67,11 @@ final normal16StyleBlack = normalStyle.copyWith(
 
 final normal16StyleBlack600 = normal16StyleBlack.copyWith(
   fontWeight: FontWeight.w600,
+);
+
+final normal17Style = normalStyle.copyWith(fontSize: 17);
+final normal17BlueStyle = normal17Style.copyWith(
+  color: palete['dark'],
 );
 
 final bold17BlackStyle = boldStyle.copyWith(
@@ -90,7 +96,8 @@ final bold18Style = boldStyle.copyWith(fontSize: 18);
 final bold18Black = bold18Style.copyWith(
   color: palete['black'],
 );
-final bold24Black = boldStyle.copyWith(fontSize: 24,
+final bold24Black = boldStyle.copyWith(
+  fontSize: 24,
   color: palete['black'],
 );
 final bold18Grey = bold18Style.copyWith(

@@ -10,7 +10,6 @@ PreferredSizeWidget buildAppbar({
   Widget action,
   VoidCallback onBackCallback,
 }) {
-
   return AppBar(
     backgroundColor: backgroundColor ?? appbarColor,
     brightness: Brightness.light,
@@ -20,7 +19,7 @@ PreferredSizeWidget buildAppbar({
       style: bold17BlackStyle,
     ),
     actions: [
-      action,
+      action ?? SizedBox(),
     ],
     leading: CupertinoButton(
       onPressed: onBackCallback,
