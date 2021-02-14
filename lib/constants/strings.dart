@@ -49,3 +49,4 @@ final discount = 'Скидка';
 final total = 'Итог';
 final paymentInfoText = 'Оплата и получение товара производится в офисе стоматологии';
 final snapshotsScreenTitle = 'Снимки';
+final servicesScreenTitle = 'Услуги';
