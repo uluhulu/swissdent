@@ -9,19 +9,16 @@ import 'package:swissdent/constants/styles.dart';
 class PaymentInfoBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 44.0, left: 16, right: 16),
-      child: Container(
-        width: 343,
-        height: 67,
-        decoration: BoxDecoration(
-          color: paymentInfoBoardColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(14),
-          ),
+    return Container(
+      width: 343,
+      height: 67,
+      decoration: BoxDecoration(
+        color: paymentInfoBoardColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(14),
         ),
-        child: _buildBody(),
       ),
+      child: _buildBody(),
     );
   }
 

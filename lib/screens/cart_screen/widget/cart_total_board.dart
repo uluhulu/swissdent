@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/screens/cart_screen/widget/payment_info_board.dart';
 import 'package:swissdent/util/money_formatter.dart';
 
 ///cart total board
@@ -27,6 +28,8 @@ class CartTotalBoard extends StatelessWidget {
             _buildCostRow(discount, 600),
             SizedBox(height: 53),
             _buildTotalRow(),
+
+            PaymentInfoBoard(),
           ],
         ),
       ),
