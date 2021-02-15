@@ -23,7 +23,7 @@ class StagePreventiveCard extends StatelessWidget {
       ///todo remove mock data
       body: PreventiveTemplate(
         dateTime: DateTime.now(),
-        preventiveName: "Очищение жопы",
+        preventiveName: "Комплекс профессиональной гигиены",
         preventiveDescription:
             'Перед хирургическим этапом и после необходи прием у ортопеда для снитяи и фиксации конструкций',
         totalCost: 4200,

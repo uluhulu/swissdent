@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/screens/user_profile_screen/widget/user_profile_info.dart';
 import 'package:swissdent/screens/user_profile_screen/widget/user_profile_photo.dart';
 import 'package:swissdent/widget/appbar.dart';
 import 'package:swissdent/widget/chat_button.dart';
+import 'package:swissdent/widget/swissdent_button.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -23,10 +26,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   Widget _buildBody(){
-    return Column(
-      children: [
-        UserProfilePhoto(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          UserProfilePhoto(),
+          UserProfileInfo(),
+          Padding(
+            padding: const EdgeInsets.only(left:16.0, right: 16.0, top: 64, bottom: 47),
+            child: SwissdentButton(
+              isAvaliable: true,
+              buttonText: save,
+              buttonColor: codeButtonColor,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

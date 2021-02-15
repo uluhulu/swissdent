@@ -56,6 +56,11 @@ final servicesScreenTitle = 'Услуги';
 final searchBarHint = 'Поиск';
 final userProfileTitle = "Ваш профиль";
 final commonData = "Общие данные";
+final passwordChange = "Сброс пароля";
+final newPassword = "Новый пароль";
+final repeatNewPassword = "Повторите новый пароль";
+final save = "Сохранить";
+
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';
