@@ -60,7 +60,9 @@ final passwordChange = "Сброс пароля";
 final newPassword = "Новый пароль";
 final repeatNewPassword = "Повторите новый пароль";
 final save = "Сохранить";
-
+final chatTitle = 'Чат';
+final userMessageTitle = 'Вы';
+final chatBarHint = 'Введите сообщение';
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';

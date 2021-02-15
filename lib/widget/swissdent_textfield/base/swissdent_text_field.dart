@@ -73,7 +73,6 @@ class SwissdentTextField extends StatelessWidget {
                   contentPadding: EdgeInsets.all(0),
                   hintText: hintText,
                   hintStyle: hintStyle,
-
                   counter: Container(
                     height: 1,
                   ),
