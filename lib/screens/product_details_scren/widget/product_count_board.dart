@@ -67,6 +67,7 @@ class ProductionCountBoard extends StatelessWidget {
           iconShoppingCart,
           width: 24,
           height: 24,
+
         ),
         Text(
           buyButton,
