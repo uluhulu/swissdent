@@ -6,12 +6,15 @@ class SwissdentNumTextField extends StatefulWidget {
   final Function(String unmaskedText) onNumberType;
   final bool readOnly;
   final String defaultText;
+  final FocusNode focusNode;
+  final Function(String text) onSubmitted;
 
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
     this.readOnly = false,
     this.defaultText = '',
+    this.focusNode, this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -27,12 +30,14 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
     },
   );
 
-   TextEditingController controller;
+  TextEditingController controller;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = TextEditingController(text: maskFormatter.maskText('$numPrefix${widget.defaultText}'));
+    controller = TextEditingController(
+        text: maskFormatter.maskText('$numPrefix${widget.defaultText}'));
     controller.addListener(() {
       widget.onNumberType(maskFormatter.unmaskText(controller.text));
       if (controller.text.isEmpty) {
@@ -49,6 +54,8 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
   @override
   Widget build(BuildContext context) {
     return SwissdentTextField(
+      focusNode: widget.focusNode ?? FocusNode(),
+      onSubmitted: widget.onSubmitted ?? (text){},
       maxLength: 16,
       formatter: maskFormatter,
       controller: controller,

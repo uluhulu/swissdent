@@ -7,6 +7,7 @@ final iconDonePath = "assets/icons/icon_done.png";
 final iconFacebook = "assets/icons/icon_facebook.png";
 final iconGoogle = "assets/icons/icon_google.png";
 final iconVk = "assets/icons/icon_vk.png";
+final iconShoppingCart = "assets/icons/icon_shopping_cart.png";
 final iconVisibilityOn = "assets/icons/icon_visibility_on.png";
 final iconVisibilityOff = "assets/icons/icon_visibility_off.png";
 final iconChat = "assets/icons/icon_chat.png";
