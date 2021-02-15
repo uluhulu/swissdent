@@ -29,7 +29,7 @@ final personalCabinet = 'Личный кабинет';
 final services = 'Услуги';
 final products = 'Товары';
 final team = 'Команда';
-final cart = '"Корзина"';
+final cart = 'Корзина';
 final help = 'Помощь';
 final emergencyCallButton = 'Экстренный звонок в клинику';
 final completeTreatmentCardName = 'Пройденное лечение';
@@ -54,6 +54,8 @@ final paymentInfoText =
 final snapshotsScreenTitle = 'Снимки';
 final servicesScreenTitle = 'Услуги';
 final searchBarHint = 'Поиск';
+final userProfileTitle = "Ваш профиль";
+final commonData = "Общие данные";
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';

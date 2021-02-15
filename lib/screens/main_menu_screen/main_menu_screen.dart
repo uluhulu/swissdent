@@ -40,11 +40,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
       mainAxisSize: MainAxisSize.min,
       children: [
         MainMenuAppBar(),
-        // UserCardWithoutCart(
-        //   userName: 'black cock',
-        //   userEmail: 'black@cock.suck',
-        //   avatarPath: 'https://cdn009.mndcdn.net/photo/c/4/b/2fc1947a75b55b357cade348618085ab_view.jpg',
-        // ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.zero,

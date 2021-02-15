@@ -36,6 +36,7 @@ final paymentInfoBoardColor = palete['cosmic latte'];
 final snapshotCardColor = palete['solitude'];
 final searchClearButtonColor = palete['alarm'];
 final productCardColor = palete['solitude'];
+final userProfilePhotoIconBackgroundColor = palete['blue'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

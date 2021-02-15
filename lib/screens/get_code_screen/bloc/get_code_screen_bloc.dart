@@ -105,8 +105,9 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       nextButtonIsVisible = true;
     } else {
       smsCodeIsAvaliable = false;
-      getCodeButtonIsAvaliable = true;
+      // getCodeButtonIsAvaliable = true;
       nextButtonIsVisible = false;
+
     }
   }
 

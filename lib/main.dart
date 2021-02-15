@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
 import 'package:swissdent/screens/product_screen/product_screen.dart';
+
+import 'screens/user_profile_screen/user_profile_screen.dart';
 
 void main() {
   runApp(MyApp());
