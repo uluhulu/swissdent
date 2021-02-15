@@ -1,6 +1,7 @@
 final logoSplashScreenPath = "assets/images/img_logo.png";
 final decorSplashWavePath = "assets/images/img_splash_wave.png";
 final textSplashScreenPath = "assets/images/img_splash_text.png";
+final productPath = "assets/images/img_product.png";
 final appBarWaveDecorPath = "assets/images/img_wave_decor_app_bar.png";
 final iconDonePath = "assets/icons/icon_done.png";
 final iconFacebook = "assets/icons/icon_facebook.png";
