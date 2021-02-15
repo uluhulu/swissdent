@@ -53,6 +53,7 @@ final paymentInfoText =
     'Оплата и получение товара производится в офисе стоматологии';
 final snapshotsScreenTitle = 'Снимки';
 final servicesScreenTitle = 'Услуги';
+final searchBarHint = 'Поиск';
 final userProfileTitle = "Ваш профиль";
 final commonData = "Общие данные";
 

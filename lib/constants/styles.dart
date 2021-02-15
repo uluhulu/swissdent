@@ -27,7 +27,7 @@ final normal11StyleRed = normalStyle.copyWith(
   color: palete['alarm'],
 );
 final normal12StyleGrey = normalStyle.copyWith(
-  fontSize: 11,
+  fontSize: 12,
   color: palete['gray1'],
 );
 
