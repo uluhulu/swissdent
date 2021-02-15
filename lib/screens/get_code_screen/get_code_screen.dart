@@ -90,22 +90,28 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             ),
             SizedBox(height: 11),
             if (state.nextButtonIsVisible)
-              SwissdentButton(
-                buttonColor: codeButtonColor,
-                buttonText: goNextText,
-                isAvaliable: state.nextButtonIsVisible,
-                onTap: () {
-                  // sendGetCodeEvent(context);
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal : 102.0),
+                child: SwissdentButton(
+                  buttonColor: codeButtonColor,
+                  buttonText: goNextText,
+                  isAvaliable: state.nextButtonIsVisible,
+                  onTap: () {
+                    // sendGetCodeEvent(context);
+                  },
+                ),
               )
             else
-              SwissdentButton(
-                buttonColor: codeButtonColor,
-                buttonText: getCodeText,
-                isAvaliable: state.getCodeButtonIsAvaliable,
-                onTap: () {
-                  sendGetCodeEvent(context);
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 102.0),
+                child: SwissdentButton(
+                  buttonColor: codeButtonColor,
+                  buttonText: getCodeText,
+                  isAvaliable: state.getCodeButtonIsAvaliable,
+                  onTap: () {
+                    sendGetCodeEvent(context);
+                  },
+                ),
               ),
             SizedBox(height: 80),
             Padding(

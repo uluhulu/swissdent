@@ -30,7 +30,7 @@ class ScheduleTreatment extends StatelessWidget {
               surgialTemplateList: surgicalTemplateMockList,
             ),
             SizedBox(height: 32),
-            StagePreventiveCard(doctorName: "Писечкина"),
+            StagePreventiveCard(doctorName: "Семенкова"),
             TreatmentCost(
               treatmentCost: 66000,
               treatmentDiscountCost: 30000,

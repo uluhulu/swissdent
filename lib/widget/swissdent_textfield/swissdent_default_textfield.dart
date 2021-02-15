@@ -8,10 +8,11 @@ class SwissdentDefaultTextField extends StatefulWidget {
   final String hint;
   final FocusNode focusNode;
   final Function(String text) onSubmitted;
+  final String defaultText;
 
   const SwissdentDefaultTextField({
     Key key,
-    this.onType, this.hint, this.focusNode, this.onSubmitted,
+    this.onType, this.hint, this.focusNode, this.onSubmitted, this.defaultText = '',
   }) : super(key: key);
 
   @override
@@ -19,13 +20,14 @@ class SwissdentDefaultTextField extends StatefulWidget {
 }
 
 class _SwissdentDefaultTextFieldState extends State<SwissdentDefaultTextField> {
-  
-  final controller = TextEditingController();
+
+  TextEditingController controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller = TextEditingController(text: widget.defaultText.isNotEmpty ? widget.defaultText : '' );
     controller.addListener(() {
       widget.onType(controller.text);
     });

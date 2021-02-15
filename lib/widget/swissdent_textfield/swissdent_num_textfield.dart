@@ -5,11 +5,13 @@ import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.d
 class SwissdentNumTextField extends StatefulWidget {
   final Function(String unmaskedText) onNumberType;
   final bool readOnly;
+  final String defaultText;
 
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
     this.readOnly = false,
+    this.defaultText = '',
   }) : super(key: key);
 
   @override
@@ -25,12 +27,12 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
     },
   );
 
-  final controller = TextEditingController(text: numPrefix);
-
+   TextEditingController controller;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller = TextEditingController(text: maskFormatter.maskText('$numPrefix${widget.defaultText}'));
     controller.addListener(() {
       widget.onNumberType(maskFormatter.unmaskText(controller.text));
       if (controller.text.isEmpty) {

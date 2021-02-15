@@ -43,7 +43,7 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
           SizedBox(height: 90),
           CompleteTreatment(
             treatmentDate: DateTime.now(),
-            treatmentName: "Массаж простаты",
+            treatmentName: "Консультация",
             treatmentCost: 999.00,
           ),
           ScheduleTreatment(

@@ -97,14 +97,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(height: 24),
             _buildSocialMediaIcons(context),
             SizedBox(height: 32),
-            SwissdentButton(
-              buttonColor: codeButtonColor,
-              isAvaliable: state is RegistrationButtonActive ? true : false,
-              buttonText: registrationText,
-              onTap: () {
-                ///todo open bottomsheet
-                showPasswordBottomSheet(context);
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: SwissdentButton(
+                buttonColor: codeButtonColor,
+                isAvaliable: state is RegistrationButtonActive ? true : false,
+                buttonText: registrationText,
+                onTap: () {
+                  ///todo open bottomsheet
+                  showPasswordBottomSheet(context);
+                },
+              ),
             ),
           ],
         );
@@ -147,6 +150,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: SwissdentNumTextField(
             readOnly: true,
+            defaultText: '9827464162',
           ),
         ),
         SizedBox(height: 16),
