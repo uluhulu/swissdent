@@ -66,6 +66,7 @@ class ProductionCountBoard extends StatelessWidget {
         Image.asset(
           iconShoppingCart,
           width: 24,
+
           height: 24,
 
         ),
