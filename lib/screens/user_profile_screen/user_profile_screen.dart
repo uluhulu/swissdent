@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/user_profile_screen/widget/user_profile_info.dart';
 import 'package:swissdent/screens/user_profile_screen/widget/user_profile_photo.dart';
 import 'package:swissdent/widget/appbar.dart';
@@ -13,6 +14,7 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             padding: const EdgeInsets.only(left:16.0, right: 16.0, top: 64, bottom: 47),
             child: SwissdentButton(
               isAvaliable: true,
-              buttonText: save,
+              buttonText: Text(save, style: semiBold17WhiteStyle,),
               buttonColor: codeButtonColor,
             ),
           )

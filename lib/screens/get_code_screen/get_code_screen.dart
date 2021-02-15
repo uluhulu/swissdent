@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
@@ -94,7 +95,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal : 102.0),
                 child: SwissdentButton(
                   buttonColor: codeButtonColor,
-                  buttonText: goNextText,
+                  buttonText: Text(goNextText, style: semiBold17WhiteStyle,),
                   isAvaliable: state.nextButtonIsVisible,
                   onTap: () {
                     // sendGetCodeEvent(context);
@@ -106,7 +107,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 102.0),
                 child: SwissdentButton(
                   buttonColor: codeButtonColor,
-                  buttonText: getCodeText,
+                  buttonText: Text(getCodeText,style: semiBold17WhiteStyle),
                   isAvaliable: state.getCodeButtonIsAvaliable,
                   onTap: () {
                     sendGetCodeEvent(context);
