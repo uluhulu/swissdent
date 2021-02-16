@@ -22,6 +22,7 @@ final registrationCreatePasswordTextColor = palete['black'];
 final backLeadingButtonColor = palete['blue'];
 final circleAvatarColor = palete['light_with_opacity'];
 final userCardColor = palete['solitude'];
+final teamCardColor = palete['solitude'];
 final cartBackgroundColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final backgroundColor = palete['gray4'];
@@ -37,6 +38,7 @@ final snapshotCardColor = palete['solitude'];
 final searchClearButtonColor = palete['alarm'];
 final productCardColor = palete['solitude'];
 final userProfilePhotoIconBackgroundColor = palete['blue'];
+final doctorCardColor = palete['superblue'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

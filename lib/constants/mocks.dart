@@ -1,3 +1,4 @@
+import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/screens/cart_screen/widget/product_card/product_card.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/widget/surgical_template/surgical_template.dart';
 import 'package:swissdent/util/money_formatter.dart';
@@ -68,4 +69,54 @@ final cartItemsMockList = [
     photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
   ),
 ];
-final productDescription = 'Зубная щетка для настоящих ценителей искусства MontCarotte Мондриан является частью коллекции зубных кистей ABSTRACTION BRUSH COLLECTION, посвященной художникам абстракционистам. Вслед коллекции, вдохновленной французским импрессионизмом, появляется новая упрощенная форма, очень напоминающая кисть художника, облегченная в ассоциативные цвета и геометрию известных художников: Пикассо, Итен, Кандинский, Малевич, Мондриан.';
+final productDescription =
+    'Зубная щетка для настоящих ценителей искусства MontCarotte Мондриан является частью коллекции зубных кистей ABSTRACTION BRUSH COLLECTION, посвященной художникам абстракционистам. Вслед коллекции, вдохновленной французским импрессионизмом, появляется новая упрощенная форма, очень напоминающая кисть художника, облегченная в ассоциативные цвета и геометрию известных художников: Пикассо, Итен, Кандинский, Малевич, Мондриан.';
+
+class DoctorInfo {
+  final String photoPath;
+  final String doctorName;
+  final String doctorSubtitle;
+  final String doctorSpecialization;
+  final String doctorExperience;
+  final String doctorDescription;
+
+  DoctorInfo(this.photoPath, this.doctorName, this.doctorSubtitle,
+      this.doctorSpecialization, this.doctorExperience, this.doctorDescription);
+}
+
+final doctorsInfo = [
+  DoctorInfo(
+    doctorKulikov,
+    "Вячеслав Куликов",
+    'Главный врач и основатель «Швейцарской стоматологии»',
+    "Устранение рецессий, Синус-лифтинг, Костная пластика, Восстановление зубов, Имплантация, Зубосохраняющие операции, Удаление зубов, Диагностика",
+    "23 года",
+    "Член швейцарского научного сообщества Connection Science. Опинион-лидер компании Thommen Medical в России.",
+  ),
+  DoctorInfo(
+    doctorIvanov,
+    "Николай Иванов",
+    'Ортопед',
+    "Вкладки, Виниры, Протезирование, Диагностика",
+    "15 лет",
+    "Закончил Уральскую Государственную Медицинскую Академию в 2005 году по специальности стоматология.",
+  ),
+  DoctorInfo(
+    doctorStarikov,
+    "Артём Стариков",
+    'Терапевт, ортопед',
+    "Вкладки, Виниры, Эстетическая реставрация, Восстановление зубов, Протезирование, Профессиональная гигиена, Отбеливание зубов Zoom4, Лечение пульпита, Лечение периодонтита, Диагностика, Лечение кариеса",
+    "15 лет",
+    "Закончил Уральскую Государственную Медицинскую Академию в 2005 году по специальности стоматология. Прошел профессиональную переподготовку на стоматолога-ортопеда, имеет соответствующий диплом и сертификат.",
+  ),
+  DoctorInfo(
+    doctorParfeneva,
+    "Елизавета Парфенова",
+    'Стоматолог - парадонтолог',
+    "Лечение парадонтита, Профессиональная гигиена, Отбеливание зубов Zoom4",
+    "5 лет",
+    "Заокнчила ЮУГМУ, прошла интернатуру и ординатуру по специальности «Стоматология хирургическая».",
+  ),
+
+
+];

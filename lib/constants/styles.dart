@@ -59,6 +59,9 @@ final bold15StyleBlue = boldStyle.copyWith(
 final normal15StyleGrey = normal15Style.copyWith(
   color: palete['gray2'],
 );
+final normal15StyleGrey1 = normal15Style.copyWith(
+  color: palete['gray1'],
+);
 final normal15StyleGreen = normal15Style.copyWith(
   color: palete['good'],
 );

@@ -63,6 +63,20 @@ final save = "Сохранить";
 final buyButton = "Купить";
 final productIsAdded = "Товар успешно добавлен в корзину";
 final navigate= "Перейти";
+final teamAppBar = 'Команда';
+
+final doctorIvanovName ="Николай Иванов";
+final doctorIvanovSubtitle ="Ортопед";
+final specialization ="Специализация";
+final experience ="Стаж в стоматологии";
+final doctorIvanovSpecialization ="Вкладки, Виниры, Протезирование, Диагностика";
+final doctorIvanovExperience ="15 лет";
+final doctorIvanovDescription ="Закончил Уральскую Государственную Медицинскую Академию в 2005 году по специальности стоматология.";
+
+final doctorKulikovName = "Вячеслав Куликов";
+final doctorKulikovSubtitle ="Главный врач и основатель «Швейцарской стоматологии»";
+final doctorKulikovSpecialization ="Устранение рецессий, Синус-лифтинг, Костная пластика, Восстановление зубов, Имплантация, Зубосохраняющие операции, Удаление зубов, Диагностика";
+
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';
