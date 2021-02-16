@@ -3,6 +3,7 @@ import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/screens/product_details_scren/widget/navigate_to_cart_board.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
 ///production count board
 ///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=12%3A511
@@ -20,7 +21,7 @@ class ProductionCountBoard extends StatelessWidget {
   }
   Widget _buildProductAmount() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 52.0, top: 32, right: 16.0),
+      padding: const EdgeInsets.only(bottom: 52.0, top: 32,),
       child: Row(
         children: [
           GestureDetector(
@@ -31,14 +32,14 @@ class ProductionCountBoard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 21,
+            width: 33,
           ),
           Text(
-            (productAmount).toString(),
+            productAmount.toString(),
             style: bold24BlackStyle,
           ),
           SizedBox(
-            width: 16,
+            width: 33,
           ),
           GestureDetector(
             child: Image.asset(
@@ -48,8 +49,11 @@ class ProductionCountBoard extends StatelessWidget {
               // width: 10,
             ),
           ),
+          SizedBox(
+            width: 22,
+          ),
           SwissdentButton(
-            width: 51,
+            width: 163,
             buttonText: _buttonInfo(),
             isAvaliable: true,
             buttonColor: codeButtonColor,
@@ -66,9 +70,11 @@ class ProductionCountBoard extends StatelessWidget {
         Image.asset(
           iconShoppingCart,
           width: 24,
-
           height: 24,
 
+        ),
+        SizedBox(
+          width: 24,
         ),
         Text(
           buyButton,
@@ -76,5 +82,8 @@ class ProductionCountBoard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget _navigateToCartScreenBoard(){
   }
 }

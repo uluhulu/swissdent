@@ -32,12 +32,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   Widget _buildBody() {
-    return SingleChildScrollView(
-      physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      child: ProductDetailsInfo(
-        productCost: 1200,
-        productName: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
-        productDescription: productDescription,
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        child: ProductDetailsInfo(
+          productCost: 1200,
+          productName: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+          productDescription: productDescription,
+        ),
       ),
     );
   }

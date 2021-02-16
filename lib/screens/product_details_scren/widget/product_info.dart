@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/screens/product_details_scren/widget/navigate_to_cart_board.dart';
 import 'package:swissdent/screens/product_details_scren/widget/product_count_board.dart';
 import 'package:swissdent/util/money_formatter.dart';
 
@@ -24,15 +25,15 @@ class ProductDetailsInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildProductSum(),
-            SizedBox(
-              height: 16,
-            ),
-            // _buildProductName(),
-            // SizedBox(
-            //   height: 32,
-            // ),
+            SizedBox(height: 16),
+            _buildProductName(),
+            SizedBox(height: 32),
             _buidProductDiscription(),
-            ProductionCountBoard(),
+            SizedBox(height: 32),
+            NavigateToCartBoard(),
+            ProductionCountBoard(
+              productAmount: 1,
+            ),
           ],
         ),
       ),

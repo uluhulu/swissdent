@@ -60,7 +60,9 @@ final passwordChange = "Сброс пароля";
 final newPassword = "Новый пароль";
 final repeatNewPassword = "Повторите новый пароль";
 final save = "Сохранить";
-final buyButton = "Buy";
+final buyButton = "Купить";
+final productIsAdded = "Товар успешно добавлен в корзину";
+final navigate= "Перейти";
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';
