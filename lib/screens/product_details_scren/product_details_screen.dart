@@ -39,6 +39,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           productCost: 1200,
           productName: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
           productDescription: productDescription,
+          productAmount: 30,
         ),
       ),
     );

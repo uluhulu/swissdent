@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/product_details_scren/widget/navigate_to_cart_board.dart';
 import 'package:swissdent/screens/product_details_scren/widget/product_count_board.dart';
@@ -8,12 +9,13 @@ class ProductDetailsInfo extends StatelessWidget {
   final double productCost;
   final String productName;
   final String productDescription;
+  final int productAmount;
 
   const ProductDetailsInfo({
     Key key,
     this.productCost,
     this.productName,
-    this.productDescription,
+    this.productDescription, this.productAmount,
   }) : super(key: key);
 
   @override
@@ -30,9 +32,9 @@ class ProductDetailsInfo extends StatelessWidget {
             SizedBox(height: 32),
             _buidProductDiscription(),
             SizedBox(height: 32),
-            NavigateToCartBoard(),
+            productAmount != 0 ? NavigateToCartBoard() : SizedBox(),
             ProductionCountBoard(
-              productAmount: 1,
+              productAmount: 100,
             ),
           ],
         ),
@@ -42,7 +44,7 @@ class ProductDetailsInfo extends StatelessWidget {
 
   Widget _buildProductSum() {
     return Text(
-      '${formatMoney(productCost)} руб ',
+      '${formatMoney(productCost)} $rubPrefix ',
       style: bold24Black,
     );
   }

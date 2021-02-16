@@ -9,7 +9,7 @@ class ProductInfo extends StatefulWidget {
   final String productDescription;
   final double productCost;
   final String photoPath;
-  final String productAmount;
+  final int productAmount;
 
   const ProductInfo(
       {Key key,
@@ -78,14 +78,14 @@ class _ProductInfoState extends State<ProductInfo> {
             ),
           ),
           SizedBox(
-            width: 21,
+            width: _buildCostPadding() ,
           ),
           Text(
-            widget.productAmount,
+            widget.productAmount.toString(),
             style: bold24BlackStyle,
           ),
           SizedBox(
-            width: 16,
+            width: _buildCostPadding() ,
           ),
           GestureDetector(
             child: Image.asset(
@@ -98,5 +98,18 @@ class _ProductInfoState extends State<ProductInfo> {
         ],
       ),
     );
+  }
+  double _buildCostPadding() {
+    if (widget.productAmount < 10) {
+      return 24;
+    }
+    if (widget.productAmount >= 10 && widget.productAmount < 100) {
+      return 18;
+    }
+
+    if (widget.productAmount >= 100 && widget.productAmount < 1000) {
+      return 11;
+    }
+    return 2;
   }
 }
