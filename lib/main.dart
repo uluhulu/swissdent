@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/screens/cart_screen/cart_screen.dart';
 import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
+import 'package:swissdent/screens/help_screen/help_screen.dart';
 import 'package:swissdent/screens/product_details_scren/product_details_screen.dart';
 import 'package:swissdent/screens/product_screen/product_screen.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: TeamScreen(),
+        home: HelpScreen(),
       ),
     );
   }

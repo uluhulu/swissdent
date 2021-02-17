@@ -39,6 +39,7 @@ final searchClearButtonColor = palete['alarm'];
 final productCardColor = palete['solitude'];
 final userProfilePhotoIconBackgroundColor = palete['blue'];
 final doctorCardColor = palete['superblue'];
+final borderColor = palete['gray3'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

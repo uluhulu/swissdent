@@ -27,7 +27,7 @@ class DoctorExperience extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              doctorIvanovExperience,
+              doctorExperience,
               style: normal15StyleGrey1,
             ),
           ),

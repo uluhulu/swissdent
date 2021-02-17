@@ -7,8 +7,8 @@ import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/styles.dart';
 
 ///expandable card for service
-///todo figma link
-class ServiceExpandCard extends StatefulWidget {
+///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=169%3A279
+class ExpandWithHeader extends StatefulWidget {
   /// collapse listener for card
   final VoidCallback onCollapseListener;
 
@@ -18,18 +18,30 @@ class ServiceExpandCard extends StatefulWidget {
   ///body of card
   final Widget expandableBody;
 
-  const ServiceExpandCard({
+  /// header text style
+  final TextStyle headerStyle;
+
+  ///icon of header
+  final Widget icon;
+
+  ///show animation after expand
+  final bool isShowAnimation;
+
+  const ExpandWithHeader({
     Key key,
     this.onCollapseListener,
     this.cardName,
     this.expandableBody,
+    this.headerStyle,
+    this.icon,
+    this.isShowAnimation = true,
   }) : super(key: key);
 
   @override
-  _ServiceExpandCardState createState() => _ServiceExpandCardState();
+  _ExpandWithHeaderState createState() => _ExpandWithHeaderState();
 }
 
-class _ServiceExpandCardState extends State<ServiceExpandCard>
+class _ExpandWithHeaderState extends State<ExpandWithHeader>
     with TickerProviderStateMixin {
   ExpandableController _expandableController;
   AnimationController _animationController;
@@ -80,29 +92,26 @@ class _ServiceExpandCardState extends State<ServiceExpandCard>
       child: ScrollOnExpand(
         scrollOnExpand: true,
         scrollOnCollapse: true,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 7),
-                  blurRadius: 15,
-                  color: shadowBlackColor.withOpacity(0.1),
-                ),
-                BoxShadow(
-                  offset: Offset(4, 4),
-                  blurRadius: 4,
-                  color: shadowWhiteColor.withOpacity(0.25),
-                ),
-              ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(14),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 7),
+                blurRadius: 15,
+                color: shadowBlackColor.withOpacity(0.1),
               ),
+              BoxShadow(
+                offset: Offset(4, 4),
+                blurRadius: 4,
+                color: shadowWhiteColor.withOpacity(0.25),
+              ),
+            ],
+            borderRadius: BorderRadius.all(
+              Radius.circular(14),
             ),
-            child: _buildExpandPanel(),
           ),
+          child: _buildExpandPanel(),
         ),
       ),
     );
@@ -135,23 +144,33 @@ class _ServiceExpandCardState extends State<ServiceExpandCard>
       padding: EdgeInsets.all(16),
       child: Row(
         children: [
-          Text(
-            widget.cardName,
-            style: bold20BlackStyle,
-          ),
-          Spacer(),
-          RotationTransition(
-            turns: _animation,
-            child: Image.asset(
-              iconCartArrow,
-              width: 12,
-              height: 20,
+          Expanded(
+            flex: 3,
+            child: Text(
+              widget.cardName,
+              style: widget.headerStyle ?? bold15StyleBlack,
             ),
           ),
+          Spacer(),
+          if (widget.isShowAnimation)
+            RotationTransition(
+              turns: _animation,
+              child: _buildIcon(),
+            ),
+          if (!widget.isShowAnimation) _buildIcon(),
           SizedBox(width: 10),
         ],
       ),
     );
+  }
+
+  Widget _buildIcon() {
+    return widget.icon ??
+        Image.asset(
+          iconCartArrow,
+          width: 12,
+          height: 20,
+        );
   }
 
   Widget _buildExpandBody() {

@@ -3,7 +3,7 @@ import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/screens/services_screen/widget/player/player.dart';
 import 'package:swissdent/screens/services_screen/widget/service_expand.dart';
-import 'package:swissdent/screens/services_screen/widget/service_expand_card/service_expand_card.dart';
+import 'package:swissdent/widget/expandable/expand_with_header.dart';
 import 'package:swissdent/widget/appbar.dart';
 import 'package:swissdent/widget/chat_button.dart';
 

@@ -64,18 +64,16 @@ final buyButton = "Купить";
 final productIsAdded = "Товар успешно добавлен в корзину";
 final navigate= "Перейти";
 final teamAppBar = 'Команда';
-
-final doctorIvanovName ="Николай Иванов";
+final healpAppBar = 'Помощь';
 final doctorIvanovSubtitle ="Ортопед";
 final specialization ="Специализация";
 final experience ="Стаж в стоматологии";
-final doctorIvanovSpecialization ="Вкладки, Виниры, Протезирование, Диагностика";
-final doctorIvanovExperience ="15 лет";
-final doctorIvanovDescription ="Закончил Уральскую Государственную Медицинскую Академию в 2005 году по специальности стоматология.";
+final toothpasteQuestion = 'Какую пасту лучше выбрать после лечения?';
+final userQuestion = 'Ваш вопрос...';
+final send = 'Отправить';
+final questionInfoText = 'Ваш вопрос отправлен.\nМы скоро Вам ответим';
 
-final doctorKulikovName = "Вячеслав Куликов";
-final doctorKulikovSubtitle ="Главный врач и основатель «Швейцарской стоматологии»";
-final doctorKulikovSpecialization ="Устранение рецессий, Синус-лифтинг, Костная пластика, Восстановление зубов, Имплантация, Зубосохраняющие операции, Удаление зубов, Диагностика";
+
 
 
 String serviceCost(double amount) {
