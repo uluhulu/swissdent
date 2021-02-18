@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:swissdent/constants/paths.dart';
+import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/cart_screen/widget/product_card/widget/product_icon.dart';
 import 'package:swissdent/util/money_formatter.dart';
@@ -49,7 +50,7 @@ class _ProductInfoState extends State<ProductInfo> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${formatMoney(widget.productCost)} руб",
+              "${formatMoney(widget.productCost)} $rubPrefix",
               style: bold15StyleBlack,
             ),
             SizedBox(
