@@ -22,4 +22,4 @@ class UpdateTimerEvent extends GetCodeScreenEvent {
 
 class CheckSmsCodeEvent extends GetCodeScreenEvent {}
 
-class NavigateNextScreenEvent extends GetCodeScreenEvent {}
+class NavigateNextRegistrationScreenEvent extends GetCodeScreenEvent {}

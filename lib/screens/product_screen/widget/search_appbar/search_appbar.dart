@@ -50,60 +50,56 @@ class _SearchAppbarState extends State<SearchAppbar> {
   }
 
   Widget _buildExpandPanel() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 23.0),
-      child: ExpandablePanel(
-        controller: _expandableController,
-        theme: ExpandableThemeData(
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          tapBodyToCollapse: false,
-          tapHeaderToExpand: false,
-          iconColor: Colors.black.withOpacity(0.4),
-          scrollAnimationDuration: Duration(milliseconds: 200),
-          hasIcon: false,
-        ),
-        builder: (_, collapsed, expanded) {
-          return Expandable(
-            collapsed: collapsed,
-            expanded: expanded,
-            theme: const ExpandableThemeData(crossFadePoint: 0),
-          );
-        },
-        header: _buildAppbarHeader(),
-        expanded: _buildExpandBody(),
+    return ExpandablePanel(
+      controller: _expandableController,
+      theme: ExpandableThemeData(
+        headerAlignment: ExpandablePanelHeaderAlignment.center,
+        tapBodyToCollapse: false,
+        tapHeaderToExpand: false,
+        iconColor: Colors.black.withOpacity(0.4),
+        scrollAnimationDuration: Duration(milliseconds: 200),
+        hasIcon: false,
       ),
+      builder: (_, collapsed, expanded) {
+        return Expandable(
+          collapsed: collapsed,
+          expanded: expanded,
+          theme: const ExpandableThemeData(crossFadePoint: 0),
+        );
+      },
+      header: _buildAppbarHeader(),
+      expanded: _buildExpandBody(),
     );
   }
 
   Widget _buildAppbarHeader() {
-    return Padding(
-      padding: EdgeInsets.all(0),
-      child: Row(
-        children: [
-          CupertinoButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.arrow_back_ios_rounded,
-              color: backLeadingButtonColor,
-            ),
+    return Row(
+      children: [
+        CupertinoButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: backLeadingButtonColor,
           ),
-          Spacer(),
-          Text(
-            products,
-            style: bold17BlackStyle,
+        ),
+        Spacer(),
+        Text(
+          products,
+          style: bold17BlackStyle,
+        ),
+        Spacer(),
+        CupertinoButton(
+          onPressed: () {
+            handleSearchbarVisibility();
+          },
+          child: Icon(
+            Icons.search,
+            color: backLeadingButtonColor,
           ),
-          Spacer(),
-          CupertinoButton(
-            onPressed: () {
-              handleSearchbarVisibility();
-            },
-            child: Icon(
-              Icons.search,
-              color: backLeadingButtonColor,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

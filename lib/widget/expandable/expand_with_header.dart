@@ -148,7 +148,7 @@ class _ExpandWithHeaderState extends State<ExpandWithHeader>
             flex: 3,
             child: Text(
               widget.cardName,
-              style: widget.headerStyle ?? bold15StyleBlack,
+              style: widget.headerStyle ?? bold20BlackStyle,
             ),
           ),
           Spacer(),
@@ -158,7 +158,7 @@ class _ExpandWithHeaderState extends State<ExpandWithHeader>
               child: _buildIcon(),
             ),
           if (!widget.isShowAnimation) _buildIcon(),
-          SizedBox(width: 10),
+          SizedBox(width: 2),
         ],
       ),
     );

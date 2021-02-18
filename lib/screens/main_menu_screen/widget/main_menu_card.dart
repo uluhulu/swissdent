@@ -7,8 +7,10 @@ import 'package:swissdent/constants/styles.dart';
 class MainMenuCard extends StatelessWidget {
   final String iconPath;
   final String cardText;
+  final Function() onTap;
 
-  const MainMenuCard({Key key, this.iconPath, this.cardText}) : super(key: key);
+  const MainMenuCard({Key key, this.iconPath, this.cardText, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +24,26 @@ class MainMenuCard extends StatelessWidget {
   }
 
   Widget _buildCardBody() {
-    return Container(
-      height: 86.47,
-      width: 343,
-      decoration: BoxDecoration(
-          color: userCardColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(14),
-          ),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 7),
-              blurRadius: 15,
-              color: userCardShadowColor.withOpacity(0.01),
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        height: 86.47,
+        // width: 343,
+        decoration: BoxDecoration(
+            color: userCardColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(14),
             ),
-          ]),
-      child:
-          Padding(padding: const EdgeInsets.all(16.0), child: _buildCardInfo()),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 7),
+                blurRadius: 15,
+                color: userCardShadowColor.withOpacity(0.01),
+              ),
+            ]),
+        child: Padding(
+            padding: const EdgeInsets.all(16.0), child: _buildCardInfo()),
+      ),
     );
   }
 

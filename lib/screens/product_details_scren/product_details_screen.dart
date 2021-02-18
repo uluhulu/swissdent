@@ -21,7 +21,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ProductPhoto(
             photoPath: 'https://doctorslon.ru/upload/iblock/c87/MC405_5png.png',
             width: MediaQuery.of(context).size.width,
-            onBackCallback: () {},
+            onBackCallback: () => Navigator.of(context).pop(),
           ),
           _buildBody(),
         ],

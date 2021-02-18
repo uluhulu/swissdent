@@ -37,6 +37,7 @@ class TeamScreen extends StatelessWidget {
         photoPath: doctor.photoPath,
         doctorName: doctor.doctorName,
         doctorSubtitle: doctor.doctorSubtitle,
+        doctorExperience: doctor.doctorExperience,
         doctorSpecialization: doctor.doctorSpecialization,
         doctorDescription: doctor.doctorDescription,
       ));

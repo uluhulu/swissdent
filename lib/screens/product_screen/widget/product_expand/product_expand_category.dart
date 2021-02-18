@@ -18,14 +18,19 @@ class _ProductExpandCategoryState extends State<ProductExpandCategory> {
   Widget build(BuildContext context) {
     return ExpandWithoutHeader(
       cardName: widget.categoryName,
-      expandableBody: Center(
-        child: Wrap(
-          direction: Axis.horizontal,
-          spacing: 16,
+      expandableBody: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:8.0),
+        child: GridView.count(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          childAspectRatio: 164 / 246,
           children: [
             ProductItem(
               productCost: 1200,
-              productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ)0,15 SOFT',
+              productDescription:
+                  'Зубная щетка (АБСТРАКЦИОНИСТ)0,15fdsfsfdsfdsfdsfdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsSOFTfsdfdsfsdfsdfsdfsdfdsfdsfdsfdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfs',
               productImagePath:
                   'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
             ),
@@ -40,16 +45,20 @@ class _ProductExpandCategoryState extends State<ProductExpandCategory> {
               productCost: 1200,
               productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ)0,15 SOFT',
               productImagePath:
-              'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
+                  'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
             ),
-            // SizedBox(width: 16),
             ProductItem(
               productCost: 1200,
               productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ)0,15 SOFT',
               productImagePath:
-              'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
+                  'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
             ),
-
+            ProductItem(
+              productCost: 1200,
+              productDescription: 'Зубная щетка (АБСТРАКЦИОНИСТ)0,15 SOFT',
+              productImagePath:
+                  'https://dizion.ru/image/cache/catalog/Katalog/Gigiyena-polosti-rta/Zubnyye-shchetki/vitis_ultrasoft_zubnaya_shetka_m_u2-700x700.jpg',
+            ),
           ],
         ),
       ),

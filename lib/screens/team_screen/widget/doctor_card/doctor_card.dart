@@ -58,7 +58,7 @@ class DoctorCard extends StatelessWidget {
         ),
         _buildSeparator(),
         DoctorSpecialization(doctorSpecialization: doctorSpecialization ),
-        DoctorExperience( doctorExperience: doctorExperience),
+        DoctorExperience(doctorExperience: doctorExperience),
         _buildSeparator(),
         DoctorDescription(doctorDescription:doctorDescription ,),
       ],

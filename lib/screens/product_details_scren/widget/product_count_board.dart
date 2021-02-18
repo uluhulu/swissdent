@@ -16,6 +16,7 @@ class ProductionCountBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildProductAmount(),
       ],
@@ -23,49 +24,51 @@ class ProductionCountBoard extends StatelessWidget {
   }
 
   Widget _buildProductAmount() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 52.0,
-        top: 32,
-      ),
-      child: Container(
-        child: Row(
-          children: [
-            GestureDetector(
-              child: Image.asset(
-                iconMinus,
-                height: 35,
-                width: 35,
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 52.0,
+          top: 32,
+        ),
+        child: Container(
+          child: Row(
+            children: [
+              GestureDetector(
+                child: Image.asset(
+                  iconMinus,
+                  height: 35,
+                  width: 35,
+                ),
               ),
-            ),
-            SizedBox(
-              width: _buildCostPadding(),
-            ),
-            Text(
-              productAmount.toString(),
-              style: bold24BlackStyle,
-            ),
-            SizedBox(
-              width: _buildCostPadding(),
-            ),
-            GestureDetector(
-              child: Image.asset(
-                iconPlus,
-                height: 35,
-                width: 35,
-                // width: 10,
+              SizedBox(
+                width: _buildCostPadding(),
               ),
-            ),
-            SizedBox(
-              width: 22,
-            ),
-            SwissdentButton(
-              width: 163,
-              buttonText: _buttonInfo(),
-              isAvaliable: true,
-              buttonColor: codeButtonColor,
-            ),
-          ],
+              Text(
+                productAmount.toString(),
+                style: bold24BlackStyle,
+              ),
+              SizedBox(
+                width: _buildCostPadding(),
+              ),
+              GestureDetector(
+                child: Image.asset(
+                  iconPlus,
+                  height: 35,
+                  width: 35,
+                  // width: 10,
+                ),
+              ),
+              SizedBox(
+                width: 22,
+              ),
+              SwissdentButton(
+                width: 163,
+                buttonText: _buttonInfo(),
+                isAvaliable: true,
+                buttonColor: codeButtonColor,
+              ),
+            ],
+          ),
         ),
       ),
     );

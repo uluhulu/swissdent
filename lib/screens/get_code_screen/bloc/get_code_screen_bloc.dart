@@ -35,6 +35,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     yield* mapTimerEvent(event);
     yield* mapGetCodeEvent(event);
     yield* mapTypeSmsCodeEvent(event);
+    yield* mapNavigateNextRegistrationScreenEvent(event);
   }
 
   @override
@@ -93,6 +94,15 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         seconds: _seconds,
         smsCodeIsAvaliable: smsCodeIsAvaliable,
         nextButtonIsVisible: nextButtonIsVisible,
+      );
+    }
+  }
+  @override
+  Stream<GetCodeScreenState> mapNavigateNextRegistrationScreenEvent(
+      GetCodeScreenEvent event,
+      ) async* {
+    if (event is NavigateNextRegistrationScreenEvent) {
+      yield NavigateNextRegistrationScreenState(
       );
     }
   }

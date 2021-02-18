@@ -37,7 +37,9 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: buildAppbar(
-        onBackCallback: () {},
+        onBackCallback: () {
+          Navigator.of(context).pop();
+        },
         titleText: chatTitle,
       ),
       body: Stack(

@@ -14,7 +14,6 @@ class ExpandWithoutHeader extends StatefulWidget {
   ///body of expand card
   final Widget expandableBody;
 
-
   const ExpandWithoutHeader({
     Key key,
     this.cardName,

@@ -10,14 +10,18 @@ class UserCard extends StatelessWidget {
   final String userName;
   final String userEmail;
   final String avatarPath;
+  final Function() navigateToCartScreen;
+  final Function() navigateToUserProfileScreen;
 
-  const UserCard({Key key, this.productCount, this.userName, this.userEmail, this.avatarPath}) : super(key: key);
+
+
+  const UserCard({Key key, this.productCount, this.userName, this.userEmail, this.avatarPath, this.navigateToCartScreen, this.navigateToUserProfileScreen}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  productCount != null
-          ? UserCardWithCart(productCount: productCount, userName: userName, userEmail: userEmail,avatarPath: avatarPath,)
-          : UserCardWithoutCart(userName: userName, userEmail: userEmail,avatarPath: avatarPath,);
+          ? UserCardWithCart(productCount: productCount, userName: userName, userEmail: userEmail,avatarPath: avatarPath, navigateToCartScreen: navigateToCartScreen,navigateToUserProfileScreen: navigateToUserProfileScreen,)
+          : UserCardWithoutCart(userName: userName, userEmail: userEmail,avatarPath: avatarPath,navigateToUserProfileScreen: navigateToUserProfileScreen);
 
   }
 }

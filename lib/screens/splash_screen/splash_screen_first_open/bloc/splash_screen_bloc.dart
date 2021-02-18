@@ -3,15 +3,23 @@ import 'package:swissdent/screens/splash_screen/splash_screen_first_open/bloc/sp
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/bloc/splash_screen_state.dart';
 
 class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
-  SplashScreenBloc() : super(SplashScreenState());
+  SplashScreenBloc() : super(SplashScreenState()) {
+    initNavigate();
+  }
 
   @override
   Stream<SplashScreenState> mapEventToState(SplashScreenEvent event) async* {
-    yield* mapNavigateState();
+    yield* mapNavigateEvent(event);
   }
 
-  Stream<SplashScreenState> mapNavigateState() async* {
+  Stream<SplashScreenState> mapNavigateEvent(SplashScreenEvent event) async* {
+    if (event is SplashNavigateEvent) {
+      yield SplashNavigateState();
+    }
+  }
+
+  void initNavigate() async {
     await Future.delayed(Duration(seconds: 2));
-    yield NavigateRegistrationScreenState();
+    add(SplashNavigateEvent());
   }
 }

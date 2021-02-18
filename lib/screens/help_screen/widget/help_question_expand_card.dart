@@ -15,7 +15,7 @@ class HelpQuestionExpandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+      padding: const EdgeInsets.only(bottom: 48, left: 16, right: 16),
       child: ExpandWithHeader(
         cardName: title,
         expandableBody: _buildBody(),
@@ -34,9 +34,9 @@ class HelpQuestionExpandCard extends StatelessWidget {
       children:[
         Padding(
         padding:
-        const EdgeInsets.only(top: 33.0, right: 16.0, bottom: 16.0, left: 16),
+        const EdgeInsets.only(top: 17.0, right: 16.0, bottom: 16.0, left: 16),
         child: Container(
-          width: 312,
+          // width: 312,
           height: 115,
           decoration: BoxDecoration(
               border: Border.all(color: borderColor),

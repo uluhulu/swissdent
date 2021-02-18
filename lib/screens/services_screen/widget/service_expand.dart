@@ -38,12 +38,15 @@ class _ServiceExpandState extends State<ServiceExpand> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpandWithHeader(
-      cardName: widget.title,
-      expandableBody: _buildBody(),
-      onCollapseListener: () {
-        _stopPlayer();
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:16.0, vertical: 12),
+      child: ExpandWithHeader(
+        cardName: widget.title,
+        expandableBody: _buildBody(),
+        onCollapseListener: () {
+          _stopPlayer();
+        },
+      ),
     );
   }
 

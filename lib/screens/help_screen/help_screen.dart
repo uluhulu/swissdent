@@ -59,7 +59,7 @@ class _HelpScreenState extends State<HelpScreen> {
             HelpQuestionExpandCard(title: 'Напишите свой вопрос',),
 
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 71),
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 71),
               child: SwissdentButton(
                 isAvaliable: true,
                 buttonColor: emergencyCallButtonColor,

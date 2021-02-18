@@ -21,6 +21,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
       backgroundColor: backgroundColor,
       appBar: buildAppbar(
         titleText: servicesScreenTitle,
+        onBackCallback: () {
+          goBack();
+        },
         action: ChatButton(
           onTap: () {},
         ),
@@ -32,11 +35,17 @@ class _ServicesScreenState extends State<ServicesScreen> {
   Widget _buildBody() {
     return ListView(
       children: [
+        SizedBox(height: 12),
         ServiceExpand(
           title: "Терапия",
-          videoUrl: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
+          videoUrl:
+              'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
         ),
       ],
     );
+  }
+
+  void goBack() {
+    Navigator.of(context).pop();
   }
 }

@@ -31,8 +31,6 @@ class TeamGroupPhotoBanner extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         alignment: Alignment.center,
-        width: 312,
-        height: 97,
         decoration: BoxDecoration(
           color: teamCardColor,
           borderRadius: BorderRadius.all(

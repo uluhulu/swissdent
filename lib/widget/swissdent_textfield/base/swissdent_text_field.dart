@@ -17,10 +17,11 @@ class SwissdentTextField extends StatelessWidget {
   final bool autofocus;
   final bool readOnly;
   final Function(String text) onSubmitted;
+  final int maxLines;
 
   SwissdentTextField({
     Key key,
-    this.maxLength = 100,
+    this.maxLength = 1000,
     this.formatter,
     this.obscureText = false,
     this.controller,
@@ -33,6 +34,7 @@ class SwissdentTextField extends StatelessWidget {
     this.autofocus = false,
     this.onSubmitted,
     this.readOnly = false,
+    this.maxLines = 100,
   }) : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class SwissdentTextField extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
-      height: 51,
+      // height: 51,
       decoration: BoxDecoration(
         color: textFieldColor,
         border: Border.all(color: textFieldBorderColor),
@@ -56,9 +58,9 @@ class SwissdentTextField extends StatelessWidget {
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(left: 23.0),
+              padding: const EdgeInsets.only(left: 23.0, right: 24,),
               child: TextField(
-                onSubmitted:onSubmitted ?? (text){},
+                onSubmitted: onSubmitted ?? (text) {},
                 autofocus: autofocus,
                 focusNode: focusNode ?? FocusNode(),
                 keyboardType: keyboardType,
@@ -70,20 +72,19 @@ class SwissdentTextField extends StatelessWidget {
                   enabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.all(0),
+                  contentPadding: EdgeInsets.only(top: 6),
                   hintText: hintText,
                   hintStyle: hintStyle,
                   counter: Container(
                     height: 1,
                   ),
                 ),
+                maxLines: maxLines,
                 maxLength: maxLength,
+                minLines: 1,
                 style: boldStyle,
                 controller: controller ?? TextEditingController(),
-                inputFormatters: [
-                  if(formatter != null)
-                    formatter
-                ],
+                inputFormatters: [if (formatter != null) formatter],
               ),
             ),
           ),

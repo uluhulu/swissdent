@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
+import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/bloc/splash_screen_bloc.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/bloc/splash_screen_state.dart';
 import 'package:swissdent/screens/splash_screen/widget/splash_logo.dart';
 import 'package:swissdent/screens/splash_screen/widget/splash_wave.dart';
 import 'package:swissdent/util/route_builder.dart';
-
 
 /// Splash screen
 /// https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=1%3A5
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       },
       child: BlocListener<SplashScreenBloc, SplashScreenState>(
         listener: (context, state) {
-          if (state is NavigateRegistrationScreenState) {
+          if (state is SplashNavigateState) {
             _navigateToRegistrationScreen();
           }
         },
@@ -40,17 +40,20 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       children: [
         SplashWave(),
-        SplashLogo(imageWidth: 170, imageHeight: 154, textWidth: 195, textHeight: 48,sizedBoxHeight: 25.85,offset: -100,),
+        SplashLogo(
+          imageWidth: 170,
+          imageHeight: 154,
+          textWidth: 195,
+          textHeight: 48,
+          sizedBoxHeight: 25.85,
+          offset: -100,
+        ),
       ],
     );
   }
 
   void _navigateToRegistrationScreen() {
-    Navigator.of(context).pushAndRemoveUntil(
-      buildRoute(
-        Container(),
-      ),
-      (route) => false,
-    );
+    Navigator.of(context)
+        .pushAndRemoveUntil(buildRoute(GetCodeScreen()), (route) => false);
   }
 }
