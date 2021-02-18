@@ -102,7 +102,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: SwissdentButton(
                 buttonColor: codeButtonColor,
                 isAvaliable: state is RegistrationButtonActive ? true : false,
-                buttonText: registrationText,
+                buttonText: Text(registrationText, style: semiBold17WhiteStyle,),
                 onTap: () {
                   ///todo open bottomsheet
                   showPasswordBottomSheet(context);

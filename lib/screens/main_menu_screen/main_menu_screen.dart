@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_app_bar.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_card.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/user_card/user_card.dart';
@@ -60,7 +61,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                     top: 24.0,left: 16,right: 16,bottom: 37),
                 child: SwissdentButton(
                   buttonColor: emergencyCallButtonColor,
-                  buttonText: emergencyCallButton,
+                  buttonText: Text(emergencyCallButton, style: semiBold17WhiteStyle,),
                   isAvaliable: true,
                 ),
               )
