@@ -9,24 +9,18 @@ class RoundedAvatar extends StatelessWidget {
 
   const RoundedAvatar({
     Key key,
-    this.photoPath =
-        'https://cdn009.mndcdn.net/photo/c/4/b/2fc1947a75b55b357cade348618085ab_view.jpg',
+    this.photoPath,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 60,
-      height: 60,
       decoration: new BoxDecoration(
         shape: BoxShape.circle,
         color: circleAvatarColor,
       ),
-      child: photoPath.isNotEmpty
+      child: photoPath != null
           ? Container(
-              // margin: EdgeInsets.all(8),
-              width: 60,
-              height: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(

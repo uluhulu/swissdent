@@ -29,14 +29,22 @@ final light15StyleGrey = lightStyle.copyWith(
   fontSize: 15,
   color: palete['gray1'],
 );
+
 final normal11StyleRed = normalStyle.copyWith(
   fontSize: 11,
   color: palete['alarm'],
 );
+
 final normal12StyleGrey = normalStyle.copyWith(
   fontSize: 12,
   color: palete['gray1'],
 );
+
+final normal12StyleGrey2 = normalStyle.copyWith(
+  fontSize: 12,
+  color: palete['gray2'],
+);
+
 final normal18StyleGrey = normalStyle.copyWith(
   fontSize: 18,
   color: palete['gray1'],

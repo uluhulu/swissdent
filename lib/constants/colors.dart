@@ -40,6 +40,9 @@ final productCardColor = palete['solitude'];
 final userProfilePhotoIconBackgroundColor = palete['blue'];
 final doctorCardColor = palete['superblue'];
 final borderColor = palete['gray3'];
+final userMessageColor = palete['alice_blue'];
+final adminMessageColor = palete['solitude'];
+final sendButtonColor = palete['dark'];
 
 final palete = {
   'alarm': Color(0xffEC2424),
@@ -59,4 +62,5 @@ final palete = {
   'solitude': Color(0xffFAFBFC),
   'alice blue': Color(0xffE0EFF5),
   'cosmic latte': Color(0xffE9FFEE),
+  'alice_blue': Color(0xffF0FBFF),
 };

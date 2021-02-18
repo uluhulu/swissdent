@@ -75,6 +75,11 @@ final questionInfoText = 'Ваш вопрос отправлен.\nМы скор
 
 
 
+final chatTitle = 'Чат';
+final userMessageTitle = 'Вы';
+final chatBarHint = 'Введите сообщение';
+final buyButton = "Buy";
+
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';
