@@ -81,19 +81,21 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildChatBar() {
     return ChatBar(
       onMessageSubmit: (message) {
-        setState(() {
-          mockMessages.add(MeMessage(
-            messageText: message,
-            messageDate: DateTime.now(),
-          ));
-          Future.delayed(Duration(milliseconds: 50), () {
-            scrollController.animateTo(
-              scrollController.position.maxScrollExtent,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeIn,
-            );
+        if(message.isNotEmpty){
+          setState(() {
+            mockMessages.add(MeMessage(
+              messageText: message,
+              messageDate: DateTime.now(),
+            ));
+            Future.delayed(Duration(milliseconds: 50), () {
+              scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: Duration(milliseconds: 200),
+                curve: Curves.easeIn,
+              );
+            });
           });
-        });
+        }
       },
     );
   }
