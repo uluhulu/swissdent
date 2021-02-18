@@ -8,7 +8,7 @@ class SplashScreenRegistrationText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 65.0),
+      padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: Text(
         successfulRegistration,
         textAlign: TextAlign.center,

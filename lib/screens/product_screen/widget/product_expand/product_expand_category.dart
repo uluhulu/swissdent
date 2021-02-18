@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/screens/product_screen/widget/product_item/product_item.dart';
 import 'package:swissdent/widget/expandable/expand_without_header.dart';
+import 'package:swissdent/widget/fixed_height_delegate.dart';
 
 ///expandable category for products
 class ProductExpandCategory extends StatefulWidget {
@@ -19,13 +20,15 @@ class _ProductExpandCategoryState extends State<ProductExpandCategory> {
     return ExpandWithoutHeader(
       cardName: widget.categoryName,
       expandableBody: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:8.0),
-        child: GridView.count(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: GridView(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          childAspectRatio: 164 / 246,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+            crossAxisCount: 2,
+            height: 270,
+          ),
           children: [
             ProductItem(
               productCost: 1200,

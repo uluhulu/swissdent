@@ -34,7 +34,7 @@ class SwissdentTextField extends StatelessWidget {
     this.autofocus = false,
     this.onSubmitted,
     this.readOnly = false,
-    this.maxLines = 100,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override

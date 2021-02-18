@@ -115,9 +115,10 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       nextButtonIsVisible = true;
     } else {
       smsCodeIsAvaliable = false;
-      // getCodeButtonIsAvaliable = true;
+      if(_seconds == 45 && phoneNumber.length == 11){
+        getCodeButtonIsAvaliable = true;
+      }
       nextButtonIsVisible = false;
-
     }
   }
 
@@ -142,8 +143,8 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
           getCodeButtonIsAvaliable = true;
         } else {
           _seconds--;
-          timerAvaliable = true;
-          getCodeButtonIsAvaliable = false;
+          // timerAvaliable = true;
+          // getCodeButtonIsAvaliable = false;
         }
         add(UpdateTimerEvent(_seconds));
       },

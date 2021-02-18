@@ -49,6 +49,7 @@ class _SwissdentPasswordFieldState extends State<SwissdentPasswordField> {
       suffixWidget: _buildVisibilityIcon(),
       keyboardType: TextInputType.text,
       hintText: widget.hintText,
+      maxLines: 1,
       hintStyle: normal15Style,
       onSubmitted: widget.onSubmitted,
     );

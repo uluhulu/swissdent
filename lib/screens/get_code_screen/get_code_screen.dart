@@ -161,10 +161,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
-  // void navigateNextRegistrationScreenEvent(BuildContext context) {
-  //   BlocProvider.of<GetCodeScreenBloc>(context)
-  //       .add(NavigateNextRegistrationScreenEvent());
-  // }
+
   void _navigateToNextRegistrationScreen(){
     Navigator.of(context).pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
   }

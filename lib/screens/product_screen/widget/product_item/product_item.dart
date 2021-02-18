@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
@@ -48,15 +49,10 @@ class ProductItem extends StatelessWidget {
                 ),
               ]),
           child: Padding(
-            padding: const EdgeInsets.only(
-              top: 16,
-              left: 16,
-              right: 16,
-              bottom: 16
-            ),
+            padding: const EdgeInsets.all(16),
             child: Container(
-              // width: 164,
-              // height: 254,
+              width: 164,
+              height: 254,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
