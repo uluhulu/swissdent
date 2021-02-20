@@ -14,4 +14,6 @@ class GetCodeScreenState {
   });
 }
 
-class NavigateNextScreenState extends GetCodeScreenState {}
+class NavigateNextRegistrationScreenState extends GetCodeScreenState {
+
+}

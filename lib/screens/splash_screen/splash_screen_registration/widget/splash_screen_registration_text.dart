@@ -7,10 +7,13 @@ import 'package:swissdent/constants/styles.dart';
 class SplashScreenRegistrationText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      successfulRegistration,
-      textAlign: TextAlign.center,
-      style: semiBold24WhiteStyle.copyWith(height: 1),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+      child: Text(
+        successfulRegistration,
+        textAlign: TextAlign.center,
+        style: semiBold24WhiteStyle.copyWith(height: 1),
+      ),
     );
   }
 }

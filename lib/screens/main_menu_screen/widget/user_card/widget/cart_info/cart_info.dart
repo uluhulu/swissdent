@@ -16,19 +16,17 @@ class CartInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Column(
-        children: [
-          SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            height: 1,
-            color: cartInfoSeparatorColor,
-          ),
-          SizedBox(height: 16),
-          _buildCartInfo()
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        Container(
+          width: double.infinity,
+          height: 1,
+          color: cartInfoSeparatorColor,
+        ),
+        SizedBox(height: 16),
+        _buildCartInfo()
+      ],
     );
   }
 

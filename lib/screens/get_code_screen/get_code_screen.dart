@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
+import 'package:swissdent/screens/registration_screen/registration_screen.dart';
+import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
@@ -54,7 +57,10 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
-      listener: (BuildContext context, state) {},
+      listener: (BuildContext context, state) {
+        if (state is NavigateNextRegistrationScreenState)
+          _navigateToNextRegistrationScreen();
+      },
       builder: (BuildContext context, state) {
         return Column(
           children: [
@@ -91,13 +97,17 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             SizedBox(height: 11),
             if (state.nextButtonIsVisible)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal : 102.0),
+                padding: const EdgeInsets.symmetric(horizontal: 102.0),
                 child: SwissdentButton(
+                  width: 170,
                   buttonColor: codeButtonColor,
-                  buttonText: goNextText,
+                  buttonText: Text(
+                    goNextText,
+                    style: semiBold17WhiteStyle,
+                  ),
                   isAvaliable: state.nextButtonIsVisible,
                   onTap: () {
-                    // sendGetCodeEvent(context);
+                    _navigateToNextRegistrationScreen();
                   },
                 ),
               )
@@ -105,8 +115,9 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 102.0),
                 child: SwissdentButton(
+                  width: 170,
                   buttonColor: codeButtonColor,
-                  buttonText: getCodeText,
+                  buttonText: Text(getCodeText, style: semiBold17WhiteStyle),
                   isAvaliable: state.getCodeButtonIsAvaliable,
                   onTap: () {
                     sendGetCodeEvent(context);
@@ -148,5 +159,10 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     BlocProvider.of<GetCodeScreenBloc>(context).add(
       TypeSmsCodeEvent(code),
     );
+  }
+
+
+  void _navigateToNextRegistrationScreen(){
+    Navigator.of(context).pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
   }
 }

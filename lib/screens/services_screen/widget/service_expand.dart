@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/screens/services_screen/widget/player/player.dart';
-import 'package:swissdent/screens/services_screen/widget/service_expand_card/service_expand_card.dart';
+import 'package:swissdent/widget/expandable/expand_with_header.dart';
 import 'package:swissdent/screens/services_screen/widget/service_item/service_item.dart';
 import 'package:video_player/video_player.dart';
 
@@ -38,12 +38,15 @@ class _ServiceExpandState extends State<ServiceExpand> {
 
   @override
   Widget build(BuildContext context) {
-    return ServiceExpandCard(
-      cardName: widget.title,
-      expandableBody: _buildBody(),
-      onCollapseListener: () {
-        _stopPlayer();
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:16.0, vertical: 12),
+      child: ExpandWithHeader(
+        cardName: widget.title,
+        expandableBody: _buildBody(),
+        onCollapseListener: () {
+          _stopPlayer();
+        },
+      ),
     );
   }
 

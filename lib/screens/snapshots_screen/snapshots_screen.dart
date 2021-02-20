@@ -17,7 +17,7 @@ class _SnapshotsScreenState extends State<SnapshotsScreen> {
     return Scaffold(
       appBar: buildAppbar(
         titleText: snapshotsScreenTitle,
-        onBackCallback: () {},
+        onBackCallback: () => Navigator.of(context).pop(),
       ),
       backgroundColor: backgroundColor,
       body: _buildBody(),

@@ -9,6 +9,10 @@ import 'package:swissdent/util/money_formatter.dart';
 ///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=3%3A5893
 ///price discount total
 class CartTotalBoard extends StatelessWidget {
+  final double amount;
+
+  const CartTotalBoard({Key key, this.amount}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,13 +27,14 @@ class CartTotalBoard extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 16),
-            _buildCostRow(price, 5600),
+            _buildCostRow(price, amount.toDouble()),
             SizedBox(height: 24),
             _buildCostRow(discount, 600),
             SizedBox(height: 53),
             _buildTotalRow(),
-            SizedBox
-              (height: 48,),
+            SizedBox(
+              height: 48,
+            ),
             PaymentInfoBoard(),
           ],
         ),

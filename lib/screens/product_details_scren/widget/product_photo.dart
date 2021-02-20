@@ -18,7 +18,7 @@ class ProductPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _buildPhoto(),
+        _buildPhoto(context),
         Positioned(
           left: 0,
             top: 30,
@@ -33,10 +33,10 @@ class ProductPhoto extends StatelessWidget {
     );
   }
 
-  Widget _buildPhoto() {
+  Widget _buildPhoto(BuildContext context) {
     return Container(
       width: width,
-      height: 375,
+      height: MediaQuery.of(context).size.height / 2,
       child: Image.network(
         photoPath,
       ),
