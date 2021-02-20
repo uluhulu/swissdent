@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen_registration/splash_screen_registration.dart';
 
 void main() {
   runApp(MyApp());

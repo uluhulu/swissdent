@@ -86,6 +86,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       builder: (BuildContext context, state) {
         return Column(
           children: [
+            SizedBox(height: 80),
             RegistrationTitle(),
             SizedBox(height: 80),
             _buildRegistrationTextFields(context),
@@ -109,6 +110,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
               ),
             ),
+            SizedBox(height: 114),
           ],
         );
       },
