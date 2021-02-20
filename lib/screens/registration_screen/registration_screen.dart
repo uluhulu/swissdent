@@ -101,6 +101,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentButton(
+                width: double.infinity,
                 buttonColor: codeButtonColor,
                 isAvaliable: state is RegistrationButtonActive ? true : false,
                 buttonText: Text(registrationText, style: semiBold17WhiteStyle,),
