@@ -30,6 +30,8 @@ class ChatBar extends StatelessWidget {
             child: SwissdentDefaultTextField(
               hint: chatBarHint,
               customController: controller,
+              maxLines: 10,
+              keyboardType: TextInputType.multiline,
               onSubmitted: (text) {
                 onMessageSubmit(controller.text);
                 clearController();

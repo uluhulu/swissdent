@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/paths.dart';
+import 'package:swissdent/screens/chat_screen/chat_screen.dart';
+import 'package:swissdent/util/route_builder.dart';
 
 ///chat button
 ///todo figma link
@@ -16,7 +18,10 @@ class ChatButton extends StatelessWidget {
         iconChat,
         width: 24,
       ),
-      onPressed: onTap,
+      onPressed: () => _navigateToChatScreen(context),
     );
+  }
+  void _navigateToChatScreen(BuildContext context) {
+    Navigator.of(context).push(buildRoute(ChatScreen()));
   }
 }

@@ -8,6 +8,8 @@ import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/compl
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/schedule_treatment.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/stage_orhtopedic_card.dart';
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/stage_orthopedic_card/widget/surgical_template/surgical_template.dart';
+import 'package:swissdent/screens/snapshots_screen/snapshots_screen.dart';
+import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/appbar.dart';
 
 import '../../constants/colors.dart';
@@ -28,7 +30,9 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
       appBar: buildAppbar(
         titleText: personalCabinetTitle,
         action: _buildJewsButton(),
-        onBackCallback: () {},
+        onBackCallback: () {
+          goBack();
+        },
       ),
       body: ListView(
         physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
@@ -46,8 +50,7 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
             treatmentName: "Консультация",
             treatmentCost: 999.00,
           ),
-          ScheduleTreatment(
-          ),
+          ScheduleTreatment(),
         ],
       ),
     );
@@ -57,7 +60,9 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          _navigateToSnapshotsScreen();
+        },
         child: Container(
           width: 50,
           height: 32,
@@ -71,5 +76,12 @@ class _PersonalCabinetScreenState extends State<PersonalCabinetScreen> {
         ),
       ),
     );
+  }
+
+  void goBack() {
+    Navigator.of(context).pop();
+  }
+  void _navigateToSnapshotsScreen() {
+    Navigator.of(context).push(buildRoute(SnapshotsScreen()));
   }
 }

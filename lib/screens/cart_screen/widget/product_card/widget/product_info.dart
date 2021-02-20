@@ -10,14 +10,17 @@ class ProductInfo extends StatefulWidget {
   final String productDescription;
   final double productCost;
   final String photoPath;
-  final String productAmount;
+  final int productAmount;
+  final Function(double amount) onPlusTap;
+  final Function(double amount) onMinusTap;
 
-  const ProductInfo(
-      {Key key,
-      this.productDescription,
-      this.productCost,
-      this.photoPath,
-      this.productAmount})
+  const ProductInfo({Key key,
+    this.productDescription,
+    this.productCost,
+    this.photoPath,
+    this.productAmount,
+    this.onPlusTap,
+    this.onMinusTap,})
       : super(key: key);
 
   @override
@@ -31,7 +34,9 @@ class _ProductInfoState extends State<ProductInfo> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ProductIcon(productPath: widget.photoPath ,),
+        ProductIcon(
+          productPath: widget.photoPath,
+        ),
         SizedBox(width: 16),
         _buildProductInfo(),
         SizedBox(width: 16),
@@ -72,6 +77,9 @@ class _ProductInfoState extends State<ProductInfo> {
       child: Row(
         children: [
           GestureDetector(
+            onTap: () {
+              widget.onMinusTap(widget.productCost);
+            },
             child: Image.asset(
               iconMinus,
               height: 35,
@@ -79,19 +87,22 @@ class _ProductInfoState extends State<ProductInfo> {
             ),
           ),
           SizedBox(
-            width: 21,
+            width: _buildCostPadding(),
           ),
           Text(
-            widget.productAmount,
+            widget.productAmount.toString(),
             style: bold24BlackStyle,
           ),
           SizedBox(
-            width: 16,
+            width: _buildCostPadding(),
           ),
           GestureDetector(
+            onTap: (){
+              widget.onPlusTap(widget.productCost);
+            },
             child: Image.asset(
               iconPlus,
-              height:35 ,
+              height: 35,
               width: 35,
               // width: 10,
             ),
@@ -99,5 +110,19 @@ class _ProductInfoState extends State<ProductInfo> {
         ],
       ),
     );
+  }
+
+  double _buildCostPadding() {
+    if (widget.productAmount < 10) {
+      return 24;
+    }
+    if (widget.productAmount >= 10 && widget.productAmount < 100) {
+      return 18;
+    }
+
+    if (widget.productAmount >= 100 && widget.productAmount < 1000) {
+      return 11;
+    }
+    return 2;
   }
 }

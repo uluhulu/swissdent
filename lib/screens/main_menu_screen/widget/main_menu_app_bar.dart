@@ -3,6 +3,7 @@ import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/app_bar_wave_decoration.dart';
+import 'package:swissdent/widget/chat_button.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 
 ///main menu app bar
@@ -11,7 +12,7 @@ class MainMenuAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 375,
+      // width: 375,
       height: 133,
       child: Stack(
         children: [
@@ -25,27 +26,12 @@ class MainMenuAppBar extends StatelessWidget {
                 children: [
                   Spacer(),
                   SizedBox(width: 32),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 11),
-                    child: Text(
-                      mainMenu,
-                      style: semiBold17BlackStyle,
-                    ),
+                  Text(
+                    mainMenu,
+                    style: semiBold17BlackStyle,
                   ),
                   Spacer(),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 10,
-                        right: 16,
-                      ),
-                      child: Image.asset(
-                        iconChat,
-                        width: 24,
-                        height: 24,
-                      ),
-                    ),
+                  ChatButton(
                   ),
                 ],
               ),

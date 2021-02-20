@@ -1,2 +1,2 @@
 class SplashScreenState{}
-class NavigateRegistrationScreenState extends SplashScreenState{}
+class SplashNavigateState extends SplashScreenState{}

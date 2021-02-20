@@ -60,10 +60,24 @@ final passwordChange = "Сброс пароля";
 final newPassword = "Новый пароль";
 final repeatNewPassword = "Повторите новый пароль";
 final save = "Сохранить";
+final buyButton = "Купить";
+final productIsAdded = "Товар успешно добавлен в корзину";
+final navigate= "Перейти";
+final teamAppBar = 'Команда';
+final healpAppBar = 'Помощь';
+final doctorIvanovSubtitle ="Ортопед";
+final specialization ="Специализация";
+final experience ="Стаж в стоматологии";
+final toothpasteQuestion = 'Какую пасту лучше выбрать после лечения?';
+final userQuestion = 'Ваш вопрос...';
+final send = 'Отправить';
+final questionInfoText = 'Ваш вопрос отправлен.\nМы скоро Вам ответим';
+
+
+
 final chatTitle = 'Чат';
 final userMessageTitle = 'Вы';
 final chatBarHint = 'Введите сообщение';
-final buyButton = "Buy";
 
 
 String serviceCost(double amount) {

@@ -22,9 +22,11 @@ class _ProductScreenState extends State<ProductScreen> {
           _buildAppbar(),
           Expanded(
             child: ListView(
+              padding: EdgeInsets.all(0),
               children: [
                 ProductExpandCategory(categoryName: "Для отбеливания"),
-                ProductExpandCategory(categoryName: "Для снятия чувствительности зубов"),
+                ProductExpandCategory(
+                    categoryName: "Для снятия чувствительности зубов"),
               ],
             ),
           ),
@@ -34,6 +36,12 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget _buildAppbar() {
-    return SearchAppbar();
+    return Container(
+      color: appbarColor,
+      child: SafeArea(
+        bottom: false,
+        child: SearchAppbar(),
+      ),
+    );
   }
 }

@@ -1,7 +1,15 @@
 final logoSplashScreenPath = "assets/images/img_logo.png";
 final decorSplashWavePath = "assets/images/img_splash_wave.png";
 final textSplashScreenPath = "assets/images/img_splash_text.png";
+final teamGroupPhotoPath = "assets/images/img_team.png";
+///
+final doctorIvanov = "assets/images/img_ivanov.png";
+final doctorKulikov = "assets/images/img_kulikov.png";
+final doctorParfeneva = "assets/images/img_parfeneva.png";
+final doctorPonomarev = "assets/images/img_ponomarev.png";
+final doctorStarikov = "assets/images/img_starikov.png";
 final productPath = "assets/images/img_product.png";
+///
 final appBarWaveDecorPath = "assets/images/img_wave_decor_app_bar.png";
 final iconDonePath = "assets/icons/icon_done.png";
 final iconFacebook = "assets/icons/icon_facebook.png";
@@ -22,7 +30,7 @@ final iconHelp = "assets/icons/icon_help.png";
 final iconBack = "assets/icons/icon_back.png";
 final iconMinus = "assets/icons/icon_minus.png";
 final iconPlus = "assets/icons/icon_plus.png";
-final iconDocument = "assets/icons/icon_document.png";
+final iconDocument = "assets/icons/icon_get_document.png";
 final iconJews = "assets/icons/icon_jews.png";
 final teethmapDemo = "assets/images/img_teethmap_demo.png";
 final iconLightBulb = "assets/icons/icon_light_bulb.png";

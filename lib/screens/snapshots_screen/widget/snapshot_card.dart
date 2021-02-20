@@ -58,7 +58,7 @@ class SnapshotCard extends StatelessWidget {
           _buildSnapshot(),
           SizedBox(height: 16),
           _buildCardTitle(),
-          SizedBox(height: 16),
+          // SizedBox(height: 16),
           _buildCardBottomRow(),
         ],
       ),
@@ -67,7 +67,7 @@ class SnapshotCard extends StatelessWidget {
 
   Widget _buildSnapshot() {
     return Container(
-      width: 312,
+      // width: 312,
       height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(16)),

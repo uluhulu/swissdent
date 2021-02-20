@@ -48,7 +48,7 @@ class _SwissdentSmsCodeTextFieldState extends State<SwissdentSmsCodeTextField> {
       isVisible: widget.isVisible,
       suffixWidget: Padding(
         padding: const EdgeInsets.only(top: 15.0, right : 16.0, bottom: 14.0),
-        child: Image.asset(iconDonePath),
+        child: Image.asset(iconDonePath, width: 22,),
       ),
     );
   }

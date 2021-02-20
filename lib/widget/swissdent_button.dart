@@ -22,7 +22,7 @@ class SwissdentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 54,
-      width: MediaQuery.of(context).size.width,
+      width: width,
       child: RaisedButton(
         elevation: 1,
         color: buttonColor,
