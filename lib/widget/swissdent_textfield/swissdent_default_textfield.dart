@@ -10,6 +10,8 @@ class SwissdentDefaultTextField extends StatefulWidget {
   final Function(String text) onSubmitted;
   final String defaultText;
   final TextEditingController customController;
+  final int maxLines;
+  final TextInputType keyboardType;
 
   const SwissdentDefaultTextField({
     Key key,
@@ -19,6 +21,8 @@ class SwissdentDefaultTextField extends StatefulWidget {
     this.onSubmitted,
     this.defaultText = '',
     this.customController,
+    this.maxLines = 1,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -47,7 +51,8 @@ class _SwissdentDefaultTextFieldState extends State<SwissdentDefaultTextField> {
       controller: widget.customController ?? controller,
       hintText: widget.hint,
       hintStyle: normal15Style,
-      keyboardType: TextInputType.text,
+      maxLines: widget.maxLines,
+      keyboardType: widget.keyboardType,
       onSubmitted: widget.onSubmitted,
     );
   }

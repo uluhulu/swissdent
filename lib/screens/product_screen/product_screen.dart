@@ -6,7 +6,7 @@ import 'package:swissdent/screens/product_screen/widget/product_item/product_ite
 import 'package:swissdent/screens/product_screen/widget/search_appbar/search_appbar.dart';
 
 ///screen of products
-///todo figma link
+///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=11%3A2993
 class ProductScreen extends StatefulWidget {
   @override
   _ProductScreenState createState() => _ProductScreenState();
@@ -22,9 +22,11 @@ class _ProductScreenState extends State<ProductScreen> {
           _buildAppbar(),
           Expanded(
             child: ListView(
+              padding: EdgeInsets.all(0),
               children: [
                 ProductExpandCategory(categoryName: "Для отбеливания"),
-                ProductExpandCategory(categoryName: "Для снятия чувствительности зубов"),
+                ProductExpandCategory(
+                    categoryName: "Для снятия чувствительности зубов"),
               ],
             ),
           ),
@@ -34,6 +36,12 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget _buildAppbar() {
-    return SearchAppbar();
+    return Container(
+      color: appbarColor,
+      child: SafeArea(
+        bottom: false,
+        child: SearchAppbar(),
+      ),
+    );
   }
 }

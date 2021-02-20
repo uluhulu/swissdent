@@ -5,15 +5,19 @@ class ProductCard extends StatelessWidget {
   final String productDescription;
   final double productCost;
   final String photoPath;
-  final String productAmount;
+  final int productAmount;
+  final Function(double amount) onPlusTap;
+  final Function(double amount) onMinusTap;
 
-  const ProductCard(
-      {Key key,
-      this.productDescription,
-      this.productCost,
-      this.photoPath,
-      this.productAmount})
-      : super(key: key);
+  const ProductCard({
+    Key key,
+    this.productDescription,
+    this.productCost,
+    this.photoPath,
+    this.productAmount,
+    this.onPlusTap,
+    this.onMinusTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,8 @@ class ProductCard extends StatelessWidget {
         productCost: productCost,
         photoPath: photoPath,
         productAmount: productAmount,
+        onPlusTap: onPlusTap,
+        onMinusTap: onMinusTap,
       ),
     );
   }

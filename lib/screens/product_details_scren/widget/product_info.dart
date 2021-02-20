@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/screens/product_details_scren/widget/navigate_to_cart_board.dart';
 import 'package:swissdent/screens/product_details_scren/widget/product_count_board.dart';
 import 'package:swissdent/util/money_formatter.dart';
 
@@ -7,12 +9,13 @@ class ProductDetailsInfo extends StatelessWidget {
   final double productCost;
   final String productName;
   final String productDescription;
+  final int productAmount;
 
   const ProductDetailsInfo({
     Key key,
     this.productCost,
     this.productName,
-    this.productDescription,
+    this.productDescription, this.productAmount,
   }) : super(key: key);
 
   @override
@@ -24,15 +27,15 @@ class ProductDetailsInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildProductSum(),
-            SizedBox(
-              height: 16,
-            ),
-            // _buildProductName(),
-            // SizedBox(
-            //   height: 32,
-            // ),
+            SizedBox(height: 16),
+            _buildProductName(),
+            SizedBox(height: 32),
             _buidProductDiscription(),
-            ProductionCountBoard(),
+            SizedBox(height: 32),
+            productAmount != 0 ? NavigateToCartBoard() : SizedBox(),
+            ProductionCountBoard(
+              productAmount: 100,
+            ),
           ],
         ),
       ),
@@ -41,7 +44,7 @@ class ProductDetailsInfo extends StatelessWidget {
 
   Widget _buildProductSum() {
     return Text(
-      '${formatMoney(productCost)} руб ',
+      '${formatMoney(productCost)} $rubPrefix ',
       style: bold24Black,
     );
   }

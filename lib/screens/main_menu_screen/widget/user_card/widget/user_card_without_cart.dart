@@ -8,12 +8,13 @@ class UserCardWithoutCart extends StatelessWidget {
   final String userName;
   final String userEmail;
   final String avatarPath;
+  final Function() navigateToUserProfileScreen;
 
   const UserCardWithoutCart({
     Key key,
     this.userName,
     this.userEmail,
-    this.avatarPath,
+    this.avatarPath, this.navigateToUserProfileScreen,
   }) : super(key: key);
 
   @override
@@ -35,10 +36,13 @@ class UserCardWithoutCart extends StatelessWidget {
             ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: UserInfo(
-            userName: userName,
-            userEmail: userEmail,
-            avatarPath: avatarPath,
+          child: GestureDetector(
+            onTap: () => navigateToUserProfileScreen(),
+            child: UserInfo(
+              userName: userName,
+              userEmail: userEmail,
+              avatarPath: avatarPath,
+            ),
           ),
         ),
       ),

@@ -21,7 +21,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ProductPhoto(
             photoPath: 'https://doctorslon.ru/upload/iblock/c87/MC405_5png.png',
             width: MediaQuery.of(context).size.width,
-            onBackCallback: () {},
+            onBackCallback: () => Navigator.of(context).pop(),
           ),
           _buildBody(),
         ],
@@ -32,12 +32,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   Widget _buildBody() {
-    return SingleChildScrollView(
-      physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      child: ProductDetailsInfo(
-        productCost: 1200,
-        productName: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
-        productDescription: productDescription,
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        child: ProductDetailsInfo(
+          productCost: 1200,
+          productName: 'Зубная щетка (АБСТРАКЦИОНИСТ) 0,15 SOFT',
+          productDescription: productDescription,
+          productAmount: 30,
+        ),
       ),
     );
   }

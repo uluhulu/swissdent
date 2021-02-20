@@ -5,7 +5,7 @@ import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/styles.dart';
 
 ///card for snapsot
-///todo figma link
+///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=106%3A405
 class SnapshotCard extends StatelessWidget {
   ///image url of snapshot
   final String snapshotPath;
@@ -58,7 +58,7 @@ class SnapshotCard extends StatelessWidget {
           _buildSnapshot(),
           SizedBox(height: 16),
           _buildCardTitle(),
-          SizedBox(height: 16),
+          // SizedBox(height: 16),
           _buildCardBottomRow(),
         ],
       ),
@@ -67,7 +67,7 @@ class SnapshotCard extends StatelessWidget {
 
   Widget _buildSnapshot() {
     return Container(
-      width: 312,
+      // width: 312,
       height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(16)),

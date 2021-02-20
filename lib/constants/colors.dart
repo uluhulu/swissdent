@@ -2,7 +2,7 @@ import 'dart:ui';
 
 final splashBackgroundColor = palete['blue'];
 final codeButtonColor = palete['blue'];
-final disableCodeButtonColor = palete['grey'];
+final disableCodeButtonColor = palete['blue_with_opacity'];
 final shadowBlackColor = palete['black'];
 final shadowWhiteColor = palete['white'];
 final textFieldColor = palete['white'];
@@ -22,6 +22,7 @@ final registrationCreatePasswordTextColor = palete['black'];
 final backLeadingButtonColor = palete['blue'];
 final circleAvatarColor = palete['light_with_opacity'];
 final userCardColor = palete['solitude'];
+final teamCardColor = palete['solitude'];
 final cartBackgroundColor = palete['solitude'];
 final userCardShadowColor = palete['black'];
 final backgroundColor = palete['gray4'];
@@ -37,6 +38,8 @@ final snapshotCardColor = palete['solitude'];
 final searchClearButtonColor = palete['alarm'];
 final productCardColor = palete['solitude'];
 final userProfilePhotoIconBackgroundColor = palete['blue'];
+final doctorCardColor = palete['superblue'];
+final borderColor = palete['gray3'];
 final userMessageColor = palete['alice_blue'];
 final adminMessageColor = palete['solitude'];
 final sendButtonColor = palete['dark'];
@@ -46,6 +49,7 @@ final palete = {
   'good': Color(0xff4AD969),
   'dark': Color(0xff0681B5),
   'blue': Color(0xff00A0E3),
+  'blue_with_opacity': Color(0xff00A0E3).withOpacity(0.2),
   'light': Color(0xff52BEEB),
   'light_with_opacity': Color(0xff52BEEB).withOpacity(0.1),
   'superblue': Color(0xffCAECFA),

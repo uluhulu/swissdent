@@ -35,6 +35,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     yield* mapTimerEvent(event);
     yield* mapGetCodeEvent(event);
     yield* mapTypeSmsCodeEvent(event);
+    yield* mapNavigateNextRegistrationScreenEvent(event);
   }
 
   @override
@@ -96,6 +97,15 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       );
     }
   }
+  @override
+  Stream<GetCodeScreenState> mapNavigateNextRegistrationScreenEvent(
+      GetCodeScreenEvent event,
+      ) async* {
+    if (event is NavigateNextRegistrationScreenEvent) {
+      yield NavigateNextRegistrationScreenState(
+      );
+    }
+  }
 
   void smsCodeCheck() {
     if (smsCode.length == 4) {
@@ -105,9 +115,10 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       nextButtonIsVisible = true;
     } else {
       smsCodeIsAvaliable = false;
-      // getCodeButtonIsAvaliable = true;
+      if(_seconds == 45 && phoneNumber.length == 11){
+        getCodeButtonIsAvaliable = true;
+      }
       nextButtonIsVisible = false;
-
     }
   }
 
@@ -132,8 +143,8 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
           getCodeButtonIsAvaliable = true;
         } else {
           _seconds--;
-          timerAvaliable = true;
-          getCodeButtonIsAvaliable = false;
+          // timerAvaliable = true;
+          // getCodeButtonIsAvaliable = false;
         }
         add(UpdateTimerEvent(_seconds));
       },

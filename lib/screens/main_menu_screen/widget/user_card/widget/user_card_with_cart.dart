@@ -10,12 +10,17 @@ class UserCardWithCart extends StatelessWidget {
   final String userEmail;
   final String avatarPath;
   final int productCount;
+  final Function() navigateToCartScreen;
+  final Function() navigateToUserProfileScreen;
 
   const UserCardWithCart({
     Key key,
     this.userName,
     this.userEmail,
-    this.avatarPath, this.productCount,
+    this.avatarPath,
+    this.productCount,
+    this.navigateToCartScreen,
+    this.navigateToUserProfileScreen,
   }) : super(key: key);
 
   @override
@@ -39,12 +44,17 @@ class UserCardWithCart extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              UserInfo(
-                userName: userName,
-                userEmail: userEmail,
-                avatarPath: avatarPath,
+              GestureDetector(
+                onTap: () => navigateToUserProfileScreen(),
+                child: UserInfo(
+                  userName: userName,
+                  userEmail: userEmail,
+                  avatarPath: avatarPath,
+                ),
               ),
-              CartInfo(productCount: productCount),
+              GestureDetector(
+                onTap: () => navigateToCartScreen(),
+                  child: CartInfo(productCount: productCount,)),
             ],
           ),
         ),
