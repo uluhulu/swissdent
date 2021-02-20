@@ -1,0 +1,2 @@
+class SplashScreenState{}
+class NavigateRegistrationScreenState extends SplashScreenState{}
