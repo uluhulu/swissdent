@@ -25,18 +25,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Widget _buildBody() {
-    // return ListView(
-    //   children: [
-    //     UserCard(
-    //       productCount: 3,
-    //     ),
-    //     MainMenuCard(iconPath: iconPerson,cardText: personalCabinet,),
-    //     MainMenuCard(iconPath: iconServices,cardText: services,),
-    //     MainMenuCard(iconPath: iconProducts,cardText: products,),
-    //     MainMenuCard(iconPath: iconTeam,cardText: team,),
-    //     MainMenuCard(iconPath: iconHelp,cardText: help,),
-    //   ],
-    // );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
