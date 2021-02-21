@@ -64,6 +64,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
       builder: (BuildContext context, state) {
         return Column(
           children: [
+            SizedBox(height: 124),
             RegistrationTitle(),
             SizedBox(height: 24),
             Padding(

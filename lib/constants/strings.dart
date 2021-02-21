@@ -5,6 +5,7 @@ final smsConfirmationHintText = 'Введите смс-код';
 final registrationTitle = 'Регистрация';
 final registrationDescription =
     'Введите номер мобильного телефона. Для регистрации заполните код, присланный в SMS';
+final logInDescription = 'Для входа введите номер мобильного телефона и пароль';
 final getCodeText = 'Получить код';
 final goNextText = 'Далее';
 final useOfTermText1 = 'Запросив код, пользователь принимает ';
@@ -17,6 +18,8 @@ final surnameHint = 'Фамилия';
 final emailHint = 'Email';
 final registrationWithAccountsHint =
     'Или зарегестрируйтесь с помощью аккаунта в соц.сети';
+final logInWithAccountsHint =
+    'Или войдите с помощью аккаунта в соц.сети';
 final registrationText = 'Зарегистрироваться';
 final createPasswordText = 'Придумайте пароль';
 final mainMenu = 'Главное меню';
@@ -72,6 +75,10 @@ final toothpasteQuestion = 'Какую пасту лучше выбрать по
 final userQuestion = 'Ваш вопрос...';
 final send = 'Отправить';
 final questionInfoText = 'Ваш вопрос отправлен.\nМы скоро Вам ответим';
+final logInTitle = 'Вход';
+final navigateToRegistrationText = 'Еще не зарегистрированы?\n';
+final logInButtonText = "Войти";
+final forgetPasswordTitle = 'Забыли пароль?';
 
 
 
