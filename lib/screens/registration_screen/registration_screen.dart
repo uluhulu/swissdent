@@ -92,7 +92,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             _buildRegistrationTextFields(context),
             SizedBox(height: 40),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: RegistrationWithAccounts(),
             ),
             SizedBox(height: 24),
