@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as security;
+import 'package:swissdent/constants/keys.dart';
 import 'package:swissdent/constants/url.dart';
+import 'package:swissdent/data/model/base_response.dart';
 
 class ApiManager {
   static Dio _dio;
@@ -28,7 +31,7 @@ class ApiManager {
 
             RequestOptions options = error.response.request;
 
-            /// возможно понадобится сделать обновление токена
+            /// todo сделать разлогин и очистку токена
 
           }
         },
@@ -58,18 +61,24 @@ class ApiManager {
   }
 
   /// GET
-  Future get(
+  Future<BaseResponse> get(
     String path, {
-    data,
+    Map<String, dynamic> queryParameters,
     Options options,
   }) async {
     try {
-      Response response = await _dio.post(
+      Response responseJson = await _dio.get(
         path,
-        data: data,
+        queryParameters: queryParameters,
         options: await _checkOptions('GET', options),
       );
-      return jsonDecode(response.data);
+
+      final response = baseResponseFromJson(responseJson.data);
+      if (!response.error) {
+        return response;
+      }
+
+      throw Exception("request error: $response.error");
     } catch (error, stacktrace) {
       print('post stacktrace $stacktrace');
       throw Exception("request error: $error, stacktrace: $stacktrace");
@@ -77,7 +86,7 @@ class ApiManager {
   }
 
   /// POST
-  Future post(
+  Future<BaseResponse> post(
     String path, {
     data,
     Options options,
@@ -88,15 +97,14 @@ class ApiManager {
         data: data,
         options: await _checkOptions('POST', options),
       );
-      return jsonDecode(response.data);
-    } catch (error, stacktrace) {
-      print('post stacktrace $stacktrace');
-      throw Exception("request error: $error, stacktrace: $stacktrace");
+      return BaseResponse.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Ошибка post-запроса: $e');
     }
   }
 
   /// PATCH
-  Future patch(
+  Future<BaseResponse> patch(
     String path, {
     data,
     Options options,
@@ -107,7 +115,7 @@ class ApiManager {
         data: data,
         options: await _checkOptions('PATCH', options),
       );
-      return jsonDecode(response.data);
+      return baseResponseFromJson(response.data);
     } catch (error, stacktrace) {
       print('post stacktrace $stacktrace');
       throw Exception("request error: $error, stacktrace: $stacktrace");
@@ -121,8 +129,8 @@ class ApiManager {
         'Accept': 'application/json',
       };
 
-      String token = 'todo add real token';
-      print(token);
+      String token = await _readToken();
+      print("токен  ${token}");
       if (token != null) {
         headers['Authorization'] = "Bearer " + token;
       }
@@ -132,6 +140,14 @@ class ApiManager {
         headers: headers,
       );
     }
+
     return options;
+  }
+
+  Future<String> _readToken() async {
+    final storage = new security.FlutterSecureStorage();
+    final token = await storage.read(key: tokenStorageKey);
+
+    return token;
   }
 }

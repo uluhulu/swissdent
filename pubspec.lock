@@ -50,6 +50,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0-nullsafety.3"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
+  crypto:
+    dependency: "direct main"
+    description:
+      name: crypto
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -97,13 +111,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.3"
-  flutter_staggered_grid_view:
+  flutter_secure_storage:
     dependency: "direct main"
     description:
-      name: flutter_staggered_grid_view
+      name: flutter_secure_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.4"
+    version: "3.3.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -261,4 +275,4 @@ packages:
     version: "0.1.4+1"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
-  flutter: ">=1.17.0 <2.0.0"
+  flutter: ">=1.20.0 <2.0.0"

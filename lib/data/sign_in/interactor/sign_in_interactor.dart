@@ -1,0 +1,29 @@
+import 'package:swissdent/data/model/register_code.dart';
+import 'package:swissdent/data/model/token.dart';
+import 'package:swissdent/data/sign_in/repository/sign_in_repository.dart';
+
+/// бизнес-логика экрана логина и регистрациии
+class SignInInteractor {
+  final SignInRepository repository;
+
+  SignInInteractor({this.repository});
+
+  ///Запрос кода для телефона
+  ///phone - номер телефона в формате "+*(***)***-**-**"
+  Future<RegisterCode> register(String phone) async {
+    return repository.register(phone);
+  }
+  ///Потверждение кода
+  ///phone - номер телефона "+*(***)***-**-**"
+  ///сщву - код подтверждения "* * * *"
+  Future<bool> confirmCode(String phone, String code) async{
+    return repository.confirmCode(phone, code);
+  }
+  ///Авторизация
+  ///phone - номер телефона "+*(***)***-**-**"
+  ///password - пароль
+  Future<Token> authorization(String phone, String password) async{
+    return repository.authorization(phone, password);
+  }
+
+}

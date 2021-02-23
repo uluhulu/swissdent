@@ -80,8 +80,6 @@ final navigateToRegistrationText = 'Еще не зарегистрированы
 final logInButtonText = "Войти";
 final forgetPasswordTitle = 'Забыли пароль?';
 
-
-
 final chatTitle = 'Чат';
 final userMessageTitle = 'Вы';
 final chatBarHint = 'Введите сообщение';
