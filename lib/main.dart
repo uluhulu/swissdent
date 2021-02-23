@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
 
 void main() {
+  initDi();
   runApp(MyApp());
 }
 
