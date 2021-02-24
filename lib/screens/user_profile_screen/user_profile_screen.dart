@@ -36,6 +36,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           Padding(
             padding: const EdgeInsets.only(left:16.0, right: 16.0, top: 64, bottom: 47),
             child: SwissdentButton(
+              width: double.infinity,
               isAvaliable: true,
               buttonText: Text(save, style: semiBold17WhiteStyle,),
               buttonColor: codeButtonColor,

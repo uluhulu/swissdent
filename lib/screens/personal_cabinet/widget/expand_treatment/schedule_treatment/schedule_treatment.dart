@@ -9,7 +9,7 @@ import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/sched
 import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/treatment_cost/treatment_cost.dart';
 
 /// schedule treatment expand
-/// todo figma link
+/// https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=0%3A1
 class ScheduleTreatment extends StatelessWidget {
 
   const ScheduleTreatment({

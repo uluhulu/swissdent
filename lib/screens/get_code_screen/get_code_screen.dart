@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
 import 'package:swissdent/util/route_builder.dart';
@@ -31,7 +33,9 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return GetCodeScreenBloc();
+        return GetCodeScreenBloc(
+          signInInteractor: getIt<SignInInteractor>(),
+        );
       },
       child: Scaffold(
         body: Stack(
@@ -64,6 +68,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
       builder: (BuildContext context, state) {
         return Column(
           children: [
+            SizedBox(height: 124),
             RegistrationTitle(),
             SizedBox(height: 24),
             Padding(
@@ -75,7 +80,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
                 onNumberType: (text) {
-                  sendTypeNumberEvent(context, "7$text");
+                  sendTypeNumberEvent(context, "$text");
                 },
               ),
             ),
@@ -107,7 +112,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                   ),
                   isAvaliable: state.nextButtonIsVisible,
                   onTap: () {
-                    _navigateToNextRegistrationScreen();
+                    sendConfirmCodeEvent(context);
                   },
                 ),
               )
@@ -129,6 +134,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),
             ),
+            SizedBox(height: 152,)
           ],
         );
       },
@@ -161,8 +167,15 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
+  void sendConfirmCodeEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<GetCodeScreenBloc>(context).add(ConfirmCodeEvent());
+  }
 
-  void _navigateToNextRegistrationScreen(){
-    Navigator.of(context).pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
+  void _navigateToNextRegistrationScreen() {
+    ///confirm code event
+    Navigator.of(context)
+        .pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
   }
 }

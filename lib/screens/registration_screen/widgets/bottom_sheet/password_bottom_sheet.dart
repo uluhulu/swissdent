@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_bloc.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
 import 'package:swissdent/screens/registration_screen/widgets/bottom_sheet/bloc/bottom_sheet_state.dart';
@@ -12,6 +13,7 @@ import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_password_textfield.dart';
 
+import '../../../../di.dart';
 import 'bloc/bottom_sheet_bloc.dart';
 import 'bloc/bottom_sheet_event.dart';
 
@@ -50,7 +52,9 @@ class _PasswordBottomSheetState extends State<PasswordBottomSheet> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return BottomSheetBloc();
+        return BottomSheetBloc(
+          signInInteractor: getIt<SignInInteractor>()
+        );
       },
       child: BlocConsumer<BottomSheetBloc, BottomSheetState>(
         listener: (BuildContext context, state) {

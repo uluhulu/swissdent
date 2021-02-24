@@ -10,7 +10,7 @@ class RegistrationWithAccounts extends StatelessWidget {
       registrationWithAccountsHint,
       textAlign: TextAlign.center,
       maxLines: 3,
-      style: semiBold17Style,
+      style: normal17StyleGrey,
     );
   }
 }

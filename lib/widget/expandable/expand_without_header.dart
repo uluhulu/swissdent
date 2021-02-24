@@ -6,7 +6,7 @@ import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/styles.dart';
 
 ///Expand without header
-///todo figma link
+///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=11%3A2993
 class ExpandWithoutHeader extends StatefulWidget {
   ///name of treatment
   final String cardName;

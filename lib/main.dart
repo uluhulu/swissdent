@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen_registration/splash_screen_registration.dart';
 
 void main() {
+  initDi();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

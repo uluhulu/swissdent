@@ -43,7 +43,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             padding: EdgeInsets.zero,
             children: [
               UserCard(
-                productCount: null,
+                productCount: 3,
                 userName: 'User User',
                 userEmail: 'user@mail.com',
                 navigateToCartScreen: (){
