@@ -134,6 +134,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),
             ),
+            SizedBox(height: 152,)
           ],
         );
       },

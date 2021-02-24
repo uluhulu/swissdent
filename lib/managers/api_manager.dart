@@ -19,6 +19,7 @@ class ApiManager {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) {
+          print("запрос ${options.path}");
           return options;
         },
         onResponse: (Response response) {
@@ -53,10 +54,7 @@ class ApiManager {
     option.connectTimeout = 1000 * 60;
     option.receiveTimeout = 1000 * 60;
     option.sendTimeout = 1000 * 60;
-    option.headers = {
-      'Accept': 'application/json',
-      'Timezone': DateTime.now().timeZoneName
-    };
+
     return option;
   }
 
@@ -73,7 +71,7 @@ class ApiManager {
         options: await _checkOptions('GET', options),
       );
 
-      final response = baseResponseFromJson(responseJson.data);
+      final response = BaseResponse.fromJson(responseJson.data);
       if (!response.error) {
         return response;
       }
@@ -92,12 +90,17 @@ class ApiManager {
     Options options,
   }) async {
     try {
-      Response response = await _dio.post(
+      Response responseJson = await _dio.post(
         path,
         data: data,
         options: await _checkOptions('POST', options),
       );
-      return BaseResponse.fromJson(response.data);
+      final response = BaseResponse.fromJson(responseJson.data);
+      if (!response.error) {
+        return response;
+      }
+
+      throw Exception("request error: $response.error");
     } catch (e) {
       throw Exception('Ошибка post-запроса: $e');
     }
@@ -110,33 +113,38 @@ class ApiManager {
     Options options,
   }) async {
     try {
-      Response response = await _dio.post(
+      Response responseJson = await _dio.patch(
         path,
         data: data,
         options: await _checkOptions('PATCH', options),
       );
-      return baseResponseFromJson(response.data);
+      final response = BaseResponse.fromJson(responseJson.data);
+      if (!response.error) {
+        return response;
+      }
+      throw Exception("request error: $response.error");
     } catch (error, stacktrace) {
-      print('post stacktrace $stacktrace');
+      print('patch stacktrace $stacktrace');
       throw Exception("request error: $error, stacktrace: $stacktrace");
     }
   }
 
   /// check Options.
-  Future<Options> _checkOptions(method, options) async {
+  Future<Options> _checkOptions(
+    String method,
+    Options options,
+  ) async {
     if (options == null) {
-      Map<String, dynamic> headers = {
-        'Accept': 'application/json',
-      };
+      Map<String, dynamic> headers = {};
 
       String token = await _readToken();
-      print("токен  ${token}");
+      print("токен ${token}");
       if (token != null) {
         headers['Authorization'] = "Bearer " + token;
       }
 
       options = Options(
-        method: method,
+        // method: method,
         headers: headers,
       );
     }

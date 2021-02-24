@@ -25,5 +25,18 @@ class SignInInteractor {
   Future<Token> authorization(String phone, String password) async{
     return repository.authorization(phone, password);
   }
+  ///Обновление информации о пользователе
+  Future<bool> updateUserInfo(String name, String surname, String email) async{
+    return repository.updateUserData(name, surname, email);
+  }
+  ///Обновление пароля
+  Future<bool> updatePassword(String password) async{
+    return repository.updatePassword(password);
+  }
+  ///Восстановление пароля
+  Future<bool> restorePassword(String phone) async{
+    return repository.restorePassword(phone);
+  }
+
 
 }

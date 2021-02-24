@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_bloc.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
-import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
 import 'package:swissdent/screens/registration_screen/widgets/bottom_sheet/password_bottom_sheet.dart';
 import 'package:swissdent/screens/registration_screen/widgets/registration_social_icon.dart';
 import 'package:swissdent/screens/registration_screen/widgets/registration_with_accounts.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
-import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/registration_title/registration_title.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
-import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_default_textfield.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
-import 'package:swissdent/widget/swissdent_textfield/swissdent_password_textfield.dart';
 
 ///step 2 registration screen
 ///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=2%3A1378
@@ -56,7 +52,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return RegistrationScreenBloc();
+        return RegistrationScreenBloc(
+          signInInteractor: getIt<SignInInteractor>()
+        );
       },
       child: Scaffold(
         body: Stack(
@@ -82,7 +80,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<RegistrationScreenBloc, RegistrationScreenState>(
-      listener: (BuildContext context, state) {},
+      listener: (BuildContext context, state) {
+        if (state is RegistrationSucceedState) {
+          showPasswordBottomSheet(context);
+        }
+      },
       builder: (BuildContext context, state) {
         return Column(
           children: [
@@ -106,8 +108,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 isAvaliable: state is RegistrationButtonActive ? true : false,
                 buttonText: Text(registrationText, style: semiBold17WhiteStyle,),
                 onTap: () {
-                  ///todo open bottomsheet
-                  showPasswordBottomSheet(context);
+                  sendRegistrationEvent(context);
                 },
               ),
             ),
@@ -218,5 +219,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void sendTypeSurnameEvent(BuildContext context, String surname) {
     BlocProvider.of<RegistrationScreenBloc>(context)
         .add(TypeSurnameEvent(surname));
+  }
+
+  void sendRegistrationEvent(BuildContext context){
+    BlocProvider.of<RegistrationScreenBloc>(context).add(RegistrationEvent());
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -9,6 +10,9 @@ import 'package:swissdent/data/model/token.dart';
 import 'package:swissdent/data/sign_in/repository/request_body/authorization_request_body.dart';
 import 'package:swissdent/data/sign_in/repository/request_body/confirm_code_request_body.dart';
 import 'package:swissdent/data/sign_in/repository/request_body/register_request_body.dart';
+import 'package:swissdent/data/sign_in/repository/request_body/restore_request_body.dart';
+import 'package:swissdent/data/sign_in/repository/request_body/update_password_request_body.dart';
+import 'package:swissdent/data/sign_in/repository/request_body/update_user_info_request_body.dart';
 import 'package:swissdent/managers/api_manager.dart';
 
 /// Репозиторий для работы с запросами авторизации и логина
@@ -71,6 +75,60 @@ class SignInRepository {
     }
 
     return token;
+  }
+
+  ///Обновление информации о пользователе
+  Future<bool> updateUserData(
+    String name,
+    String surname,
+    String email,
+  ) async {
+    final response = await apiManager.patch(
+      updateUserDataUrlTest,
+      data: updateUserInfoRequestBodyToJson(
+        UpdateUserInfoRequestBody(
+          name: name,
+          surname: surname,
+          email: email,
+        ),
+      ),
+    );
+
+    if (!response.error) return true;
+    return false;
+  }
+
+  ///Обновление пароля
+  Future<bool> updatePassword(String password) async {
+    final response = await apiManager.post(
+      ///todo поменять на реальный апи
+      updatePasswordUrlTest,
+      data: updatePasswordRequestBodyToJson(
+        UpdatePasswordRequestBody(
+          password: _hashCode(password),
+        ),
+      ),
+    );
+
+    if (!response.error) return true;
+
+    return false;
+  }
+  ///Восстановление пароля
+  Future<bool> restorePassword(String phone) async {
+    final response = await apiManager.post(
+      ///todo поменять на реальный апи
+      restoreUrlText,
+      data: restoreRequestBodyToJson(
+        RestoreRequestBody(
+          phone: phone,
+        ),
+      ),
+    );
+
+    if (!response.error) return true;
+
+    return false;
   }
 
   String _hashCode(String password) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-BaseResponse baseResponseFromJson<T>(String str) =>
+BaseResponse baseResponseFromJson(String str) =>
     BaseResponse.fromJson(json.decode(str));
 
 ///Обложка для запросов

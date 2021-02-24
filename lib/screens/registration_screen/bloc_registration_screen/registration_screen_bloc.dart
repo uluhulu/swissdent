@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_state.dart';
 import 'package:swissdent/screens/registration_screen/bloc_registration_screen/registration_screen_event.dart';
 
@@ -10,13 +11,16 @@ class RegistrationScreenBloc
   String email = '';
   String passwordConfirmation = '';
 
-  RegistrationScreenBloc() : super(RegistrationScreenState());
+  final SignInInteractor signInInteractor;
+
+  RegistrationScreenBloc({this.signInInteractor}) : super(RegistrationScreenState());
 
   @override
   Stream<RegistrationScreenState> mapEventToState(
       RegistrationScreenEvent event) async* {
     yield* mapTypeNameEvent(event);
     yield* mapTypeSurNameEvent(event);
+    yield* mapRegistrationEvent(event);
 
   }
 
@@ -39,6 +43,16 @@ class RegistrationScreenBloc
       RegistrationScreenEvent event) async* {
     if (event is TypeEmailEvent) {
       email = event.email;
+    }
+  }
+  Stream<RegistrationScreenState> mapRegistrationEvent(
+      RegistrationScreenEvent event) async* {
+    if (event is RegistrationEvent) {
+      final updateInfoResponse = await signInInteractor.updateUserInfo(name, surname, email);
+      if(updateInfoResponse)
+        yield RegistrationSucceedState();
+      else
+        yield RegistrationNotSucceedState();
     }
   }
 

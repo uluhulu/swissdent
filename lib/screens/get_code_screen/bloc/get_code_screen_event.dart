@@ -24,3 +24,4 @@ class CheckSmsCodeEvent extends GetCodeScreenEvent {}
 
 class NavigateNextRegistrationScreenEvent extends GetCodeScreenEvent {}
 class ConfirmCodeEvent extends GetCodeScreenEvent {}
+

@@ -138,8 +138,9 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       print("код для отправки:$smsCode номер$phoneNumber");
       final confirmResponse = await signInInteractor.confirmCode(
           maskFormatter.maskText(phoneNumber), smsCode);
-      if (confirmResponse)
-        add(NavigateNextRegistrationScreenEvent());
+      if (confirmResponse){
+        final loginResponse = await signInInteractor.authorization( maskFormatter.maskText(phoneNumber), smsCode);
+        add(NavigateNextRegistrationScreenEvent());}
       else
         yield ErrorConfirmCodeState();
     }
