@@ -14,7 +14,7 @@ import 'package:swissdent/widget/registration_background/gradient_background.dar
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
-import 'package:swissdent/widget/registration_title/registration_title.dart';
+import 'package:swissdent/screens/get_code_screen/widget/registration_title.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';

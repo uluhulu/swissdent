@@ -3,6 +3,8 @@ import 'package:swissdent/util/money_formatter.dart';
 final splashText = 'ШВЕЙЦАРСКАЯ СТОМАТОЛОГИЯ';
 final smsConfirmationHintText = 'Введите смс-код';
 final registrationTitle = 'Регистрация';
+final restoreTitle = 'Восстановление паролья';
+final restoreDiscription = 'Для восстановления пароля введите номер телефона';
 final registrationDescription =
     'Введите номер мобильного телефона. Для регистрации заполните код, присланный в SMS';
 final logInDescription = 'Для входа введите номер мобильного телефона и пароль';
@@ -21,6 +23,7 @@ final registrationWithAccountsHint =
 final logInWithAccountsHint =
     'Или войдите с помощью аккаунта в соц.сети';
 final registrationText = 'Зарегистрироваться';
+final restoreText = 'Выслать код';
 final createPasswordText = 'Придумайте пароль';
 final mainMenu = 'Главное меню';
 final passwordText = 'Пароль';
