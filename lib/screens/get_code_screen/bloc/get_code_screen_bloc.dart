@@ -5,6 +5,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_state.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 
 class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   String phoneNumber = '';
@@ -15,18 +16,15 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   bool smsCodeIsAvaliable = false;
   bool nextButtonIsVisible = false;
 
+
   Timer _timer;
   int _seconds = 45;
-
+  final int _timerMaxTime = 45;
+  final int _smsCodeMaxLength = 4;
+  final int _phoneNumberMaxLength = 11;
+  final int _phoneNumberLengthWithoutPrefix = 10;
   final SignInInteractor signInInteractor;
 
-  static final numPrefix = '+7';
-  final maskFormatter = new MaskTextInputFormatter(
-    mask: '$numPrefix(###)###-##-##',
-    filter: {
-      "#": RegExp(r'[0-9]'),
-    },
-  );
 
   GetCodeScreenBloc({this.signInInteractor})
       : super(GetCodeScreenState(
@@ -73,7 +71,6 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     GetCodeScreenEvent event,
   ) async* {
     if (event is GetCodeEvent) {
-      print(maskFormatter.maskText(phoneNumber));
       final registerResponse =
           await signInInteractor.register(maskFormatter.maskText(phoneNumber));
       smsCode = registerResponse.code;
@@ -135,12 +132,16 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     GetCodeScreenEvent event,
   ) async* {
     if (event is ConfirmCodeEvent) {
-      print("код для отправки:$smsCode номер$phoneNumber");
       final confirmResponse = await signInInteractor.confirmCode(
           maskFormatter.maskText(phoneNumber), smsCode);
       if (confirmResponse){
         final loginResponse = await signInInteractor.authorization( maskFormatter.maskText(phoneNumber), smsCode);
-        add(NavigateNextRegistrationScreenEvent());}
+        if(loginResponse) {
+          add(NavigateNextRegistrationScreenEvent());
+        } else{
+          yield ErrorLogInState();
+        }
+      }
       else
         yield ErrorConfirmCodeState();
     }
@@ -151,7 +152,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   }
 
   void smsCodeCheck() {
-    if (smsCode.length == 4) {
+    if (smsCode.length == _smsCodeMaxLength) {
       ///todo запрос
       ///если запрос ок
       smsCodeIsAvaliable = true;
@@ -159,7 +160,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       nextButtonIsVisible = true;
     } else {
       smsCodeIsAvaliable = false;
-      if (_seconds == 45 && phoneNumber.length == 11) {
+      if (_seconds == _timerMaxTime && phoneNumber.length == _phoneNumberMaxLength) {
         getCodeButtonIsAvaliable = true;
       }
       nextButtonIsVisible = false;
@@ -168,7 +169,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
 
   /// Проверка активации кнопки "Получить код"
   void codeButtonAvaliableCheck() {
-    if (phoneNumber.length == 10 && timerAvaliable == false) {
+    if (phoneNumber.length == _phoneNumberLengthWithoutPrefix && timerAvaliable == false) {
       getCodeButtonIsAvaliable = true;
     } else {
       getCodeButtonIsAvaliable = false;
@@ -182,7 +183,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       (Timer timer) {
         if (_seconds == 0) {
           timer.cancel();
-          _seconds = 45;
+          _seconds = _timerMaxTime;
           timerAvaliable = false;
           getCodeButtonIsAvaliable = true;
         } else {

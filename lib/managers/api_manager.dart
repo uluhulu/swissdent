@@ -26,15 +26,15 @@ class ApiManager {
           return response;
         },
         onError: (DioError error) async {
-          if (error.response?.statusCode == 401) {
-            _dio.interceptors.requestLock.lock();
-            _dio.interceptors.responseLock.lock();
-
-            RequestOptions options = error.response.request;
-
-            /// todo сделать разлогин и очистку токена
-
-          }
+          // if (error.response?.statusCode == 401) {
+          //   _dio.interceptors.requestLock.lock();
+          //   _dio.interceptors.responseLock.lock();
+          //
+          //   RequestOptions options = error.response.request;
+          //
+          //   /// todo сделать разлогин и очистку токена
+          //
+          // }
         },
       ),
     );
@@ -51,9 +51,9 @@ class ApiManager {
   BaseOptions _defaultOption() {
     BaseOptions option = BaseOptions().merge();
     option.baseUrl = baseUrl;
-    option.connectTimeout = 1000 * 60;
-    option.receiveTimeout = 1000 * 60;
-    option.sendTimeout = 1000 * 60;
+    option.connectTimeout = 1000 * 5;
+    option.receiveTimeout = 1000 * 5;
+    option.sendTimeout = 1000 * 5;
 
     return option;
   }
@@ -96,11 +96,8 @@ class ApiManager {
         options: await _checkOptions('POST', options),
       );
       final response = BaseResponse.fromJson(responseJson.data);
-      if (!response.error) {
-        return response;
-      }
 
-      throw Exception("request error: $response.error");
+      return response;
     } catch (e) {
       throw Exception('Ошибка post-запроса: $e');
     }
@@ -144,7 +141,7 @@ class ApiManager {
       }
 
       options = Options(
-        // method: method,
+        method: method,
         headers: headers,
       );
     }

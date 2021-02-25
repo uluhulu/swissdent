@@ -3,20 +3,15 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_event.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_state.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 
 class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState>{
   String phoneNumber = '';
+  String password = '';
   bool restoreButtonIsAvailable = false;
 
   final SignInInteractor signInInteractor;
 
-  static final numPrefix = '+7';
-  final maskFormatter = new MaskTextInputFormatter(
-    mask: '$numPrefix(###)###-##-##',
-    filter: {
-      "#": RegExp(r'[0-9]'),
-    },
-  );
   RestoreScreenBloc({this.signInInteractor}) : super(RestoreScreenState(
     restoreButtonIsAvailable: false,
   ));
@@ -44,7 +39,9 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState>{
       ) async* {
     if (event is RestorePasswordEvent) {
       final restoreResponse = await signInInteractor.restorePassword(maskFormatter.maskText(phoneNumber));
-      if(restoreResponse){
+      password = restoreResponse.code;
+      print(password);
+      if(password.isNotEmpty){
         yield RestoreSucceedState(
           restoreButtonIsAvailable: restoreButtonIsAvailable,
         );

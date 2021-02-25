@@ -13,30 +13,33 @@ class SignInInteractor {
   Future<RegisterCode> register(String phone) async {
     return repository.register(phone);
   }
+
   ///Потверждение кода
   ///phone - номер телефона "+*(***)***-**-**"
-  ///сщву - код подтверждения "* * * *"
-  Future<bool> confirmCode(String phone, String code) async{
+  ///code - код подтверждения "* * * *"
+  Future<bool> confirmCode(String phone, String code) async {
     return repository.confirmCode(phone, code);
   }
+
   ///Авторизация
   ///phone - номер телефона "+*(***)***-**-**"
   ///password - пароль
-  Future<Token> authorization(String phone, String password) async{
+  Future<bool> authorization(String phone, String password) async {
     return repository.authorization(phone, password);
   }
+
   ///Обновление информации о пользователе
-  Future<bool> updateUserInfo(String name, String surname, String email) async{
+  Future<bool> updateUserInfo(String name, String surname, String email) async {
     return repository.updateUserData(name, surname, email);
   }
+
   ///Обновление пароля
-  Future<bool> updatePassword(String password) async{
+  Future<bool> updatePassword(String password) async {
     return repository.updatePassword(password);
   }
+
   ///Восстановление пароля
-  Future<bool> restorePassword(String phone) async{
+  Future<RegisterCode> restorePassword(String phone) async {
     return repository.restorePassword(phone);
   }
-
-
 }

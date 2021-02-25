@@ -22,24 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // testSignIn();
   }
-
-  testSignIn() {
-    final interactor = getIt<SignInInteractor>();
-    final number = '+7(982)746-51-21';
-
-    interactor.register(number).then((confirmCode) {
-      print("ответ по регистрации ${confirmCode.toJson()}");
-      interactor.confirmCode(number, confirmCode.code).then((value) {
-        print("номер подтвержден? $value ");
-        interactor.authorization(number, confirmCode.code).then((value) {
-          print("ответ по авторизации ${value.toJson()}");
-        });
-      });
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

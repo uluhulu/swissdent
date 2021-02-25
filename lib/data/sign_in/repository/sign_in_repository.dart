@@ -39,7 +39,7 @@ class SignInRepository {
 
   ///Потверждение кода
   ///phone - номер телефона "+*(***)***-**-**"
-  ///сщву - код подтверждения "* * * *"
+  ///code - код подтверждения "* * * *"
   Future<bool> confirmCode(String phone, String code) async {
     final response = await apiManager.post(
       ///todo поменять на реальный апи
@@ -60,7 +60,7 @@ class SignInRepository {
   ///Авторизация
   ///phone - номер телефона "+*(***)***-**-**"
   ///password - пароль
-  Future<Token> authorization(String phone, String password) async {
+  Future<bool> authorization(String phone, String password) async {
     final response = await apiManager.post(
       ///todo поменять на реальный апи
       authorizationUrlTest,
@@ -68,13 +68,13 @@ class SignInRepository {
         AuthorizationRequestBody(phone: phone, password: _hashCode(password)),
       ),
     );
-
-    final token = Token.fromJson(response.result);
     if (!response.error) {
-      _writeToken(token.token);
+      final token = Token.fromJson(response.result);
+      await _writeToken(token.token);
+      return true;
     }
 
-    return token;
+    return false;
   }
 
   ///Обновление информации о пользователе
@@ -114,8 +114,9 @@ class SignInRepository {
 
     return false;
   }
+
   ///Восстановление пароля
-  Future<bool> restorePassword(String phone) async {
+  Future<RegisterCode> restorePassword(String phone) async {
     final response = await apiManager.post(
       ///todo поменять на реальный апи
       restoreUrlText,
@@ -126,9 +127,7 @@ class SignInRepository {
       ),
     );
 
-    if (!response.error) return true;
-
-    return false;
+    return RegisterCode.fromJson(response.result);
   }
 
   String _hashCode(String password) {

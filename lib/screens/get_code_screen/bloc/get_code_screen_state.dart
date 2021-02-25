@@ -31,3 +31,4 @@ class NavigateNextRegistrationScreenState extends GetCodeScreenState {
 }
 
 class ErrorConfirmCodeState extends GetCodeScreenState {}
+class ErrorLogInState extends GetCodeScreenState {}

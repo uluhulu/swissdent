@@ -6,24 +6,26 @@ import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_event.dart';
-import 'package:swissdent/screens/get_code_screen/widget/registration_title.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_bloc.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_state.dart';
 import 'package:swissdent/screens/restore_screen/widget/restore_discription.dart';
+import 'package:swissdent/screens/restore_screen/widget/restore_title.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
-///экран восстановления
+
+///restore password
 class RestoreScreen extends StatefulWidget {
   @override
   _RestoreScreenState createState() => _RestoreScreenState();
 }
+
 class _RestoreScreenState extends State<RestoreScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context){
+      create: (BuildContext context) {
         return RestoreScreenBloc(
           signInInteractor: getIt<SignInInteractor>(),
         );
@@ -49,32 +51,33 @@ class _RestoreScreenState extends State<RestoreScreen> {
       ),
     );
   }
-  Widget _buildBody(BuildContext context){
+
+  Widget _buildBody(BuildContext context) {
     return BlocConsumer<RestoreScreenBloc, RestoreScreenState>(
-      listener: (BuildContext context, state){
-        if(state is RestoreSucceedState)
-          print("Восстановление пароля прошло удачно");
-        if(state is RestoreNotSucceedState){
+      listener: (BuildContext context, state) {
+        if (state is RestoreSucceedState) if (state is RestoreNotSucceedState) {
           print("Что-то пошло не так, номер нашей тех. поддержки ХХХХХ");
         }
       },
-      builder: (BuildContext context, state){
+      builder: (BuildContext context, state) {
         return Column(
           children: [
             _buildTitleAndDescription(),
             _buildNumTextField(context),
-            _buildRestoreButton(context,state),
+            _buildRestoreButton(context, state),
           ],
         );
       },
-
     );
   }
-  Widget _buildTitleAndDescription(){
+
+  Widget _buildTitleAndDescription() {
     return Column(
       children: [
-        SizedBox(height: 124,),
-        RegistrationTitle(),
+        SizedBox(
+          height: 124,
+        ),
+        RestoreTitle(),
         SizedBox(height: 24),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 23.0),
@@ -84,7 +87,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
     );
   }
 
-  Widget _buildNumTextField(BuildContext context){
+  Widget _buildNumTextField(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 80),
@@ -92,14 +95,15 @@ class _RestoreScreenState extends State<RestoreScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
             onNumberType: (text) {
-              sendTypeNumberEvent("$text",context);
+              sendTypeNumberEvent("$text", context);
             },
           ),
         ),
       ],
     );
   }
-  Widget _buildRestoreButton(BuildContext context,state){
+
+  Widget _buildRestoreButton(BuildContext context, state) {
     return Column(
       children: [
         SizedBox(height: 32),
@@ -109,21 +113,27 @@ class _RestoreScreenState extends State<RestoreScreen> {
             width: double.infinity,
             buttonColor: codeButtonColor,
             isAvaliable: state.restoreButtonIsAvailable,
-            buttonText: Text(restoreText, style: semiBold17WhiteStyle,),
+            buttonText: Text(
+              restoreText,
+              style: semiBold17WhiteStyle,
+            ),
             onTap: () {
               sendRestorePasswordEvent(context);
             },
           ),
         ),
-        SizedBox(height: 152,),
+        SizedBox(
+          height: 152,
+        ),
       ],
     );
   }
 
-  void sendTypeNumberEvent(String number, BuildContext context){
+  void sendTypeNumberEvent(String number, BuildContext context) {
     BlocProvider.of<RestoreScreenBloc>(context).add(TypeNumberEvent(number));
   }
-  void sendRestorePasswordEvent(BuildContext context){
+
+  void sendRestorePasswordEvent(BuildContext context) {
     BlocProvider.of<RestoreScreenBloc>(context).add(RestorePasswordEvent());
   }
 }

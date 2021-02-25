@@ -1,14 +1,15 @@
 ///base
 final baseUrl = 'http://178.154.232.29:8000';
 final baseUrlTest = 'http://test.dentistry.hellfish.ru';
+final apiUrl ='/api/v1';
 
 //sign int
 
-final registerUrl = '$baseUrl/api/v1/user/register';
-final registerUrlTest = '$baseUrlTest/api/v1/dev/user/register';
-final confirmCodeUrlTest = '$baseUrlTest/api/v1/user/confirm';
-final authorizationUrlTest = '$baseUrlTest/api/v1/user/login';
-final updateUserDataUrlTest = '$baseUrlTest/api/v1/user';
+final registerUrl = '$baseUrl$apiUrl/user/register';
+final registerUrlTest = '$baseUrlTest$apiUrl/dev/user/register';
+final confirmCodeUrlTest = '$baseUrlTest$apiUrl/user/confirm';
+final authorizationUrlTest = '$baseUrlTest$apiUrl/user/login';
+final updateUserDataUrlTest = '$baseUrlTest$apiUrl/user';
 // final updatePasswordUrlTest = '$baseUrlTest/api​/v1​/user​/password';
-final updatePasswordUrlTest = 'http://test.dentistry.hellfish.ru/api/v1/user/password';
-final restoreUrlText = '$baseUrlTest/api/v1/user/restore';
+final updatePasswordUrlTest = '$baseUrlTest$apiUrl/user/password';
+final restoreUrlText = '$baseUrlTest$apiUrl/dev/user/restore';

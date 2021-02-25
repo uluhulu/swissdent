@@ -3,7 +3,7 @@ import 'package:swissdent/util/money_formatter.dart';
 final splashText = 'ШВЕЙЦАРСКАЯ СТОМАТОЛОГИЯ';
 final smsConfirmationHintText = 'Введите смс-код';
 final registrationTitle = 'Регистрация';
-final restoreTitle = 'Восстановление паролья';
+final restoreTitle = 'Восстановление пароля';
 final restoreDiscription = 'Для восстановления пароля введите номер телефона';
 final registrationDescription =
     'Введите номер мобильного телефона. Для регистрации заполните код, присланный в SMS';
@@ -87,6 +87,7 @@ final chatTitle = 'Чат';
 final userMessageTitle = 'Вы';
 final chatBarHint = 'Введите сообщение';
 
+final numPrefix = '+7';
 
 String serviceCost(double amount) {
   return 'от ${formatMoney(amount)} $rubPrefix';

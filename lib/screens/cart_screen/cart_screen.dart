@@ -10,8 +10,6 @@ import 'package:swissdent/screens/cart_screen/bloc/cart_screen_event.dart';
 import 'package:swissdent/screens/cart_screen/bloc/cart_screen_state.dart';
 import 'package:swissdent/screens/cart_screen/widget/product_card/product_card.dart';
 import 'package:swissdent/screens/cart_screen/widget/cart_total_board.dart';
-import 'package:swissdent/screens/personal_cabinet/widget/expand_treatment/schedule_treatment/widget/separator.dart';
-import 'package:swissdent/util/money_formatter.dart';
 import 'package:swissdent/widget/appbar.dart';
 import 'package:swissdent/widget/chat_button.dart';
 
@@ -56,7 +54,9 @@ class _CartScreenState extends State<CartScreen> {
           _buildList(context),
           Positioned(
             bottom: 0,
-            child: CartTotalBoard(amount: state.cost,),
+            child: CartTotalBoard(
+              amount: state.cost,
+            ),
           ),
         ],
       ),

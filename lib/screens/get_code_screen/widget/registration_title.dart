@@ -8,7 +8,7 @@ class RegistrationTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      restoreTitle,
+      registrationTitle,
       style: semiBold24Style,
     );
   }
