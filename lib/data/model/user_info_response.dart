@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-UserInfoRequestBody userInfoRequestBodyFromJson(String str) => UserInfoRequestBody.fromJson(json.decode(str));
+UserInfoResponseBody userInfoRequestBodyFromJson(String str) => UserInfoResponseBody.fromJson(json.decode(str));
 
-String userInfoRequestBodyToJson(UserInfoRequestBody data) => json.encode(data.toJson());
+String userInfoRequestBodyToJson(UserInfoResponseBody data) => json.encode(data.toJson());
 
-class UserInfoRequestBody {
-  UserInfoRequestBody({
+class UserInfoResponseBody {
+  UserInfoResponseBody({
     this.id,
     this.phone,
     this.name,
@@ -23,7 +23,7 @@ class UserInfoRequestBody {
   final String surname;
   final String email;
 
-  factory UserInfoRequestBody.fromJson(Map<String, dynamic> json) => UserInfoRequestBody(
+  factory UserInfoResponseBody.fromJson(Map<String, dynamic> json) => UserInfoResponseBody(
     id: json["_id"],
     phone: json["phone"],
     name: json["name"],

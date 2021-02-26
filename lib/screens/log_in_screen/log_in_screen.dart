@@ -54,7 +54,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<LogInScreenBloc>(
       create: (BuildContext context) {
         return LogInScreenBloc(
           signInInteractor: getIt<SignInInteractor>(),
@@ -286,7 +286,6 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void _navigateToRestoreScreen() {
     print('навигация на экран восстановления');
-    Navigator.of(context)
-        .pushAndRemoveUntil(buildRoute(RestoreScreen()), (route) => false);
+    Navigator.of(context).push(buildRoute(RestoreScreen()));
   }
 }

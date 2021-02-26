@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/di.dart';
-import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
-import 'package:swissdent/screens/log_in_screen/log_in_screen.dart';
-import 'package:swissdent/screens/restore_screen/restore_screen.dart';
-import 'package:swissdent/screens/splash_screen/splash_screen_first_open/splash_screen.dart';
+import 'package:swissdent/screens/main_menu_screen/main_menu_screen.dart';
 
 void main() {
   initDi();
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: GetCodeScreen(),
+        home: MainMenuScreen(),
       ),
     );
   }

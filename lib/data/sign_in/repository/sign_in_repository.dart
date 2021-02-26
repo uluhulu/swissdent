@@ -84,7 +84,7 @@ class SignInRepository {
     String email,
   ) async {
     final response = await apiManager.patch(
-      updateUserDataUrlTest,
+      userInfoUrlTest,
       data: updateUserInfoRequestBodyToJson(
         UpdateUserInfoRequestBody(
           name: name,

@@ -55,7 +55,10 @@ class _RestoreScreenState extends State<RestoreScreen> {
   Widget _buildBody(BuildContext context) {
     return BlocConsumer<RestoreScreenBloc, RestoreScreenState>(
       listener: (BuildContext context, state) {
-        if (state is RestoreSucceedState) if (state is RestoreNotSucceedState) {
+        if (state is RestoreSucceedState){
+          Navigator.of(context).pop();
+        }
+          if (state is RestoreNotSucceedState) {
           print("Что-то пошло не так, номер нашей тех. поддержки ХХХХХ");
         }
       },

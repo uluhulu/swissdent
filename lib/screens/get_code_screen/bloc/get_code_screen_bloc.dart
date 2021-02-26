@@ -71,11 +71,18 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     GetCodeScreenEvent event,
   ) async* {
     if (event is GetCodeEvent) {
+      getCodeButtonIsAvaliable = false;
+      yield GetCodeScreenState(
+        getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+        timerAvaliable: timerAvaliable,
+        seconds: _seconds,
+        smsCodeIsAvaliable: smsCodeIsAvaliable,
+        nextButtonIsVisible: nextButtonIsVisible,
+      );
       final registerResponse =
           await signInInteractor.register(maskFormatter.maskText(phoneNumber));
       smsCode = registerResponse.code;
       print(smsCode);
-      getCodeButtonIsAvaliable = false;
       timerAvaliable = true;
       startTimer();
     }
@@ -132,6 +139,14 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     GetCodeScreenEvent event,
   ) async* {
     if (event is ConfirmCodeEvent) {
+      nextButtonIsVisible = false;
+      yield GetCodeScreenState(
+        getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+        timerAvaliable: timerAvaliable,
+        seconds: _seconds,
+        smsCodeIsAvaliable: smsCodeIsAvaliable,
+        nextButtonIsVisible: nextButtonIsVisible,
+      );
       final confirmResponse = await signInInteractor.confirmCode(
           maskFormatter.maskText(phoneNumber), smsCode);
       if (confirmResponse){

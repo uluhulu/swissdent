@@ -29,6 +29,24 @@ class GetCodeScreen extends StatefulWidget {
 }
 
 class _GetCodeScreenState extends State<GetCodeScreen> {
+  FocusNode phone;
+  FocusNode smsCode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    phone = FocusNode();
+    smsCode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    phone.dispose();
+    smsCode.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -79,6 +97,10 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
+                focusNode: phone,
+                onSubmitted: (text){
+                  onSubmitted(context, smsCode);
+                },
                 onNumberType: (text) {
                   sendTypeNumberEvent(context, "$text");
                 },
@@ -88,6 +110,10 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentSmsCodeTextField(
+                focusNode: smsCode,
+                onSubmitted: (text){
+                  onSubmitted(context, smsCode);
+                },
                 isVisible: state.smsCodeIsAvaliable,
                 onCodeType: (text) {
                   sendTypeSmsCodeEvent(context, "$text");
@@ -139,6 +165,9 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
         );
       },
     );
+  }
+  void onSubmitted(BuildContext context, FocusNode nextFocus) {
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 
   void sendTypeNumberEvent(
