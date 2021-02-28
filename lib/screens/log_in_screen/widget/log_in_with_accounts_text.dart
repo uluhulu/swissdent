@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
-
+///log in accounts
 class LogInWithAccounts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

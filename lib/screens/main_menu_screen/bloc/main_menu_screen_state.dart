@@ -4,7 +4,7 @@ class GetUserInfoState extends MainMenuScreenState{
   final String userSurname;
   final String userEmail;
 
-  GetUserInfoState(this.userName, this.userSurname, this.userEmail);
+  GetUserInfoState({this.userName, this.userSurname, this.userEmail});
 }
 class GetCartInfoState extends MainMenuScreenState{
   final int productsCount;

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/data/user_info/interactor/user_info_interactor.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/cart_screen/cart_screen.dart';
-import 'package:swissdent/screens/chat_screen/chat_screen.dart';
 import 'package:swissdent/screens/help_screen/help_screen.dart';
+import 'package:swissdent/screens/main_menu_screen/bloc/main_menu_screen_bloc.dart';
+import 'package:swissdent/screens/main_menu_screen/bloc/main_menu_screen_state.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_app_bar.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_card.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/user_card/user_card.dart';
@@ -29,81 +33,105 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        MainMenuAppBar(),
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.zero,
+  Widget _buildBody(BuildContext context) {
+    return BlocProvider(
+      create: (BuildContext context) {
+        return MainMenuScreenBloc(
+          userInfoInteractor: getIt<UserInfoInteractor>(),
+        );
+      },
+      child: BlocConsumer<MainMenuScreenBloc, MainMenuScreenState>(
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, state) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              UserCard(
-                productCount: 3,
-                userName: 'User User',
-                userEmail: 'user@mail.com',
-                navigateToCartScreen: (){
-                  _navigateToCartScreen();
-                },
-                navigateToUserProfileScreen: (){
-                  _navigateToUserProfileScreen();
-                },
-                avatarPath:
-                'https://www.denofgeek.com/wp-content/uploads/2019/11/star-wars-the-mandalorian-baby-yoda.png?fit=1401%2C734',
-              ),
-              MainMenuCard(
-                iconPath: iconPerson,
-                cardText: personalCabinet,
-                onTap: () {
-                  _navigateToPersonalCabinetScreen();
-                },
-              ),
-              MainMenuCard(
-                  iconPath: iconServices,
-                  cardText: services,
-                  onTap: () {
-                    _navigateToServicesScreen();
-                  }
-              ),
-              MainMenuCard(
-                iconPath: iconProducts,
-                cardText: products,
-                onTap: (){
-                  _navigateToProductScreen();
-                },
-              ),
-              MainMenuCard(
-                iconPath: iconTeam,
-                cardText: team,
-                onTap: (){
-                  _navigateToTeamScreen();
-                },
-              ),
-              MainMenuCard(
-                iconPath: iconHelp,
-                cardText: help,
-                onTap: (){
-                  _navigateToHelpScreen();
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 24.0, left: 16, right: 16, bottom: 37),
-                child: SwissdentButton(
-                  buttonColor: emergencyCallButtonColor,
-                  buttonText: Text(
-                    emergencyCallButton,
-                    style: semiBold17WhiteStyle,
-                  ),
-                  isAvaliable: true,
+              MainMenuAppBar(),
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    _buildUserCard(context, state),
+                    _buildMainMenuScreenCard(context,state),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 24.0, left: 16, right: 16, bottom: 37),
+                      child: SwissdentButton(
+                        buttonColor: emergencyCallButtonColor,
+                        buttonText: Text(
+                          emergencyCallButton,
+                          style: semiBold17WhiteStyle,
+                        ),
+                        isAvaliable: true,
+                      ),
+                    )
+                  ],
                 ),
-              )
+              ),
             ],
-          ),
+          );
+        },
+
+      ),
+    );
+  }
+
+  Widget _buildUserCard(BuildContext context, state){
+    return UserCard(
+      productCount: 3,
+      userName: 'User User',
+      userEmail: 'user@mail.com',
+      navigateToCartScreen: () {
+        _navigateToCartScreen();
+      },
+      navigateToUserProfileScreen: () {
+        _navigateToUserProfileScreen();
+      },
+      avatarPath:
+      'https://www.denofgeek.com/wp-content/uploads/2019/11/star-wars-the-mandalorian-baby-yoda.png?fit=1401%2C734',
+    );
+  }
+  Widget _buildMainMenuScreenCard(BuildContext context, state){
+    return Column(
+      children: [
+        MainMenuCard(
+          iconPath: iconPerson,
+          cardText: personalCabinet,
+          onTap: () {
+            _navigateToPersonalCabinetScreen();
+          },
+        ),
+        MainMenuCard(
+            iconPath: iconServices,
+            cardText: services,
+            onTap: () {
+              _navigateToServicesScreen();
+            }
+        ),
+        MainMenuCard(
+          iconPath: iconProducts,
+          cardText: products,
+          onTap: () {
+            _navigateToProductScreen();
+          },
+        ),
+        MainMenuCard(
+          iconPath: iconTeam,
+          cardText: team,
+          onTap: () {
+            _navigateToTeamScreen();
+          },
+        ),
+        MainMenuCard(
+          iconPath: iconHelp,
+          cardText: help,
+          onTap: () {
+            _navigateToHelpScreen();
+          },
         ),
       ],
     );
@@ -116,18 +144,23 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   void _navigateToServicesScreen() {
     Navigator.of(context).push(buildRoute(ServicesScreen()));
   }
+
   void _navigateToProductScreen() {
     Navigator.of(context).push(buildRoute(ProductScreen()));
   }
+
   void _navigateToTeamScreen() {
     Navigator.of(context).push(buildRoute(TeamScreen()));
   }
+
   void _navigateToHelpScreen() {
     Navigator.of(context).push(buildRoute(HelpScreen()));
   }
+
   void _navigateToCartScreen() {
     Navigator.of(context).push(buildRoute(CartScreen()));
   }
+
   void _navigateToUserProfileScreen() {
     Navigator.of(context).push(buildRoute(UserProfileScreen()));
   }

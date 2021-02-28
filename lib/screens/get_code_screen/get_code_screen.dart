@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
 import 'package:swissdent/util/route_builder.dart';
@@ -12,7 +14,7 @@ import 'package:swissdent/widget/registration_background/gradient_background.dar
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_description.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_terms_of_use_text.dart';
-import 'package:swissdent/widget/registration_title/registration_title.dart';
+import 'package:swissdent/screens/get_code_screen/widget/registration_title.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
 import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dart';
@@ -27,11 +29,31 @@ class GetCodeScreen extends StatefulWidget {
 }
 
 class _GetCodeScreenState extends State<GetCodeScreen> {
+  FocusNode phone;
+  FocusNode smsCode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    phone = FocusNode();
+    smsCode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    phone.dispose();
+    smsCode.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return GetCodeScreenBloc();
+        return GetCodeScreenBloc(
+          signInInteractor: getIt<SignInInteractor>(),
+        );
       },
       child: Scaffold(
         body: Stack(
@@ -75,8 +97,12 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
+                focusNode: phone,
+                onSubmitted: (text){
+                  onSubmitted(context, smsCode);
+                },
                 onNumberType: (text) {
-                  sendTypeNumberEvent(context, "7$text");
+                  sendTypeNumberEvent(context, "$text");
                 },
               ),
             ),
@@ -84,6 +110,10 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentSmsCodeTextField(
+                focusNode: smsCode,
+                onSubmitted: (text){
+                  onSubmitted(context, smsCode);
+                },
                 isVisible: state.smsCodeIsAvaliable,
                 onCodeType: (text) {
                   sendTypeSmsCodeEvent(context, "$text");
@@ -108,7 +138,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                   ),
                   isAvaliable: state.nextButtonIsVisible,
                   onTap: () {
-                    _navigateToNextRegistrationScreen();
+                    sendConfirmCodeEvent(context);
                   },
                 ),
               )
@@ -130,10 +160,14 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),
             ),
+            SizedBox(height: 152,)
           ],
         );
       },
     );
+  }
+  void onSubmitted(BuildContext context, FocusNode nextFocus) {
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 
   void sendTypeNumberEvent(
@@ -162,8 +196,15 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
+  void sendConfirmCodeEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<GetCodeScreenBloc>(context).add(ConfirmCodeEvent());
+  }
 
-  void _navigateToNextRegistrationScreen(){
-    Navigator.of(context).pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
+  void _navigateToNextRegistrationScreen() {
+    ///confirm code event
+    Navigator.of(context)
+        .pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
   }
 }

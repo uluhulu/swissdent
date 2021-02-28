@@ -18,3 +18,8 @@ class TypeEmailEvent extends RegistrationScreenEvent{
   TypeEmailEvent(this.email);
 }
 
+class RegistrationEvent extends RegistrationScreenEvent{
+
+}
+
+

@@ -9,9 +9,12 @@ import 'base/swissdent_text_field.dart';
 class SwissdentSmsCodeTextField extends StatefulWidget {
   final bool isVisible;
   final Function(String unmaskedText) onCodeType;
+  final FocusNode focusNode;
+  final Function(String text) onSubmitted;
 
 
-  const SwissdentSmsCodeTextField({Key key, this.isVisible, this.onCodeType}) : super(key: key);
+
+  const SwissdentSmsCodeTextField({Key key, this.isVisible, this.onCodeType, this.focusNode, this.onSubmitted}) : super(key: key);
 
   @override
   _SwissdentSmsCodeTextFieldState createState() =>
@@ -39,6 +42,8 @@ class _SwissdentSmsCodeTextFieldState extends State<SwissdentSmsCodeTextField> {
   @override
   Widget build(BuildContext context) {
     return SwissdentTextField(
+      onSubmitted: widget.onSubmitted ?? (text){},
+      focusNode: widget.focusNode,
       keyboardType: TextInputType.number,
       maxLength: 7,
       formatter: maskFormatter,

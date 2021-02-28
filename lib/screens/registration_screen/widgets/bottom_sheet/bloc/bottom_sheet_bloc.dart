@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/registration_screen/widgets/bottom_sheet/bloc/bottom_sheet_event.dart';
 
 import 'bottom_sheet_state.dart';
@@ -7,7 +8,9 @@ class BottomSheetBloc extends Bloc<BottomSheetEvent,BottomSheetState>{
   String password = '';
   String passwordConfirmation = '';
 
-  BottomSheetBloc() : super(BottomSheetState());
+  final SignInInteractor signInInteractor;
+
+  BottomSheetBloc({this.signInInteractor}) : super(BottomSheetState());
 
   @override
   Stream<BottomSheetState> mapEventToState(BottomSheetEvent event) async* {
@@ -27,13 +30,15 @@ class BottomSheetBloc extends Bloc<BottomSheetEvent,BottomSheetState>{
     if (event is TypePasswordConfirmation) {
       passwordConfirmation = event.passwordConfirmation;
       print('TypePasswordConfirmation');
-      yield passwordValidation();
+      yield await passwordValidation();
     }
   }
-  BottomSheetState passwordValidation() {
+  Future<BottomSheetState> passwordValidation() async{
     if (password == passwordConfirmation && password.isNotEmpty && passwordConfirmation.isNotEmpty) {
       // print("Navigate");
-      return NavigateNext();
+      final updatePasswordResponse = await signInInteractor.updatePassword(password);
+      if(updatePasswordResponse)
+        return NavigateNext();
     }
 
     return PaswordNotConfirmed();
