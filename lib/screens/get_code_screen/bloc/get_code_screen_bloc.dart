@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/managers/exception.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_state.dart';
 import 'package:swissdent/util/mask_formatter.dart';
@@ -16,15 +17,12 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   bool smsCodeIsAvaliable = false;
   bool nextButtonIsVisible = false;
 
-
   Timer _timer;
   int _seconds = 45;
   final int _timerMaxTime = 45;
   final int _smsCodeMaxLength = 4;
-  final int _phoneNumberMaxLength = 11;
-  final int _phoneNumberLengthWithoutPrefix = 10;
+  final int _phoneNumberMaxLength = 10;
   final SignInInteractor signInInteractor;
-
 
   GetCodeScreenBloc({this.signInInteractor})
       : super(GetCodeScreenState(
@@ -55,7 +53,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is TypeNumberEvent) {
       phoneNumber = event.number;
-      codeButtonAvaliableCheck();
+      checkVariables();
       yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
@@ -79,10 +77,22 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         smsCodeIsAvaliable: smsCodeIsAvaliable,
         nextButtonIsVisible: nextButtonIsVisible,
       );
-      final registerResponse =
-          await signInInteractor.register(maskFormatter.maskText(phoneNumber));
-      smsCode = registerResponse.code;
-      print(smsCode);
+      try {
+        final registerResponse = await signInInteractor
+            .register(maskFormatter.maskText(phoneNumber));
+        smsCode = registerResponse.code;
+        print(smsCode);
+      } on NetworkException catch (e) {
+        yield ErrorCodeState(
+          getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+          timerAvaliable: timerAvaliable,
+          seconds: _seconds,
+          smsCodeIsAvaliable: smsCodeIsAvaliable,
+          nextButtonIsVisible: nextButtonIsVisible,
+          errorMessage: e.customErrorMessage,
+        );
+      }
+
       timerAvaliable = true;
       startTimer();
     }
@@ -109,7 +119,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is TypeSmsCodeEvent) {
       smsCode = event.code;
-      smsCodeCheck();
+      checkVariables();
       yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
@@ -147,18 +157,28 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         smsCodeIsAvaliable: smsCodeIsAvaliable,
         nextButtonIsVisible: nextButtonIsVisible,
       );
-      final confirmResponse = await signInInteractor.confirmCode(
-          maskFormatter.maskText(phoneNumber), smsCode);
-      if (confirmResponse){
-        final loginResponse = await signInInteractor.authorization( maskFormatter.maskText(phoneNumber), smsCode);
-        if(loginResponse) {
+      try {
+        final confirmResponse = await signInInteractor.confirmCode(
+            maskFormatter.maskText(phoneNumber), smsCode);
+        final loginResponse = await signInInteractor.authorization(
+            maskFormatter.maskText(phoneNumber), smsCode);
+
+        if (loginResponse) {
           add(NavigateNextRegistrationScreenEvent());
-        } else{
+        } else {
           yield ErrorLogInState();
         }
+      } on NetworkException catch (e) {
+        checkVariables();
+        yield ErrorCodeState(
+          getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+          timerAvaliable: timerAvaliable,
+          seconds: _seconds,
+          smsCodeIsAvaliable: smsCodeIsAvaliable,
+          nextButtonIsVisible: nextButtonIsVisible,
+          errorMessage: e.customErrorMessage,
+        );
       }
-      else
-        yield ErrorConfirmCodeState();
     }
 
     ///запрос подтверждения
@@ -166,29 +186,40 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     ///если ок -> aadd(error event)
   }
 
-  void smsCodeCheck() {
-    if (smsCode.length == _smsCodeMaxLength) {
-      ///todo запрос
-      ///если запрос ок
-      smsCodeIsAvaliable = true;
-      getCodeButtonIsAvaliable = false;
-      nextButtonIsVisible = true;
-    } else {
-      smsCodeIsAvaliable = false;
-      if (_seconds == _timerMaxTime && phoneNumber.length == _phoneNumberMaxLength) {
+  void checkVariables() {
+    if(phoneNumberIsValid()){
+      if(!timerAvaliable){
         getCodeButtonIsAvaliable = true;
+      }else{
+        getCodeButtonIsAvaliable = false;
       }
+
+      if(smsCodeIsValid()){
+        smsCodeIsAvaliable = true;
+        getCodeButtonIsAvaliable = false;
+        nextButtonIsVisible = true;
+      }else{
+        nextButtonIsVisible = false;
+        smsCodeIsAvaliable = false;
+      }
+    }else{
+      getCodeButtonIsAvaliable = false;
       nextButtonIsVisible = false;
     }
   }
 
-  /// Проверка активации кнопки "Получить код"
-  void codeButtonAvaliableCheck() {
-    if (phoneNumber.length == _phoneNumberLengthWithoutPrefix && timerAvaliable == false) {
-      getCodeButtonIsAvaliable = true;
-    } else {
-      getCodeButtonIsAvaliable = false;
+  bool phoneNumberIsValid() {
+    if (phoneNumber.length == _phoneNumberMaxLength) {
+      return true;
     }
+    return false;
+  }
+
+  bool smsCodeIsValid() {
+    if (smsCode.length == _smsCodeMaxLength) {
+      return true;
+    }
+    return false;
   }
 
   void startTimer() {
@@ -203,8 +234,8 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
           getCodeButtonIsAvaliable = true;
         } else {
           _seconds--;
-          // timerAvaliable = true;
-          // getCodeButtonIsAvaliable = false;
+          timerAvaliable = true;
+          getCodeButtonIsAvaliable = false;
         }
         add(UpdateTimerEvent(_seconds));
       },

@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as security;
 import 'package:swissdent/constants/keys.dart';
 import 'package:swissdent/constants/url.dart';
 import 'package:swissdent/data/model/base_response.dart';
+import 'package:swissdent/managers/exception.dart';
 
 class ApiManager {
   static Dio _dio;
@@ -72,14 +71,14 @@ class ApiManager {
       );
 
       final response = BaseResponse.fromJson(responseJson.data);
-      if (!response.error) {
-        return response;
-      }
 
-      throw Exception("request error: $response.error");
-    } catch (error, stacktrace) {
-      print('post stacktrace $stacktrace');
-      throw Exception("request error: $error, stacktrace: $stacktrace");
+      return response;
+    } on DioError catch (e) {
+      throw NetworkException(
+        errorMessage: e.message,
+        code: e.response.statusCode,
+        customErrorMessage: e.response.data['message'],
+      );
     }
   }
 
@@ -95,11 +94,16 @@ class ApiManager {
         data: data,
         options: await _checkOptions('POST', options),
       );
+
       final response = BaseResponse.fromJson(responseJson.data);
 
       return response;
-    } catch (e) {
-      throw Exception('Ошибка post-запроса: $e');
+    } on DioError catch (e) {
+      throw NetworkException(
+        errorMessage: e.message,
+        code: e.response.statusCode,
+        customErrorMessage: e.response.data['message'],
+      );
     }
   }
 
@@ -116,13 +120,14 @@ class ApiManager {
         options: await _checkOptions('PATCH', options),
       );
       final response = BaseResponse.fromJson(responseJson.data);
-      if (!response.error) {
-        return response;
-      }
-      throw Exception("request error: $response.error");
-    } catch (error, stacktrace) {
-      print('patch stacktrace $stacktrace');
-      throw Exception("request error: $error, stacktrace: $stacktrace");
+
+      return response;
+    } on DioError catch (e) {
+      throw NetworkException(
+        errorMessage: e.message,
+        code: e.response.statusCode,
+        customErrorMessage: e.response.data['message'],
+      );
     }
   }
 
@@ -135,7 +140,7 @@ class ApiManager {
       Map<String, dynamic> headers = {};
 
       String token = await _readToken();
-      print("токен ${token}");
+      print("токен $token");
       if (token != null) {
         headers['Authorization'] = "Bearer " + token;
       }
