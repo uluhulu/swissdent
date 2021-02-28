@@ -8,6 +8,7 @@ import 'package:swissdent/constants/styles.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
+import 'package:swissdent/screens/get_code_screen/widget/restore_code_title.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
@@ -155,6 +156,14 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                   },
                 ),
               ),
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: RestoreCodeTitle(
+                onTap: () {
+                },
+              ),
+            ),
             SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
