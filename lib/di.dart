@@ -22,6 +22,11 @@ void initDi() {
       repository: getIt<SignInRepository>(),
     ),
   );
+  getIt.registerSingleton<UserInfoRepository>(
+    UserInfoRepository(
+      apiManager: getIt<ApiManager>(),
+    ),
+  );
   getIt.registerSingleton<UserInfoInteractor>(
     UserInfoInteractor(
       repository: getIt<UserInfoRepository>(),

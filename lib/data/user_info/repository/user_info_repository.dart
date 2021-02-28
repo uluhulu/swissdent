@@ -6,7 +6,7 @@ import 'package:swissdent/screens/main_menu_screen/widget/user_card/widget/user_
 class UserInfoRepository{
   final ApiManager apiManager;
 
-  UserInfoRepository(this.apiManager);
+  UserInfoRepository({this.apiManager});
 ///Получение информации о пользователе
   Future<UserInfoResponse> getUserInfo()async{
     final response = await apiManager.get(userInfoUrlTest,);

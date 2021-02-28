@@ -82,6 +82,7 @@ final logInTitle = 'Вход';
 final navigateToRegistrationText = 'Еще не зарегистрированы?\n';
 final logInButtonText = "Войти";
 final forgetPasswordTitle = 'Забыли пароль?';
+final restoreCodeTitle = 'Восстановить код';
 
 final chatTitle = 'Чат';
 final userMessageTitle = 'Вы';
