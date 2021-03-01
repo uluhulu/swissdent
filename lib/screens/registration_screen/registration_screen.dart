@@ -22,6 +22,9 @@ import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dar
 ///step 2 registration screen
 ///https://www.figma.com/file/esZIIKJ4Hb7I4at0WqUKx1/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F?node-id=2%3A1378
 class RegistrationScreen extends StatefulWidget {
+  final String phoneNumber;
+
+  const RegistrationScreen({Key key, this.phoneNumber}) : super(key: key);
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -154,7 +157,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: SwissdentNumTextField(
             readOnly: true,
-            defaultText: '9827464162',
+            defaultText: widget.phoneNumber,
           ),
         ),
         SizedBox(height: 16),

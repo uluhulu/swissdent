@@ -23,4 +23,13 @@ class UpdateTimerEvent extends GetCodeScreenEvent {
 class CheckSmsCodeEvent extends GetCodeScreenEvent {}
 
 class NavigateNextRegistrationScreenEvent extends GetCodeScreenEvent {}
+
 class ConfirmCodeEvent extends GetCodeScreenEvent {}
+
+class NavigateRestoreScreenEvent extends GetCodeScreenEvent {}
+
+class PhoneUpdateEvent extends GetCodeScreenEvent {
+  final String phoneNumber;
+
+  PhoneUpdateEvent(this.phoneNumber);
+}
