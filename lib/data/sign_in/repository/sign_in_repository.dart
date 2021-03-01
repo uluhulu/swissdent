@@ -70,6 +70,7 @@ class SignInRepository {
     );
     if (!response.error) {
       final token = Token.fromJson(response.result);
+      print("token: ${token.token}");
       await _writeToken(token.token);
       return true;
     }

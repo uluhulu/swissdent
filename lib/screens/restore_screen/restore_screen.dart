@@ -56,11 +56,10 @@ class _RestoreScreenState extends State<RestoreScreen> {
     return BlocConsumer<RestoreScreenBloc, RestoreScreenState>(
       listener: (BuildContext context, state) {
         if (state is RestoreSucceedState){
-          print("номер телефона ${state.phoneNumber}");
           Navigator.of(context).pop<String>(state.phoneNumber);
         }
           if (state is RestoreNotSucceedState) {
-          print("Что-то пошло не так, номер нашей тех. поддержки ХХХХХ");
+            _showErrorSnackBar(context, state.errorMessage);
         }
       },
       builder: (BuildContext context, state) {
@@ -99,7 +98,6 @@ class _RestoreScreenState extends State<RestoreScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
             onNumberType: (text) {
-              print("номер на входе  1 $text");
               sendTypeNumberEvent(text, context);
             },
           ),
@@ -133,9 +131,20 @@ class _RestoreScreenState extends State<RestoreScreen> {
       ],
     );
   }
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: errorSnackbarColor,
+        content: Text(
+          errorMessage,
+          style: semiBold17WhiteStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
 
   void sendTypeNumberEvent(String number, BuildContext context) {
-    print("номер на входе $number");
     BlocProvider.of<RestoreScreenBloc>(context).add(TypeNumberEvent(number));
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/managers/exception.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_event.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_state.dart';
 import 'package:swissdent/constants/strings.dart';
@@ -34,8 +35,7 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
   Stream<RestoreScreenState> mapTypeNumberEvent(
     RestoreScreenEvent event,
   ) async* {
-    if (event is TypeNumberEvent){
-      print("номер на выходе ${event.number}");
+    if (event is TypeNumberEvent) {
       phoneNumber = event.number;
       restoreButtonAvailableCheck();
       yield RestoreScreenState(
@@ -49,25 +49,25 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
     RestoreScreenEvent event,
   ) async* {
     if (event is RestorePasswordEvent) {
-      final restoreResponse = await signInInteractor
-          .restorePassword(formatter.maskText(phoneNumber));
-      password = restoreResponse.code;
-      print(password);
-      if (password.isNotEmpty) {
+      try {
+        final restoreResponse = await signInInteractor
+            .restorePassword(formatter.maskText(phoneNumber));
+        password = restoreResponse.code;
+        print(password);
         yield RestoreSucceedState(
           phoneNumber: phoneNumber,
           restoreButtonIsAvailable: restoreButtonIsAvailable,
         );
-      } else {
+      } on NetworkException catch (e) {
         yield RestoreNotSucceedState(
           restoreButtonIsAvailable: restoreButtonIsAvailable,
+          errorMessage: e.customErrorMessage,
         );
       }
     }
   }
 
   void restoreButtonAvailableCheck() {
-    print("длтна номера телефона ${phoneNumber.length}" );
     if (phoneNumber.length == 10) {
       restoreButtonIsAvailable = true;
     } else {

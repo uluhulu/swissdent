@@ -358,8 +358,6 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
       ),
     );
 
-    print("полученный номер $phoneNumber");
-
     BlocProvider.of<GetCodeScreenBloc>(context).add(
       PhoneUpdateEvent(phoneNumber),
     );

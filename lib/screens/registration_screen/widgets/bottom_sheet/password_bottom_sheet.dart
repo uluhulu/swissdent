@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
@@ -61,6 +62,9 @@ class _PasswordBottomSheetState extends State<PasswordBottomSheet> {
           if (state is NavigateNext) {
             navigateToNextScreen();
           }
+          if (state is PaswordNotConfirmed) {
+            _showErrorSnackBar(context, state.errorMessage);
+          }
         },
         builder: (BuildContext context, state) {
           return Padding(
@@ -104,6 +108,18 @@ class _PasswordBottomSheetState extends State<PasswordBottomSheet> {
             ),
           );
         },
+      ),
+    );
+  }
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: errorSnackbarColor,
+        content: Text(
+          errorMessage,
+          style: semiBold17WhiteStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

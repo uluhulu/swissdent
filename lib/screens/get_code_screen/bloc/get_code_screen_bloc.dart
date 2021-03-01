@@ -221,7 +221,6 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is PhoneUpdateEvent) {
       phoneNumber = event.phoneNumber;
-      print("номер обновлен $phoneNumber");
       yield UpdateNumberState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,

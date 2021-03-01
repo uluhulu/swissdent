@@ -18,7 +18,6 @@ class ApiManager {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) {
-          print("запрос ${options.path}");
           return options;
         },
         onResponse: (Response response) {
@@ -140,7 +139,6 @@ class ApiManager {
       Map<String, dynamic> headers = {};
 
       String token = await _readToken();
-      print("токен $token");
       if (token != null) {
         headers['Authorization'] = "Bearer " + token;
       }

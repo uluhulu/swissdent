@@ -11,7 +11,7 @@ class UserInfoRepository {
   ///Получение информации о пользователе
   Future<UserInfoResponse> getUserInfo() async {
     final response = await apiManager.get(userInfoUrlTest);
-
+    print('${UserInfoResponse.fromJson(response.result).email}');
     return UserInfoResponse.fromJson(response.result);
   }
 }

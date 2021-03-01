@@ -3,6 +3,7 @@ import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/get_code_screen/get_code_screen.dart';
 import 'package:swissdent/screens/log_in_screen/log_in_screen.dart';
 import 'package:swissdent/screens/main_menu_screen/main_menu_screen.dart';
+import 'package:swissdent/screens/registration_screen/registration_screen.dart';
 
 void main() {
   initDi();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: GetCodeScreen(),
+        home: MainMenuScreen(),
         // home: LogInScreen(),
       ),
     );

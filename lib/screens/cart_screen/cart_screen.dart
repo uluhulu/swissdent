@@ -73,7 +73,6 @@ class _CartScreenState extends State<CartScreen> {
           productAmount: 2,
           photoPath: 'https://cdn1.ozone.ru/s3/multimedia-5/6027797585.jpg',
           onMinusTap: (amount) {
-            print('ass');
             BlocProvider.of<CartScreenBloc>(context).add(TapOnMinus(amount));
           },
           onPlusTap: (amount) {
