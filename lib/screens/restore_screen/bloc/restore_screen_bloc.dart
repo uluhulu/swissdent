@@ -3,12 +3,19 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_event.dart';
 import 'package:swissdent/screens/restore_screen/bloc/restore_screen_state.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
+import 'package:swissdent/constants/strings.dart';
 
 class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
   String phoneNumber = '';
   String password = '';
   bool restoreButtonIsAvailable = false;
+
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix(###)###-##-##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   final SignInInteractor signInInteractor;
 
@@ -27,7 +34,8 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
   Stream<RestoreScreenState> mapTypeNumberEvent(
     RestoreScreenEvent event,
   ) async* {
-    if (event is TypeNumberEvent) {
+    if (event is TypeNumberEvent){
+      print("номер на выходе ${event.number}");
       phoneNumber = event.number;
       restoreButtonAvailableCheck();
       yield RestoreScreenState(
@@ -41,9 +49,8 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
     RestoreScreenEvent event,
   ) async* {
     if (event is RestorePasswordEvent) {
-
       final restoreResponse = await signInInteractor
-          .restorePassword(maskFormatterForRequest.maskText(phoneNumber));
+          .restorePassword(formatter.maskText(phoneNumber));
       password = restoreResponse.code;
       print(password);
       // if (password.isNotEmpty) {
@@ -60,14 +67,15 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
       //   phoneNumber: phoneNumber,
       //   restoreButtonIsAvailable: restoreButtonIsAvailable,
       // );
-      yield  RestoreSucceedState(
-               phoneNumber: phoneNumber,
-               restoreButtonIsAvailable: restoreButtonIsAvailable,
-             );
+      yield RestoreSucceedState(
+        phoneNumber: phoneNumber,
+        restoreButtonIsAvailable: restoreButtonIsAvailable,
+      );
     }
   }
 
   void restoreButtonAvailableCheck() {
+    print("длтна номера телефона ${phoneNumber.length}" );
     if (phoneNumber.length == 10) {
       restoreButtonIsAvailable = true;
     } else {

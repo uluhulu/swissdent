@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/paths.dart';
 import 'package:swissdent/constants/strings.dart';
@@ -18,8 +19,6 @@ import 'package:swissdent/screens/log_in_screen/widget/navigate_to_registration_
 import 'package:swissdent/screens/main_menu_screen/main_menu_screen.dart';
 import 'package:swissdent/screens/registration_screen/widgets/registration_social_icon.dart';
 import 'package:swissdent/screens/restore_screen/restore_screen.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
-import 'package:swissdent/util/mask_formatter_for_ui.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/widget/registration_background/registration_wave.dart';
@@ -39,6 +38,14 @@ class _LogInScreenState extends State<LogInScreen> {
 
   LogInScreenBloc bloc;
   TextEditingController numberController;
+
+
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix ### ### ## ##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   @override
   void initState() {
@@ -69,9 +76,9 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void initNumberController() {
     numberController =
-        TextEditingController(text: maskFormatterForUi.maskText('$numPrefix${''}'));
+        TextEditingController(text: formatter.maskText('$numPrefix${''}'));
     numberController.addListener(() {
-      sentTypeNumberEvent(maskFormatterForUi.unmaskText(numberController.text));
+      sentTypeNumberEvent(formatter.unmaskText(numberController.text));
       if (numberController.text.isEmpty) {
         numberController.value = numberController.value.copyWith(
           text: numPrefix,
@@ -164,7 +171,6 @@ class _LogInScreenState extends State<LogInScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
-            // defaultText: state.phoneNumber,
             customController: numberController,
             focusNode: phone,
             onSubmitted: (text) {
@@ -337,6 +343,6 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void _updateNumberController(UpdateNumberState state) {
     numberController.text =
-        maskFormatterForUi.maskText('$numPrefix${state.phoneNumber}');
+        formatter.maskText('$numPrefix${state.phoneNumber}');
   }
 }

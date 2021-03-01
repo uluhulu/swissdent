@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_state.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 
 class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   String phoneNumber = '';
@@ -23,6 +24,13 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   final int _phoneNumberMaxLength = 11;
   final int _phoneNumberLengthWithoutPrefix = 10;
   final SignInInteractor signInInteractor;
+
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix(###)###-##-##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   GetCodeScreenBloc({this.signInInteractor})
       : super(GetCodeScreenState(
@@ -81,7 +89,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         phoneNumber: phoneNumber,
       );
       final registerResponse =
-          await signInInteractor.register(maskFormatterForRequest.maskText(phoneNumber));
+          await signInInteractor.register(formatter.maskText(phoneNumber));
       smsCode = registerResponse.code;
       print(smsCode);
       timerAvaliable = true;
@@ -168,10 +176,10 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         phoneNumber: phoneNumber,
       );
       final confirmResponse = await signInInteractor.confirmCode(
-          maskFormatterForRequest.maskText(phoneNumber), smsCode);
+          formatter.maskText(phoneNumber), smsCode);
       if (confirmResponse) {
         final loginResponse = await signInInteractor.authorization(
-            maskFormatterForRequest.maskText(phoneNumber), smsCode);
+            formatter.maskText(phoneNumber), smsCode);
         if (loginResponse) {
           add(NavigateNextRegistrationScreenEvent());
         } else {

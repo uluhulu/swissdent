@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/constants/strings.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
-import 'package:swissdent/util/mask_formatter_for_ui.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 
 class SwissdentNumTextField extends StatefulWidget {
@@ -30,10 +29,17 @@ class SwissdentNumTextField extends StatefulWidget {
 class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
   TextEditingController controller;
 
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix ### ### ## ##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
+
   @override
   void initState() {
-    initController();
     super.initState();
+    initController();
   }
 
   @override
@@ -45,9 +51,9 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
 
   void initController() {
     controller = TextEditingController(
-        text: maskFormatterForUi.maskText('$numPrefix${widget.defaultText}'));
+        text: formatter.maskText('$numPrefix${widget.defaultText}'));
     controller.addListener(() {
-      widget.onNumberType(maskFormatterForUi.unmaskText(controller.text));
+      widget.onNumberType(formatter.unmaskText(controller.text));
       if (controller.text.isEmpty) {
         controller.value = controller.value.copyWith(
           text: numPrefix,
@@ -65,10 +71,8 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
       focusNode: widget.focusNode ?? FocusNode(),
       onSubmitted: widget.onSubmitted ?? (text) {},
       maxLength: 16,
-      formatter: maskFormatterForUi,
-      controller: widget.customController != null
-          ? widget.customController
-          : controller,
+      formatter: formatter,
+      controller: widget.customController ?? controller,
       suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
       readOnly: widget.readOnly,

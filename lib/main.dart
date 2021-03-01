@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: GetCodeScreen(),
+        home: LogInScreen(),
         // home: LogInScreen(),
       ),
     );

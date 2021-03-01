@@ -98,9 +98,9 @@ class _RestoreScreenState extends State<RestoreScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
-
             onNumberType: (text) {
-              sendTypeNumberEvent("$text", context);
+              print("номер на входе  1 $text");
+              sendTypeNumberEvent(text, context);
             },
           ),
         ),
@@ -135,6 +135,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
   }
 
   void sendTypeNumberEvent(String number, BuildContext context) {
+    print("номер на входе $number");
     BlocProvider.of<RestoreScreenBloc>(context).add(TypeNumberEvent(number));
   }
 

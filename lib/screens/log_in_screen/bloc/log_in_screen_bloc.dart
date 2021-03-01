@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/log_in_screen/bloc/log_in_screen_event.dart';
 import 'package:swissdent/screens/log_in_screen/bloc/log_in_screen_state.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 
 class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
   String phoneNumber = '';
@@ -11,6 +12,13 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
   bool logInButtonIsAvailable = false;
 
   final SignInInteractor signInInteractor;
+
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix(###)###-##-##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   LogInScreenBloc({this.signInInteractor})
       : super(LogInScreenState(logInButtonIsAvailable: false));
@@ -52,7 +60,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
         logInButtonIsAvailable: logInButtonIsAvailable,
       );
       final logInResponse = await signInInteractor.authorization(
-          maskFormatterForRequest.maskText(phoneNumber), password);
+          formatter.maskText(phoneNumber), password);
       if (logInResponse) {
         yield NavigateMainMenuScreenState(
           logInButtonIsAvailable: logInButtonIsAvailable,

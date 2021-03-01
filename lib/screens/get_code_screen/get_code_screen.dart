@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/constants/colors.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/constants/styles.dart';
@@ -11,8 +12,7 @@ import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dar
 import 'package:swissdent/screens/get_code_screen/widget/restore_code_title.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
 import 'package:swissdent/screens/restore_screen/restore_screen.dart';
-import 'package:swissdent/util/mask_formatter_for_request.dart';
-import 'package:swissdent/util/mask_formatter_for_ui.dart';
+import 'package:swissdent/util/mask_formatter.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
@@ -40,6 +40,13 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
 
   TextEditingController numberController;
 
+  final formatter = MaskTextInputFormatter(
+    mask: '$numPrefix ### ### ## ##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
+
   @override
   void initState() {
     // TODO: implement initState
@@ -66,9 +73,9 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
 
   void initNumberController() {
     numberController =
-        TextEditingController(text: maskFormatterForUi.maskText('$numPrefix${''}'));
+        TextEditingController(text: formatter.maskText('$numPrefix${''}'));
     numberController.addListener(() {
-      sendTypeNumberEvent(maskFormatterForUi.unmaskText(numberController.text));
+      sendTypeNumberEvent(formatter.unmaskText(numberController.text));
       if (numberController.text.isEmpty) {
         numberController.value = numberController.value.copyWith(
           text: numPrefix,
@@ -286,6 +293,6 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
 
   void _updateNumberController(UpdateNumberState state) {
     numberController.text =
-        maskFormatterForUi.maskText('$numPrefix${state.phoneNumber}');
+        formatter.maskText('$numPrefix${state.phoneNumber}');
   }
 }
