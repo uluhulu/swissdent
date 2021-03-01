@@ -30,6 +30,7 @@ class NavigateNextRegistrationScreenState extends GetCodeScreenState {
         );
 }
 
+
 class ErrorCodeState extends GetCodeScreenState {
   final String errorMessage;
 
