@@ -52,6 +52,7 @@ class NavigateRestoreScreenState extends GetCodeScreenState {
         );
 }
 
+
 class ErrorCodeState extends GetCodeScreenState {
   final String errorMessage;
 
