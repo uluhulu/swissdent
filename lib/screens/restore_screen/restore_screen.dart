@@ -56,7 +56,8 @@ class _RestoreScreenState extends State<RestoreScreen> {
     return BlocConsumer<RestoreScreenBloc, RestoreScreenState>(
       listener: (BuildContext context, state) {
         if (state is RestoreSucceedState){
-          Navigator.of(context).pop();
+          print("номер телефона ${state.phoneNumber}");
+          Navigator.of(context).pop<String>(state.phoneNumber);
         }
           if (state is RestoreNotSucceedState) {
           print("Что-то пошло не так, номер нашей тех. поддержки ХХХХХ");
@@ -97,6 +98,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
+
             onNumberType: (text) {
               sendTypeNumberEvent("$text", context);
             },

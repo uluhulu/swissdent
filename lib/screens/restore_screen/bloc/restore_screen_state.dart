@@ -4,7 +4,8 @@ class RestoreScreenState{
   RestoreScreenState({this.restoreButtonIsAvailable});
 }
 class RestoreSucceedState extends RestoreScreenState{
-  RestoreSucceedState({
+  final String phoneNumber;
+  RestoreSucceedState( {this.phoneNumber,
     bool restoreButtonIsAvailable,
   }) : super(
     restoreButtonIsAvailable: restoreButtonIsAvailable,

@@ -13,3 +13,8 @@ class TapOnLogInButtonEvent extends LogInScreenEvent{}
 class NavigateMainMenuScreenEvent extends LogInScreenEvent{}
 class NavigateRegistrationScreenEvent extends LogInScreenEvent{}
 class NavigateRestoreScreenEvent extends LogInScreenEvent{}
+class PhoneUpdateEvent extends LogInScreenEvent{
+  final String phoneNumber;
+
+  PhoneUpdateEvent(this.phoneNumber);
+}

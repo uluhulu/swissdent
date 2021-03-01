@@ -3,7 +3,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
 import 'package:swissdent/screens/log_in_screen/bloc/log_in_screen_event.dart';
 import 'package:swissdent/screens/log_in_screen/bloc/log_in_screen_state.dart';
-import 'package:swissdent/util/mask_formatter.dart';
+import 'package:swissdent/util/mask_formatter_for_request.dart';
 
 class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
   String phoneNumber = '';
@@ -23,6 +23,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     yield* mapNavigateMainMenuScreenEvent(event);
     yield* mapNavigateRegistrationScreenEvent(event);
     yield* mapNavigateRestoreScreenEvent(event);
+    yield* mapUpdatePhoneEvent(event);
   }
 
   Stream<LogInScreenState> mapTypeNumberEvent(LogInScreenEvent event) async* {
@@ -36,7 +37,10 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     if (event is TypePasswordEvent) {
       password = event.password;
       logInButtonIsAvailableCheck();
-      yield LogInScreenState(logInButtonIsAvailable: logInButtonIsAvailable);
+      yield LogInScreenState(
+        logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
+      );
     }
   }
 
@@ -48,7 +52,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
         logInButtonIsAvailable: logInButtonIsAvailable,
       );
       final logInResponse = await signInInteractor.authorization(
-          maskFormatter.maskText(phoneNumber), password);
+          maskFormatterForRequest.maskText(phoneNumber), password);
       if (logInResponse) {
         yield NavigateMainMenuScreenState(
           logInButtonIsAvailable: logInButtonIsAvailable,
@@ -57,6 +61,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
         logInButtonIsAvailable = true;
         yield LogInScreenState(
           logInButtonIsAvailable: logInButtonIsAvailable,
+          phoneNumber: phoneNumber,
         );
         print('ошибка запроса логина');
       }
@@ -68,6 +73,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     if (event is NavigateMainMenuScreenEvent) {
       yield NavigateMainMenuScreenState(
         logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
       );
     }
   }
@@ -77,6 +83,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     if (event is NavigateRegistrationScreenEvent) {
       yield NavigateRegistrationScreenState(
         logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
       );
     }
   }
@@ -86,6 +93,20 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     if (event is NavigateRestoreScreenEvent) {
       yield NavigateRestoreScreenState(
         logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
+      );
+    }
+  }
+
+  Stream<LogInScreenState> mapUpdatePhoneEvent(
+    LogInScreenEvent event,
+  ) async* {
+    if (event is PhoneUpdateEvent) {
+      phoneNumber = event.phoneNumber;
+      print("номер обновлен $phoneNumber");
+      yield UpdateNumberState(
+        logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
       );
     }
   }

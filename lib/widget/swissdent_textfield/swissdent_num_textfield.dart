@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:swissdent/constants/strings.dart';
+import 'package:swissdent/util/mask_formatter_for_request.dart';
+import 'package:swissdent/util/mask_formatter_for_ui.dart';
 import 'package:swissdent/widget/swissdent_textfield/base/swissdent_text_field.dart';
 
 class SwissdentNumTextField extends StatefulWidget {
@@ -8,13 +11,16 @@ class SwissdentNumTextField extends StatefulWidget {
   final String defaultText;
   final FocusNode focusNode;
   final Function(String text) onSubmitted;
+  final TextEditingController customController;
 
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
     this.readOnly = false,
     this.defaultText = '',
-    this.focusNode, this.onSubmitted,
+    this.focusNode,
+    this.onSubmitted,
+    this.customController,
   }) : super(key: key);
 
   @override
@@ -22,24 +28,26 @@ class SwissdentNumTextField extends StatefulWidget {
 }
 
 class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
-  static final numPrefix = '+7';
-  final maskFormatter = new MaskTextInputFormatter(
-    mask: '$numPrefix ### ### ## ##',
-    filter: {
-      "#": RegExp(r'[0-9]'),
-    },
-  );
-
   TextEditingController controller;
 
   @override
   void initState() {
-    // TODO: implement initState
+    initController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
+
+  void initController() {
     controller = TextEditingController(
-        text: maskFormatter.maskText('$numPrefix${widget.defaultText}'));
+        text: maskFormatterForUi.maskText('$numPrefix${widget.defaultText}'));
     controller.addListener(() {
-      widget.onNumberType(maskFormatter.unmaskText(controller.text));
+      widget.onNumberType(maskFormatterForUi.unmaskText(controller.text));
       if (controller.text.isEmpty) {
         controller.value = controller.value.copyWith(
           text: numPrefix,
@@ -55,10 +63,12 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
   Widget build(BuildContext context) {
     return SwissdentTextField(
       focusNode: widget.focusNode ?? FocusNode(),
-      onSubmitted: widget.onSubmitted ?? (text){},
+      onSubmitted: widget.onSubmitted ?? (text) {},
       maxLength: 16,
-      formatter: maskFormatter,
-      controller: controller,
+      formatter: maskFormatterForUi,
+      controller: widget.customController != null
+          ? widget.customController
+          : controller,
       suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
       readOnly: widget.readOnly,

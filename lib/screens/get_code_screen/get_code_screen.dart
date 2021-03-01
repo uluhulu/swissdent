@@ -10,6 +10,9 @@ import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/widget/restore_code_title.dart';
 import 'package:swissdent/screens/registration_screen/registration_screen.dart';
+import 'package:swissdent/screens/restore_screen/restore_screen.dart';
+import 'package:swissdent/util/mask_formatter_for_request.dart';
+import 'package:swissdent/util/mask_formatter_for_ui.dart';
 import 'package:swissdent/util/route_builder.dart';
 import 'package:swissdent/widget/registration_background/gradient_background.dart';
 import 'package:swissdent/screens/get_code_screen/widget/registration_countdown.dart';
@@ -33,12 +36,18 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   FocusNode phone;
   FocusNode smsCode;
 
+  GetCodeScreenBloc bloc;
+
+  TextEditingController numberController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     phone = FocusNode();
     smsCode = FocusNode();
+    initBloc();
+    initNumberController();
   }
 
   @override
@@ -48,13 +57,34 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     phone.dispose();
     smsCode.dispose();
   }
+
+  void initBloc() {
+    bloc = GetCodeScreenBloc(
+      signInInteractor: getIt<SignInInteractor>(),
+    );
+  }
+
+  void initNumberController() {
+    numberController =
+        TextEditingController(text: maskFormatterForUi.maskText('$numPrefix${''}'));
+    numberController.addListener(() {
+      sendTypeNumberEvent(maskFormatterForUi.unmaskText(numberController.text));
+      if (numberController.text.isEmpty) {
+        numberController.value = numberController.value.copyWith(
+          text: numPrefix,
+          selection: TextSelection.fromPosition(
+            TextPosition(offset: numPrefix.length),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return GetCodeScreenBloc(
-          signInInteractor: getIt<SignInInteractor>(),
-        );
+        return bloc;
       },
       child: Scaffold(
         body: Stack(
@@ -69,7 +99,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             ),
             Center(
               child: SingleChildScrollView(
-                child: _buildBody(),
+                child: _buildBody(context),
               ),
             ),
           ],
@@ -78,11 +108,19 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
-        if (state is NavigateNextRegistrationScreenState)
-          _navigateToNextRegistrationScreen();
+        if (state is NavigateNextRegistrationScreenState) {
+          _navigateToNextRegistrationScreen(context,state.phoneNumber);
+        }
+        if (state is NavigateRestoreScreenState)
+          _navigateToRestoreScreen(
+            context,
+          );
+        if (state is UpdateNumberState) {
+          _updateNumberController(state);
+        }
       },
       builder: (BuildContext context, state) {
         return Column(
@@ -96,14 +134,13 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             ),
             SizedBox(height: 80),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
+                defaultText: state.phoneNumber,
                 focusNode: phone,
-                onSubmitted: (text){
+                customController: numberController,
+                onSubmitted: (text) {
                   onSubmitted(context, smsCode);
-                },
-                onNumberType: (text) {
-                  sendTypeNumberEvent(context, "$text");
                 },
               ),
             ),
@@ -112,7 +149,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentSmsCodeTextField(
                 focusNode: smsCode,
-                onSubmitted: (text){
+                onSubmitted: (text) {
                   onSubmitted(context, smsCode);
                 },
                 isVisible: state.smsCodeIsAvaliable,
@@ -161,6 +198,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: RestoreCodeTitle(
                 onTap: () {
+                  sendNavigateRestoreScreenEvent(context);
                 },
               ),
             ),
@@ -169,21 +207,23 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),
             ),
-            SizedBox(height: 152,)
+            SizedBox(
+              height: 152,
+            )
           ],
         );
       },
     );
   }
+
   void onSubmitted(BuildContext context, FocusNode nextFocus) {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
   void sendTypeNumberEvent(
-    BuildContext context,
     String number,
   ) {
-    BlocProvider.of<GetCodeScreenBloc>(context).add(
+    bloc.add(
       TypeNumberEvent(number),
     );
   }
@@ -211,9 +251,41 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     BlocProvider.of<GetCodeScreenBloc>(context).add(ConfirmCodeEvent());
   }
 
-  void _navigateToNextRegistrationScreen() {
+  void sendNavigateRestoreScreenEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<GetCodeScreenBloc>(context)
+        .add(NavigateRestoreScreenEvent());
+  }
+
+  void _navigateToNextRegistrationScreen(BuildContext context, String phoneNumber) {
     ///confirm code event
-    Navigator.of(context)
-        .pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
+    Navigator.of(context).push<String>(
+      buildRoute<String>(
+        RegistrationScreen(),
+      ),
+    );
+  }
+
+  void _navigateToRestoreScreen(
+    BuildContext context,
+  ) async {
+    ///confirm code event
+    final phoneNumber = await Navigator.of(context).push<String>(
+      buildRoute<String>(
+        RestoreScreen(),
+      ),
+    );
+
+    print("полученный номер $phoneNumber");
+
+    BlocProvider.of<GetCodeScreenBloc>(context).add(
+      PhoneUpdateEvent(phoneNumber),
+    );
+  }
+
+  void _updateNumberController(UpdateNumberState state) {
+    numberController.text =
+        maskFormatterForUi.maskText('$numPrefix${state.phoneNumber}');
   }
 }

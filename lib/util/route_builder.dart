@@ -4,16 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///Native route builder
-Route buildRoute(Widget screen) {
+Route<T> buildRoute<T>(Widget screen) {
   if (Platform.isIOS) {
-    return CupertinoPageRoute(
+    return CupertinoPageRoute<T>(
       builder: (context) {
         return screen;
       },
     );
   }
 
-  return MaterialPageRoute(
+  return MaterialPageRoute<T>(
     builder: (context) {
       return screen;
     },
