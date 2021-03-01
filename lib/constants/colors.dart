@@ -43,6 +43,7 @@ final borderColor = palete['gray3'];
 final userMessageColor = palete['alice_blue'];
 final adminMessageColor = palete['solitude'];
 final sendButtonColor = palete['dark'];
+final errorSnackbarColor = palete['alarm'];
 
 final palete = {
   'alarm': Color(0xffEC2424),

@@ -81,8 +81,13 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
   Widget _buildBody() {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
-        if (state is NavigateNextRegistrationScreenState)
+        if (state is NavigateNextRegistrationScreenState) {
           _navigateToNextRegistrationScreen();
+        }
+
+        if (state is ErrorCodeState) {
+          _showErrorSnackBar(context, state.errorMessage);
+        }
       },
       builder: (BuildContext context, state) {
         return Column(
@@ -99,7 +104,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentNumTextField(
                 focusNode: phone,
-                onSubmitted: (text){
+                onSubmitted: (text) {
                   onSubmitted(context, smsCode);
                 },
                 onNumberType: (text) {
@@ -112,7 +117,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: SwissdentSmsCodeTextField(
                 focusNode: smsCode,
-                onSubmitted: (text){
+                onSubmitted: (text) {
                   onSubmitted(context, smsCode);
                 },
                 isVisible: state.smsCodeIsAvaliable,
@@ -160,8 +165,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: RestoreCodeTitle(
-                onTap: () {
-                },
+                onTap: () {},
               ),
             ),
             SizedBox(height: 80),
@@ -169,12 +173,15 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RegistrationTermsOfUseText(),
             ),
-            SizedBox(height: 152,)
+            SizedBox(
+              height: 152,
+            )
           ],
         );
       },
     );
   }
+
   void onSubmitted(BuildContext context, FocusNode nextFocus) {
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -215,5 +222,18 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     ///confirm code event
     Navigator.of(context)
         .pushAndRemoveUntil(buildRoute(RegistrationScreen()), (route) => false);
+  }
+
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: errorSnackbarColor,
+        content: Text(
+          errorMessage,
+          style: semiBold17WhiteStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 }
