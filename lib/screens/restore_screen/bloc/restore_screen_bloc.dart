@@ -63,14 +63,6 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
           restoreButtonIsAvailable: restoreButtonIsAvailable,
         );
       }
-      yield RestoreSucceedState(
-        phoneNumber: phoneNumber,
-        restoreButtonIsAvailable: restoreButtonIsAvailable,
-      );
-      yield RestoreSucceedState(
-        phoneNumber: phoneNumber,
-        restoreButtonIsAvailable: restoreButtonIsAvailable,
-      );
     }
   }
 

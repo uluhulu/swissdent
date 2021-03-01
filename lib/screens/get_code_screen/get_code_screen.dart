@@ -119,110 +119,166 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
         if (state is NavigateNextRegistrationScreenState) {
-          _navigateToNextRegistrationScreen(context,state.phoneNumber);
+          _navigateToNextRegistrationScreen(state.phoneNumber);
         }
-        if (state is NavigateRestoreScreenState)
-          _navigateToRestoreScreen(
-            context,
-          );
-        if (state is UpdateNumberState) {
-          _updateNumberController(state);
+        if (state is NavigateRestoreScreenState) {
+          _navigateToRestoreScreen(context);
+        }
+
+        if (state is ErrorCodeState) {
+          _showErrorSnackBar(context, state.errorMessage);
         }
       },
       builder: (BuildContext context, state) {
         return Column(
           children: [
-            SizedBox(height: 124),
-            RegistrationTitle(),
-            SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23.0),
-              child: RegistrationDescription(),
-            ),
-            SizedBox(height: 80),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.0),
-              child: SwissdentNumTextField(
-                defaultText: state.phoneNumber,
-                focusNode: phone,
-                customController: numberController,
-                onSubmitted: (text) {
-                  onSubmitted(context, smsCode);
-                },
-                onNumberType: (text) {
-                  sendTypeNumberEvent( "$text");
-                },
-              ),
-            ),
-            SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: SwissdentSmsCodeTextField(
-                focusNode: smsCode,
-                onSubmitted: (text) {
-                  onSubmitted(context, smsCode);
-                },
-                isVisible: state.smsCodeIsAvaliable,
-                onCodeType: (text) {
-                  sendTypeSmsCodeEvent(context, "$text");
-                },
-              ),
-            ),
-            SizedBox(height: 8),
-            Opacity(
-              opacity: state.timerAvaliable ? 1 : 0,
-              child: RegistrationCountdown(timerCount: state.seconds),
-            ),
-            SizedBox(height: 11),
+            _buildRegistrationTitle(),
+            _buildTextFields(context, state),
+            _buildRegistrationCountDown(context, state),
             if (state.nextButtonIsVisible)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 102.0),
-                child: SwissdentButton(
-                  width: 170,
-                  buttonColor: codeButtonColor,
-                  buttonText: Text(
-                    goNextText,
-                    style: semiBold17WhiteStyle,
-                  ),
-                  isAvaliable: state.nextButtonIsVisible,
-                  onTap: () {
-                    sendConfirmCodeEvent(context);
-                  },
-                ),
-              )
+              _buildNextButton(context, state)
             else
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 102.0),
-                child: SwissdentButton(
-                  width: 170,
-                  buttonColor: codeButtonColor,
-                  buttonText: Text(getCodeText, style: semiBold17WhiteStyle),
-                  isAvaliable: state.getCodeButtonIsAvaliable,
-                  onTap: () {
-                    sendGetCodeEvent(context);
-                  },
-                ),
-              ),
-            SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: RestoreCodeTitle(
-                onTap: () {
-                  sendNavigateRestoreScreenEvent(context);
-                },
-              ),
-            ),
-            SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: RegistrationTermsOfUseText(),
-            ),
-            SizedBox(
-              height: 152,
-            )
+              _buildGetCodeButton(context, state),
+            _buildNavigateRestoreScreenTitle(context, state),
+            _buildTermsOfUseTitle(context, state),
           ],
         );
       },
+    );
+  }
+
+  Widget _buildRegistrationTitle() {
+    return Column(
+      children: [
+        SizedBox(height: 124),
+        RegistrationTitle(),
+        SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 23.0),
+          child: RegistrationDescription(),
+        ),
+        SizedBox(height: 80),
+      ],
+    );
+  }
+
+  Widget _buildTextFields(BuildContext context, state) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40.0),
+          child: SwissdentNumTextField(
+            defaultText: state.phoneNumber,
+            focusNode: phone,
+            customController: numberController,
+            onSubmitted: (text) {
+              onSubmitted(context, smsCode);
+            },
+            onNumberType: (text) {
+              sendTypeNumberEvent("$text");
+            },
+          ),
+        ),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: SwissdentSmsCodeTextField(
+            focusNode: smsCode,
+            onSubmitted: (text) {
+              onSubmitted(context, smsCode);
+            },
+            isVisible: state.smsCodeIsAvaliable,
+            onCodeType: (text) {
+              sendTypeSmsCodeEvent(context, "$text");
+            },
+          ),
+        ),
+        SizedBox(height: 8),
+      ],
+    );
+  }
+
+  Widget _buildRegistrationCountDown(BuildContext context, state) {
+    return Column(
+      children: [
+        Opacity(
+          opacity: state.timerAvaliable ? 1 : 0,
+          child: RegistrationCountdown(timerCount: state.seconds),
+        ),
+        SizedBox(height: 11),
+      ],
+    );
+  }
+
+  Widget _buildNextButton(BuildContext context, state) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 102.0),
+          child: SwissdentButton(
+            width: 170,
+            buttonColor: codeButtonColor,
+            buttonText: Text(
+              goNextText,
+              style: semiBold17WhiteStyle,
+            ),
+            isAvaliable: state.nextButtonIsVisible,
+            onTap: () {
+              sendConfirmCodeEvent(context);
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildGetCodeButton(BuildContext context, state) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 102.0),
+          child: SwissdentButton(
+            width: 170,
+            buttonColor: codeButtonColor,
+            buttonText: Text(getCodeText, style: semiBold17WhiteStyle),
+            isAvaliable: state.getCodeButtonIsAvaliable,
+            onTap: () {
+              sendGetCodeEvent(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNavigateRestoreScreenTitle(BuildContext context, state) {
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: RestoreCodeTitle(
+            onTap: () {
+              sendNavigateRestoreScreenEvent(context);
+            },
+          ),
+        ),
+        SizedBox(height: 80),
+      ],
+    );
+  }
+
+  Widget _buildTermsOfUseTitle(BuildContext context, state) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: RegistrationTermsOfUseText(),
+        ),
+        SizedBox(
+          height: 152,
+        )
+      ],
     );
   }
 
@@ -268,11 +324,26 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
         .add(NavigateRestoreScreenEvent());
   }
 
-  void _navigateToNextRegistrationScreen(BuildContext context, String phoneNumber) {
+  void _navigateToNextRegistrationScreen(String phoneNumber) {
     ///confirm code event
-    Navigator.of(context).push<String>(
-      buildRoute<String>(
-        RegistrationScreen(),
+    Navigator.of(context).pushAndRemoveUntil(
+        buildRoute(
+          RegistrationScreen(
+            phoneNumber: phoneNumber,
+          ),
+        ),
+        (route) => false);
+  }
+
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: errorSnackbarColor,
+        content: Text(
+          errorMessage,
+          style: semiBold17WhiteStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -292,10 +363,5 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     BlocProvider.of<GetCodeScreenBloc>(context).add(
       PhoneUpdateEvent(phoneNumber),
     );
-  }
-
-  void _updateNumberController(UpdateNumberState state) {
-    numberController.text =
-        formatter.maskText('$numPrefix${state.phoneNumber}');
   }
 }
