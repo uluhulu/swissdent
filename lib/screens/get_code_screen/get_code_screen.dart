@@ -115,7 +115,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody() {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
         if (state is NavigateNextRegistrationScreenState) {
@@ -148,6 +148,9 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                 customController: numberController,
                 onSubmitted: (text) {
                   onSubmitted(context, smsCode);
+                },
+                onNumberType: (text) {
+                  sendTypeNumberEvent(context, "$text");
                 },
               ),
             ),

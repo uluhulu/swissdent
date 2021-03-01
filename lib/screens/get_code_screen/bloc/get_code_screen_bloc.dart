@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:swissdent/constants/strings.dart';
 import 'package:swissdent/data/sign_in/interactor/sign_in_interactor.dart';
+import 'package:swissdent/managers/exception.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_event.dart';
 import 'package:swissdent/screens/get_code_screen/bloc/get_code_screen_state.dart';
 import 'package:swissdent/util/mask_formatter.dart';
@@ -21,8 +22,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   int _seconds = 45;
   final int _timerMaxTime = 45;
   final int _smsCodeMaxLength = 4;
-  final int _phoneNumberMaxLength = 11;
-  final int _phoneNumberLengthWithoutPrefix = 10;
+  final int _phoneNumberMaxLength = 10;
   final SignInInteractor signInInteractor;
 
   final formatter = MaskTextInputFormatter(
@@ -62,7 +62,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is TypeNumberEvent) {
       phoneNumber = event.number;
-      codeButtonAvaliableCheck();
+      checkVariables();
       yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
@@ -88,10 +88,21 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         nextButtonIsVisible: nextButtonIsVisible,
         phoneNumber: phoneNumber,
       );
-      final registerResponse =
-          await signInInteractor.register(formatter.maskText(phoneNumber));
-      smsCode = registerResponse.code;
-      print(smsCode);
+      try {
+        final registerResponse = await signInInteractor
+            .register(formatter.maskText(phoneNumber));
+        smsCode = registerResponse.code;
+        print(smsCode);
+      } on NetworkException catch (e) {
+        yield ErrorCodeState(
+          getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+          timerAvaliable: timerAvaliable,
+          seconds: _seconds,
+          smsCodeIsAvaliable: smsCodeIsAvaliable,
+          nextButtonIsVisible: nextButtonIsVisible,
+          errorMessage: e.customErrorMessage,
+        );
+      }
       timerAvaliable = true;
       startTimer();
     }
@@ -119,7 +130,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is TypeSmsCodeEvent) {
       smsCode = event.code;
-      smsCodeCheck();
+      checkVariables();
       yield GetCodeScreenState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,
@@ -175,9 +186,10 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         nextButtonIsVisible: nextButtonIsVisible,
         phoneNumber: phoneNumber,
       );
-      final confirmResponse = await signInInteractor.confirmCode(
-          formatter.maskText(phoneNumber), smsCode);
-      if (confirmResponse) {
+      try {
+        final confirmResponse = await signInInteractor.confirmCode(
+            formatter.maskText(phoneNumber), smsCode);
+
         final loginResponse = await signInInteractor.authorization(
             formatter.maskText(phoneNumber), smsCode);
         if (loginResponse) {
@@ -185,8 +197,17 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
         } else {
           yield ErrorLogInState();
         }
-      } else
-        yield ErrorConfirmCodeState();
+      } on NetworkException catch (e) {
+        checkVariables();
+        yield ErrorCodeState(
+          getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+          timerAvaliable: timerAvaliable,
+          seconds: _seconds,
+          smsCodeIsAvaliable: smsCodeIsAvaliable,
+          nextButtonIsVisible: nextButtonIsVisible,
+          errorMessage: e.customErrorMessage,
+        );
+      }
     }
 
     ///запрос подтверждения
@@ -212,31 +233,40 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
     }
   }
 
-  void smsCodeCheck() {
-    if (smsCode.length == _smsCodeMaxLength) {
-      ///todo запрос
-      ///если запрос ок
-      smsCodeIsAvaliable = true;
-      getCodeButtonIsAvaliable = false;
-      nextButtonIsVisible = true;
-    } else {
-      smsCodeIsAvaliable = false;
-      if (_seconds == _timerMaxTime &&
-          phoneNumber.length == _phoneNumberMaxLength) {
+  void checkVariables() {
+    if(phoneNumberIsValid()){
+      if(!timerAvaliable){
         getCodeButtonIsAvaliable = true;
+      }else{
+        getCodeButtonIsAvaliable = false;
       }
+
+      if(smsCodeIsValid()){
+        smsCodeIsAvaliable = true;
+        getCodeButtonIsAvaliable = false;
+        nextButtonIsVisible = true;
+      }else{
+        nextButtonIsVisible = false;
+        smsCodeIsAvaliable = false;
+      }
+    }else{
+      getCodeButtonIsAvaliable = false;
       nextButtonIsVisible = false;
     }
   }
 
-  /// Проверка активации кнопки "Получить код"
-  void codeButtonAvaliableCheck() {
-    if (phoneNumber.length == _phoneNumberLengthWithoutPrefix &&
-        timerAvaliable == false) {
-      getCodeButtonIsAvaliable = true;
-    } else {
-      getCodeButtonIsAvaliable = false;
+  bool phoneNumberIsValid() {
+    if (phoneNumber.length == _phoneNumberMaxLength) {
+      return true;
     }
+    return false;
+  }
+
+  bool smsCodeIsValid() {
+    if (smsCode.length == _smsCodeMaxLength) {
+      return true;
+    }
+    return false;
   }
 
   void startTimer() {
@@ -251,8 +281,8 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
           getCodeButtonIsAvaliable = true;
         } else {
           _seconds--;
-          // timerAvaliable = true;
-          // getCodeButtonIsAvaliable = false;
+          timerAvaliable = true;
+          getCodeButtonIsAvaliable = false;
         }
         add(UpdateTimerEvent(_seconds));
       },

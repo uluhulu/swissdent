@@ -52,8 +52,24 @@ class NavigateRestoreScreenState extends GetCodeScreenState {
         );
 }
 
-class ErrorConfirmCodeState extends GetCodeScreenState {}
+class ErrorCodeState extends GetCodeScreenState {
+  final String errorMessage;
 
+  ErrorCodeState({
+    bool getCodeButtonIsAvaliable,
+    bool timerAvaliable,
+    int seconds,
+    bool smsCodeIsAvaliable,
+    bool nextButtonIsVisible,
+    this.errorMessage,
+  }) : super(
+          getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
+          timerAvaliable: timerAvaliable,
+          seconds: seconds,
+          smsCodeIsAvaliable: smsCodeIsAvaliable,
+          nextButtonIsVisible: nextButtonIsVisible,
+        );
+}
 class ErrorLogInState extends GetCodeScreenState {}
 
 class UpdateNumberState extends GetCodeScreenState {
