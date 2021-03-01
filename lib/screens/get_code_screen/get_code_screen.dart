@@ -115,7 +115,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return BlocConsumer<GetCodeScreenBloc, GetCodeScreenState>(
       listener: (BuildContext context, state) {
         if (state is NavigateNextRegistrationScreenState) {
@@ -150,7 +150,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
                   onSubmitted(context, smsCode);
                 },
                 onNumberType: (text) {
-                  sendTypeNumberEvent(context, "$text");
+                  sendTypeNumberEvent( "$text");
                 },
               ),
             ),

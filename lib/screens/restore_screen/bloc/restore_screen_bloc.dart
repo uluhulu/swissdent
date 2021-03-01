@@ -53,20 +53,20 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
           .restorePassword(formatter.maskText(phoneNumber));
       password = restoreResponse.code;
       print(password);
-      // if (password.isNotEmpty) {
-      //   yield RestoreSucceedState(
-      //     phoneNumber: phoneNumber,
-      //     restoreButtonIsAvailable: restoreButtonIsAvailable,
-      //   );
-      // } else {
-      //   yield RestoreNotSucceedState(
-      //     restoreButtonIsAvailable: restoreButtonIsAvailable,
-      //   );
-      // }
-      // yield RestoreSucceedState(
-      //   phoneNumber: phoneNumber,
-      //   restoreButtonIsAvailable: restoreButtonIsAvailable,
-      // );
+      if (password.isNotEmpty) {
+        yield RestoreSucceedState(
+          phoneNumber: phoneNumber,
+          restoreButtonIsAvailable: restoreButtonIsAvailable,
+        );
+      } else {
+        yield RestoreNotSucceedState(
+          restoreButtonIsAvailable: restoreButtonIsAvailable,
+        );
+      }
+      yield RestoreSucceedState(
+        phoneNumber: phoneNumber,
+        restoreButtonIsAvailable: restoreButtonIsAvailable,
+      );
       yield RestoreSucceedState(
         phoneNumber: phoneNumber,
         restoreButtonIsAvailable: restoreButtonIsAvailable,
