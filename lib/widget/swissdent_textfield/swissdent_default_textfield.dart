@@ -37,8 +37,18 @@ class _SwissdentDefaultTextFieldState extends State<SwissdentDefaultTextField> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = TextEditingController(
-        text: widget.defaultText.isNotEmpty ? widget.defaultText : '');
+    initController();
+  }
+
+  @override
+  void didUpdateWidget(covariant SwissdentDefaultTextField oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    initController();
+  }
+
+  void initController(){
+    controller = TextEditingController(text: widget.defaultText ?? '');
     controller.addListener(() {
       widget.onType(controller.text);
     });

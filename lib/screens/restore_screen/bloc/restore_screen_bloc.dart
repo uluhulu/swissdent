@@ -39,6 +39,7 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
       phoneNumber = event.number;
       restoreButtonAvailableCheck();
       yield RestoreScreenState(
+        phoneNumber: phoneNumber,
         restoreButtonIsAvailable: restoreButtonIsAvailable,
       );
     }

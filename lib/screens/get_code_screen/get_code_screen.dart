@@ -170,7 +170,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
           child: SwissdentNumTextField(
             defaultText: state.phoneNumber,
             focusNode: phone,
-            customController: numberController,
+            // customController: numberController,
             onSubmitted: (text) {
               onSubmitted(context, smsCode);
             },

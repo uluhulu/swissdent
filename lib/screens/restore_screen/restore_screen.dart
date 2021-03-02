@@ -55,18 +55,18 @@ class _RestoreScreenState extends State<RestoreScreen> {
   Widget _buildBody(BuildContext context) {
     return BlocConsumer<RestoreScreenBloc, RestoreScreenState>(
       listener: (BuildContext context, state) {
-        if (state is RestoreSucceedState){
+        if (state is RestoreSucceedState) {
           Navigator.of(context).pop<String>(state.phoneNumber);
         }
-          if (state is RestoreNotSucceedState) {
-            _showErrorSnackBar(context, state.errorMessage);
+        if (state is RestoreNotSucceedState) {
+          _showErrorSnackBar(context, state.errorMessage);
         }
       },
       builder: (BuildContext context, state) {
         return Column(
           children: [
             _buildTitleAndDescription(),
-            _buildNumTextField(context),
+            _buildNumTextField(context, state),
             _buildRestoreButton(context, state),
           ],
         );
@@ -90,15 +90,16 @@ class _RestoreScreenState extends State<RestoreScreen> {
     );
   }
 
-  Widget _buildNumTextField(BuildContext context) {
+  Widget _buildNumTextField(BuildContext context, RestoreScreenState state,) {
     return Column(
       children: [
         SizedBox(height: 80),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
+            defaultText: state.phoneNumber,
             onNumberType: (text) {
-              sendTypeNumberEvent(text, context);
+              sendTypeNumberEvent("$text", context);
             },
           ),
         ),
@@ -131,6 +132,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
       ],
     );
   }
+
   void _showErrorSnackBar(BuildContext context, String errorMessage) {
     Scaffold.of(context).showSnackBar(
       SnackBar(

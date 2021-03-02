@@ -55,7 +55,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           if (state is ProductsNavigateState) _navigateToProductScreen();
           if (state is TeamNavigateState) _navigateToTeamScreen();
           if (state is HelpNavigateState) _navigateToHelpScreen();
-          if (state is ChatNavigateState) _navigateToHelpScreen();
         },
         builder: (BuildContext context, state) {
           return Column(
