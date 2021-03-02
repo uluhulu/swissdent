@@ -39,6 +39,7 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
   ) async* {
     if (event is RestoreScreenEvent) {
       restoreButtonAvailableCheck();
+
       yield RestoreScreenState(
         phoneNumber: phoneNumber,
         restoreButtonIsAvailable: restoreButtonIsAvailable,

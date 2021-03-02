@@ -40,13 +40,14 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
     initController();
   }
 
-  @override
-  void didUpdateWidget(covariant SwissdentNumTextField oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.defaultText != widget.defaultText) {
-      updateControllerText();
-    }
-  }
+  // @override
+  // void didUpdateWidget(covariant SwissdentNumTextField oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (oldWidget.defaultText != widget.defaultText) {
+  //     print("update");
+  //     updateControllerText();
+  //   }
+  // }
 
   void initController() {
     controller = TextEditingController(
@@ -69,10 +70,13 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
   }
 
   void updateControllerText() {
-    controller.value = controller.value.copyWith(
-      text: formatter.maskText('$numPrefix${widget.defaultText}',
-      ),
-    );
+    setState(() {
+      controller.value = controller.value.copyWith(
+        text: formatter.maskText(
+          '$numPrefix${widget.defaultText}',
+        ),
+      );
+    });
   }
 
   @override
@@ -82,7 +86,7 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
       onSubmitted: widget.onSubmitted ?? (text) {},
       maxLength: 16,
       formatter: formatter,
-      controller:  controller,
+      controller: controller,
       suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
       readOnly: widget.readOnly,

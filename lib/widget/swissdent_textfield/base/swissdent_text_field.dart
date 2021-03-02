@@ -83,7 +83,7 @@ class SwissdentTextField extends StatelessWidget {
                 maxLength: maxLength,
                 minLines: 1,
                 style: boldStyle,
-                controller: controller ?? TextEditingController(),
+                controller: controller,
                 inputFormatters: [if (formatter != null) formatter],
               ),
             ),
