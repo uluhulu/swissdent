@@ -51,9 +51,11 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     }
   }
 
+
   Stream<LogInScreenState> mapTypeNumberEvent(LogInScreenEvent event) async* {
     if (event is TypeNumberEvent) {
       phoneNumber = event.number;
+      print("type num $phoneNumber");
       yield LogInScreenState(logInButtonIsAvailable: logInButtonIsAvailable);
     }
   }
@@ -116,6 +118,7 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
   Stream<LogInScreenState> mapNavigateRestoreScreenEvent(
       LogInScreenEvent event) async* {
     if (event is NavigateRestoreScreenEvent) {
+      print("bloc num $phoneNumber");
       yield NavigateRestoreScreenState(
         logInButtonIsAvailable: logInButtonIsAvailable,
         phoneNumber: phoneNumber,

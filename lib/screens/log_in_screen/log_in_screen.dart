@@ -77,11 +77,16 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget _buildBody() {
     return BlocConsumer<LogInScreenBloc, LogInScreenState>(
       listener: (BuildContext context, state) {
-        if (state is NavigateMainMenuScreenState) _navigateToMainMenuScreen();
-        if (state is NavigateRegistrationScreenState)
+        if (state is NavigateMainMenuScreenState) {
+          _navigateToMainMenuScreen();
+        }
+        if (state is NavigateRegistrationScreenState) {
           _navigateToRegistrationScreen();
-        if (state is NavigateRestoreScreenState)
+        }
+
+        if (state is NavigateRestoreScreenState) {
           _navigateToRestoreScreen(context, state);
+        }
       },
       builder: (BuildContext context, LogInScreenState state) {
         return Column(
@@ -125,8 +130,7 @@ class _LogInScreenState extends State<LogInScreen> {
             defaultText: state.phoneNumber,
             focusNode: phone,
             onNumberType: (number) {
-              print("number $number");
-              // sentTypeNumberEvent(context, number);
+              sentTypeNumberEvent(context, number);
             },
             onSubmitted: (text) {
               onSubmitted(context, password);
@@ -247,7 +251,6 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   void sentTypeNumberEvent(BuildContext context, String phoneNumber) {
-    print("num $phoneNumber");
     BlocProvider.of<LogInScreenBloc>(context).add(TypeNumberEvent(phoneNumber));
   }
 
@@ -269,7 +272,6 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   void _navigateToMainMenuScreen() {
-    print('навигация в главное меню');
     Navigator.of(context)
         .pushAndRemoveUntil(buildRoute(MainMenuScreen()), (route) => false);
   }
@@ -281,7 +283,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void _navigateToRestoreScreen(
     BuildContext context,
-    LogInScreenState state,
+    NavigateRestoreScreenState state,
   ) async {
     final phoneNumber = await Navigator.of(context).push<String>(
       buildRoute<String>(

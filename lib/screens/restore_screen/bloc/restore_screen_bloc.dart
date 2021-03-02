@@ -23,7 +23,9 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
   RestoreScreenBloc({
     this.signInInteractor,
     this.phoneNumber,
-  }) : super(RestoreScreenState(restoreButtonIsAvailable: false));
+  }) : super(RestoreScreenState(restoreButtonIsAvailable: false)){
+    init();
+  }
 
   @override
   Stream<RestoreScreenState> mapEventToState(RestoreScreenEvent event) async* {

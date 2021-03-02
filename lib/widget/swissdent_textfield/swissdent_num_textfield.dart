@@ -10,16 +10,14 @@ class SwissdentNumTextField extends StatefulWidget {
   final String defaultText;
   final FocusNode focusNode;
   final Function(String text) onSubmitted;
-  final TextEditingController customController;
 
   const SwissdentNumTextField({
     Key key,
     this.onNumberType,
     this.readOnly = false,
-    this.defaultText = '',
+    this.defaultText,
     this.focusNode,
     this.onSubmitted,
-    this.customController,
   }) : super(key: key);
 
   @override
@@ -44,16 +42,10 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
 
   @override
   void didUpdateWidget(covariant SwissdentNumTextField oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    updateControllerText();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    controller.dispose();
+    if (oldWidget.defaultText != widget.defaultText) {
+      updateControllerText();
+    }
   }
 
   void initController() {
@@ -78,7 +70,8 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
 
   void updateControllerText() {
     controller.value = controller.value.copyWith(
-      text: formatter.maskText('$numPrefix${widget.defaultText}'),
+      text: formatter.maskText('$numPrefix${widget.defaultText}',
+      ),
     );
   }
 
@@ -89,7 +82,7 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
       onSubmitted: widget.onSubmitted ?? (text) {},
       maxLength: 16,
       formatter: formatter,
-      controller: widget.customController ?? controller,
+      controller:  controller,
       suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
       readOnly: widget.readOnly,
