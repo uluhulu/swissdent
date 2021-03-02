@@ -7,8 +7,16 @@ class UserInfoInteractor{
   final SignInRepository signInRepository;
 
   UserInfoInteractor({this.userInfoRepository,this.signInRepository,});
-
+  ///Получить информацию о пользователе
   Future<UserInfoResponse> getUserInfo() async{
     return userInfoRepository.getUserInfo();
+  }
+  ///Обновление информации о пользователе
+  Future<bool> updateUserInfo(String name, String surname, String email) async {
+    return signInRepository.updateUserData(name, surname, email);
+  }
+  ///Обновление пароля
+  Future<bool> updatePassword(String password) async {
+    return signInRepository.updatePassword(password);
   }
 }
