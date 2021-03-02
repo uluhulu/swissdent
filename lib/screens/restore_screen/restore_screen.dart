@@ -17,6 +17,13 @@ import 'package:swissdent/widget/swissdent_textfield/swissdent_num_textfield.dar
 
 ///restore password
 class RestoreScreen extends StatefulWidget {
+  final String phoneNumber;
+
+  const RestoreScreen({
+    Key key,
+    this.phoneNumber,
+  }) : super(key: key);
+
   @override
   _RestoreScreenState createState() => _RestoreScreenState();
 }
@@ -28,6 +35,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
       create: (BuildContext context) {
         return RestoreScreenBloc(
           signInInteractor: getIt<SignInInteractor>(),
+          phoneNumber: widget.phoneNumber,
         );
       },
       child: Scaffold(
@@ -62,7 +70,7 @@ class _RestoreScreenState extends State<RestoreScreen> {
           _showErrorSnackBar(context, state.errorMessage);
         }
       },
-      builder: (BuildContext context, state) {
+      builder: (BuildContext context, RestoreScreenState state) {
         return Column(
           children: [
             _buildTitleAndDescription(),
@@ -90,7 +98,10 @@ class _RestoreScreenState extends State<RestoreScreen> {
     );
   }
 
-  Widget _buildNumTextField(BuildContext context, RestoreScreenState state,) {
+  Widget _buildNumTextField(
+    BuildContext context,
+    RestoreScreenState state,
+  ) {
     return Column(
       children: [
         SizedBox(height: 80),

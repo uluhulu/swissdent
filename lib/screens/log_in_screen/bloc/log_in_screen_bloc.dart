@@ -21,10 +21,15 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
   );
 
   LogInScreenBloc({this.signInInteractor})
-      : super(LogInScreenState(logInButtonIsAvailable: false));
+      : super(LogInScreenState(
+          logInButtonIsAvailable: false,
+        )) {
+    init();
+  }
 
   @override
   Stream<LogInScreenState> mapEventToState(LogInScreenEvent event) async* {
+    yield* mapInitEvent(event);
     yield* mapTypeNumberEvent(event);
     yield* mapTypePasswordEvent(event);
     yield* mapTapOnLogInButtonEvent(event);
@@ -32,6 +37,18 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
     yield* mapNavigateRegistrationScreenEvent(event);
     yield* mapNavigateRestoreScreenEvent(event);
     yield* mapUpdatePhoneEvent(event);
+  }
+
+  Stream<LogInScreenState> mapInitEvent(
+    LogInScreenEvent event,
+  ) async* {
+    if (event is LoginScreenInitEvent) {
+      yield LogInScreenState(
+        logInButtonIsAvailable: logInButtonIsAvailable,
+        phoneNumber: phoneNumber,
+        password: password,
+      );
+    }
   }
 
   Stream<LogInScreenState> mapTypeNumberEvent(LogInScreenEvent event) async* {
@@ -104,6 +121,10 @@ class LogInScreenBloc extends Bloc<LogInScreenEvent, LogInScreenState> {
         phoneNumber: phoneNumber,
       );
     }
+  }
+
+  void init() {
+    add(LoginScreenInitEvent());
   }
 
   Stream<LogInScreenState> mapUpdatePhoneEvent(

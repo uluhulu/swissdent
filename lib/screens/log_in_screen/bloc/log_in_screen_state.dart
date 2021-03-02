@@ -1,8 +1,13 @@
 class LogInScreenState {
   final bool logInButtonIsAvailable;
   final String phoneNumber;
+  final String password;
 
-  LogInScreenState({this.phoneNumber, this.logInButtonIsAvailable});
+  LogInScreenState({
+    this.phoneNumber,
+    this.password,
+    this.logInButtonIsAvailable,
+  });
 }
 
 class NavigateMainMenuScreenState extends LogInScreenState {

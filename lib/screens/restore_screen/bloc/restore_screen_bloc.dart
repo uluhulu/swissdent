@@ -20,15 +20,28 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
 
   final SignInInteractor signInInteractor;
 
-  RestoreScreenBloc({this.signInInteractor})
-      : super(RestoreScreenState(
-          restoreButtonIsAvailable: false,
-        ));
+  RestoreScreenBloc({
+    this.signInInteractor,
+    this.phoneNumber,
+  }) : super(RestoreScreenState(restoreButtonIsAvailable: false));
 
   @override
   Stream<RestoreScreenState> mapEventToState(RestoreScreenEvent event) async* {
+    yield* mapInitEvent(event);
     yield* mapTypeNumberEvent(event);
     yield* mapRestorePasswordEvent(event);
+  }
+
+  Stream<RestoreScreenState> mapInitEvent(
+    RestoreScreenEvent event,
+  ) async* {
+    if (event is RestoreScreenEvent) {
+      restoreButtonAvailableCheck();
+      yield RestoreScreenState(
+        phoneNumber: phoneNumber,
+        restoreButtonIsAvailable: restoreButtonIsAvailable,
+      );
+    }
   }
 
   @override
@@ -66,6 +79,10 @@ class RestoreScreenBloc extends Bloc<RestoreScreenEvent, RestoreScreenState> {
         );
       }
     }
+  }
+
+  void init() {
+    add(RestoreScreenInitEvent());
   }
 
   void restoreButtonAvailableCheck() {

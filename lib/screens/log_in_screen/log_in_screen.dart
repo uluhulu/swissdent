@@ -36,65 +36,21 @@ class _LogInScreenState extends State<LogInScreen> {
   FocusNode phone;
   FocusNode password;
 
-  LogInScreenBloc bloc;
-  TextEditingController numberController;
-
-
-  final formatter = MaskTextInputFormatter(
-    mask: '$numPrefix ### ### ## ##',
-    filter: {
-      "#": RegExp(r'[0-9]'),
-    },
-  );
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     phone = FocusNode();
     password = FocusNode();
-    initBloc();
-    initNumberController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    phone.dispose();
-    password.dispose();
-    if(numberController != null){
-      numberController.dispose();
-    }
-  }
-
-  void initBloc() {
-    bloc = LogInScreenBloc(
-      signInInteractor: getIt<SignInInteractor>(),
-    );
-  }
-
-  void initNumberController() {
-    numberController =
-        TextEditingController(text: formatter.maskText('$numPrefix${''}'));
-    numberController.addListener(() {
-      sentTypeNumberEvent(formatter.unmaskText(numberController.text));
-      if (numberController.text.isEmpty) {
-        numberController.value = numberController.value.copyWith(
-          text: numPrefix,
-          selection: TextSelection.fromPosition(
-            TextPosition(offset: numPrefix.length),
-          ),
-        );
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LogInScreenBloc>(
       create: (BuildContext context) {
-        return bloc;
+        return LogInScreenBloc(
+          signInInteractor: getIt<SignInInteractor>(),
+        );
       },
       child: Scaffold(
         body: Stack(
@@ -109,7 +65,7 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
             Center(
               child: SingleChildScrollView(
-                child: _buildBody(context),
+                child: _buildBody(),
               ),
             )
           ],
@@ -118,21 +74,16 @@ class _LogInScreenState extends State<LogInScreen> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody() {
     return BlocConsumer<LogInScreenBloc, LogInScreenState>(
       listener: (BuildContext context, state) {
         if (state is NavigateMainMenuScreenState) _navigateToMainMenuScreen();
         if (state is NavigateRegistrationScreenState)
           _navigateToRegistrationScreen();
         if (state is NavigateRestoreScreenState)
-          _navigateToRestoreScreen(
-            context,
-          );
-        if (state is UpdateNumberState) {
-          _updateNumberController(state);
-        }
+          _navigateToRestoreScreen(context, state);
       },
-      builder: (BuildContext context, state) {
+      builder: (BuildContext context, LogInScreenState state) {
         return Column(
           children: [
             _logInTitle(),
@@ -164,15 +115,19 @@ class _LogInScreenState extends State<LogInScreen> {
     );
   }
 
-  Widget _buildTextFields(BuildContext context, state) {
+  Widget _buildTextFields(BuildContext context, LogInScreenState state) {
     return Column(
       children: [
         SizedBox(height: 60),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
-            customController: numberController,
+            defaultText: state.phoneNumber,
             focusNode: phone,
+            onNumberType: (number) {
+              print("number $number");
+              // sentTypeNumberEvent(context, number);
+            },
             onSubmitted: (text) {
               onSubmitted(context, password);
             },
@@ -214,7 +169,7 @@ class _LogInScreenState extends State<LogInScreen> {
     );
   }
 
-  Widget _buildSignInButton(BuildContext context, state) {
+  Widget _buildSignInButton(BuildContext context, LogInScreenState state) {
     return Column(
       children: [
         SizedBox(height: 11),
@@ -291,10 +246,9 @@ class _LogInScreenState extends State<LogInScreen> {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  void sentTypeNumberEvent(
-    String phoneNumber,
-  ) {
-    bloc.add(TypeNumberEvent(phoneNumber));
+  void sentTypeNumberEvent(BuildContext context, String phoneNumber) {
+    print("num $phoneNumber");
+    BlocProvider.of<LogInScreenBloc>(context).add(TypeNumberEvent(phoneNumber));
   }
 
   void sentTypePasswordEvent(BuildContext context, String password) {
@@ -321,28 +275,21 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   void _navigateToRegistrationScreen() {
-    print('навигация на экран регестрации');
     Navigator.of(context)
         .pushAndRemoveUntil(buildRoute(GetCodeScreen()), (route) => false);
   }
 
   void _navigateToRestoreScreen(
     BuildContext context,
+    LogInScreenState state,
   ) async {
-    print('навигация на экран восстановления');
-
     final phoneNumber = await Navigator.of(context).push<String>(
       buildRoute<String>(
-        RestoreScreen(),
+        RestoreScreen(phoneNumber: state.phoneNumber),
       ),
     );
     BlocProvider.of<LogInScreenBloc>(context).add(
       PhoneUpdateEvent(phoneNumber),
     );
-  }
-
-  void _updateNumberController(UpdateNumberState state) {
-    numberController.text =
-        formatter.maskText('$numPrefix${state.phoneNumber}');
   }
 }
