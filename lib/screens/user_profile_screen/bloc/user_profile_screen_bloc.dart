@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swissdent/data/user_info/interactor/user_info_interactor.dart';
 import 'package:swissdent/managers/exception.dart';
@@ -12,6 +13,7 @@ class UserProfileScreenBloc
   String surname = '';
   String email = '';
   String phone = '';
+  String imageUrl = '';
 
   String newPassword = '';
   String confirmNewPassword = '';
@@ -26,6 +28,10 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     yield* mapGetUserInfoEvent(event);
     yield* mapTypeNameEvent(event);
+    yield* mapTypeSurnameEvent(event);
+    yield* mapTypeEmailEvent(event);
+    yield* mapTypeNewPasswordEvent(event);
+    yield* mapTypeConfirmNewPasswordEvent(event);
   }
 
   Stream<UserProfileScreenState> mapGetUserInfoEvent(
@@ -80,10 +86,12 @@ class UserProfileScreenBloc
       name = response.name;
       surname = response.surname;
       email = response.email;
-      phone = response.phone;
+      phone = response.phone.substring(2);
+      print('$phone');
       add(GetUserInfoEvent());
     } on NetworkException catch (e) {
       print("ошибка ${e.errorMessage}");
     }
   }
+
 }

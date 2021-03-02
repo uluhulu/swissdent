@@ -34,6 +34,9 @@ dependencies:
   flutter_money_formatter: ^0.8.3
   expandable: ^4.1.4
   video_player: ^1.0.1
+  image_picker: ^0.6.7+22
+
+
 
   #data libs
   dio: ^3.0.10
