@@ -18,8 +18,12 @@ class UserProfileScreenBloc
   String newPassword = '';
   String confirmNewPassword = '';
 
-  UserProfileScreenBloc({this.userInfoInteractor})
-      : super(UserProfileScreenState()) {
+  bool saveButtonIsAvailable = false;
+
+  UserProfileScreenBloc({this.userInfoInteractor, })
+      : super(UserProfileScreenState(
+      saveButtonIsAvailable: false,
+  )) {
     _getUserData();
   }
 
@@ -42,6 +46,7 @@ class UserProfileScreenBloc
         userSurname: surname,
         userEmail: email,
         userPhoneNumber: phone,
+        saveButtonIsAvailable: saveButtonIsAvailable
       );
   }
 
@@ -49,6 +54,14 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     if (event is TypeNameEvent) {
       name = event.name;
+      _checkFields();
+      yield GetUserInfoState(
+          userName: name,
+          userSurname: surname,
+          userEmail: email,
+          userPhoneNumber: phone,
+          saveButtonIsAvailable: saveButtonIsAvailable
+      );
     }
   }
 
@@ -56,6 +69,14 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     if (event is TypeSurnameEvent) {
       surname = event.surname;
+      _checkFields();
+      yield GetUserInfoState(
+          userName: name,
+          userSurname: surname,
+          userEmail: email,
+          userPhoneNumber: phone,
+          saveButtonIsAvailable: saveButtonIsAvailable
+      );
     }
   }
 
@@ -63,6 +84,14 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     if (event is TypeEmailEvent) {
       email = event.email;
+      _checkFields();
+      yield GetUserInfoState(
+          userName: name,
+          userSurname: surname,
+          userEmail: email,
+          userPhoneNumber: phone,
+          saveButtonIsAvailable: saveButtonIsAvailable
+      );
     }
   }
 
@@ -70,6 +99,14 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     if (event is TypeNewPasswordEvent) {
       newPassword = event.newPassword;
+      _checkFields();
+      yield GetUserInfoState(
+          userName: name,
+          userSurname: surname,
+          userEmail: email,
+          userPhoneNumber: phone,
+          saveButtonIsAvailable: saveButtonIsAvailable
+      );
     }
   }
 
@@ -77,8 +114,23 @@ class UserProfileScreenBloc
       UserProfileScreenEvent event) async* {
     if (event is TypeConfirmNewPasswordEvent) {
       confirmNewPassword = event.confirmNewPassword;
+      _checkFields();
+      yield GetUserInfoState(
+          userName: name,
+          userSurname: surname,
+          userEmail: email,
+          userPhoneNumber: phone,
+          saveButtonIsAvailable: saveButtonIsAvailable
+      );
     }
   }
+  Stream<UserProfileScreenState> mapSaveChangesEvent(
+      UserProfileScreenEvent event) async* {
+    if (event is SaveChangesEvent) {
+
+    }
+  }
+
 
   void _getUserData() async {
     try {
@@ -91,6 +143,13 @@ class UserProfileScreenBloc
       add(GetUserInfoEvent());
     } on NetworkException catch (e) {
       print("ошибка ${e.errorMessage}");
+    }
+  }
+  void  _checkFields(){
+    if (name.isNotEmpty && surname.isNotEmpty && newPassword == confirmNewPassword){
+      saveButtonIsAvailable = true;
+    }else {
+
     }
   }
 

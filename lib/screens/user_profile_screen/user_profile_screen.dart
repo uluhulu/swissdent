@@ -106,7 +106,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     left: 16.0, right: 16.0, top: 64, bottom: 47),
                 child: SwissdentButton(
                   width: double.infinity,
-                  isAvaliable: true,
+                  isAvaliable: state.saveButtonIsAvailable,
                   buttonText: Text(
                     save,
                     style: semiBold17WhiteStyle,
