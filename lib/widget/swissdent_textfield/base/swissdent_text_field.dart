@@ -17,6 +17,7 @@ class SwissdentTextField extends StatelessWidget {
   final bool autofocus;
   final bool readOnly;
   final Function(String text) onSubmitted;
+  final Function(String text) onType;
   final int maxLines;
 
   SwissdentTextField({
@@ -35,6 +36,7 @@ class SwissdentTextField extends StatelessWidget {
     this.onSubmitted,
     this.readOnly = false,
     this.maxLines = 1,
+    this.onType,
   }) : super(key: key);
 
   @override
@@ -58,9 +60,14 @@ class SwissdentTextField extends StatelessWidget {
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(left: 23.0, right: 24,),
-              child: TextField(
-                onSubmitted: onSubmitted ?? (text) {},
+              padding: const EdgeInsets.only(
+                left: 23.0,
+                right: 24,
+              ),
+              child: TextFormField(
+                onChanged: onType ?? (text) {},
+                onFieldSubmitted: onSubmitted ?? (text) {},
+                // onSubmitted: onSubmitted ?? (text) {},
                 autofocus: autofocus,
                 focusNode: focusNode ?? FocusNode(),
                 keyboardType: keyboardType,

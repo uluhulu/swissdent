@@ -35,8 +35,7 @@ dependencies:
   expandable: ^4.1.4
   video_player: ^1.0.1
   image_picker: ^0.6.7+22
-
-
+  masked_controller: ^1.0.1
 
   #data libs
   dio: ^3.0.10

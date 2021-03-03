@@ -127,7 +127,6 @@ class _LogInScreenState extends State<LogInScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
-            defaultText: state.phoneNumber,
             focusNode: phone,
             onNumberType: (number) {
               sentTypeNumberEvent(context, number);

@@ -109,7 +109,6 @@ class _RestoreScreenState extends State<RestoreScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: SwissdentNumTextField(
             defaultText: state.phoneNumber,
-            onSubmitted: (text) {},
             onNumberType: (text) {
               sendTypeNumberEvent(text, context);
             },

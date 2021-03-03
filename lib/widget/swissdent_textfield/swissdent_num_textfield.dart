@@ -25,7 +25,7 @@ class SwissdentNumTextField extends StatefulWidget {
 }
 
 class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
-  TextEditingController controller;
+  TextEditingController controller = TextEditingController();
 
   final formatter = MaskTextInputFormatter(
     mask: '$numPrefix ### ### ## ##',
@@ -40,43 +40,44 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
     initController();
   }
 
-  // @override
-  // void didUpdateWidget(covariant SwissdentNumTextField oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   if (oldWidget.defaultText != widget.defaultText) {
-  //     print("update");
-  //     updateControllerText();
-  //   }
-  // }
+  @override
+  void didUpdateWidget(covariant SwissdentNumTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.defaultText != widget.defaultText) {
+      updateControllerText();
+    }
+  }
 
   void initController() {
-    controller = TextEditingController(
-        text: formatter.maskText('$numPrefix${widget.defaultText}'));
+    controller.value = controller.value.copyWith(
+      text: formatter.maskText('$numPrefix${widget.defaultText}'),
+    );
 
+    updateControllerPrefix();
     controller.addListener(() {
-      if (widget.onNumberType != null) {
-        widget.onNumberType.call(formatter.unmaskText(controller.text));
-      }
-
-      if (controller.text.isEmpty) {
-        controller.value = controller.value.copyWith(
-          text: numPrefix,
-          selection: TextSelection.fromPosition(
-            TextPosition(offset: numPrefix.length),
-          ),
-        );
-      }
+      widget.onNumberType(formatter.unmaskText(controller.text));
+      updateControllerPrefix();
     });
   }
 
-  void updateControllerText() {
-    setState(() {
+  void updateControllerPrefix() {
+    if (controller.text.isEmpty) {
       controller.value = controller.value.copyWith(
-        text: formatter.maskText(
-          '$numPrefix${widget.defaultText}',
+        text: numPrefix,
+        selection: TextSelection.fromPosition(
+          TextPosition(offset: numPrefix.length),
         ),
       );
-    });
+    }
+  }
+
+  void updateControllerText() {
+    print('update ${widget.defaultText}');
+    controller.value = controller.value.copyWith(
+      text: formatter.maskText(
+        '$numPrefix${widget.defaultText}',
+      ),
+    );
   }
 
   @override
@@ -87,7 +88,6 @@ class _SwissdentNumTextFieldState extends State<SwissdentNumTextField> {
       maxLength: 16,
       formatter: formatter,
       controller: controller,
-      suffixWidget: Icon(Icons.add),
       keyboardType: TextInputType.phone,
       readOnly: widget.readOnly,
     );
