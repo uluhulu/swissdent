@@ -91,7 +91,8 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       try {
         final registerResponse = await signInInteractor
             .register(formatter.maskText(phoneNumber));
-        smsCode = registerResponse.code.toString();
+
+        smsCode = registerResponse.code;
         print(smsCode);
       } on NetworkException catch (e) {
         yield ErrorCodeState(

@@ -26,5 +26,10 @@ class TypeConfirmNewPasswordEvent extends UserProfileScreenEvent{
   TypeConfirmNewPasswordEvent(this.confirmNewPassword);
 }
 class SaveChangesEvent extends UserProfileScreenEvent{
-
 }
+class UpdatePhotoPathEvent extends UserProfileScreenEvent{
+  final String photoPath;
+
+  UpdatePhotoPathEvent(this.photoPath);
+}
+

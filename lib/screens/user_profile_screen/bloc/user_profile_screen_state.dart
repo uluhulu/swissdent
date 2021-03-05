@@ -4,6 +4,7 @@ class UserProfileScreenState {
   final String userEmail;
   final String userPhoneNumber;
   final String imageUrl;
+  final String photoPath;
   final bool saveButtonIsAvailable;
 
   UserProfileScreenState({
@@ -13,6 +14,7 @@ class UserProfileScreenState {
     this.userPhoneNumber,
     this.imageUrl,
     this.saveButtonIsAvailable,
+    this.photoPath,
   });
 }
 
@@ -23,13 +25,14 @@ class GetUserInfoState extends UserProfileScreenState {
     String userEmail,
     String userPhoneNumber,
     String imageUrl,
+    String photoPath,
     bool saveButtonIsAvailable,
   }) : super(
-          userName: userName,
-          userSurname: userSurname,
-          userEmail: userEmail,
-          userPhoneNumber: userPhoneNumber,
-          imageUrl: imageUrl,
-          saveButtonIsAvailable: saveButtonIsAvailable,
-        );
+            userName: userName,
+            userSurname: userSurname,
+            userEmail: userEmail,
+            userPhoneNumber: userPhoneNumber,
+            imageUrl: imageUrl,
+            saveButtonIsAvailable: saveButtonIsAvailable,
+            photoPath: photoPath);
 }

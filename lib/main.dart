@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: LogInScreen(),
+        home: UserProfileScreen(),
         // home: LogInScreen(),
       ),
     );

@@ -94,15 +94,26 @@ class ApiManager {
         options: await _checkOptions('POST', options),
       );
 
+      print("ответ в json  $responseJson");
       final response = BaseResponse.fromJson(responseJson.data);
 
       return response;
     } on DioError catch (e) {
-      throw NetworkException(
-        errorMessage: e.message,
-        code: e.response.statusCode,
-        customErrorMessage: e.response.data['message'],
-      );
+      if (e.response.statusCode == 500) {
+        throw NetworkException(
+          errorMessage: e.message,
+          code: e.response.statusCode,
+          customErrorMessage: 'ошибка на сервере',
+          // customErrorMessage:'ass',
+        );
+      } else {
+        throw NetworkException(
+          errorMessage: e.message,
+          code: e.response.statusCode,
+          customErrorMessage: e.response.data['message'].toString(),
+          // customErrorMessage:'ass',
+        );
+      }
     }
   }
 

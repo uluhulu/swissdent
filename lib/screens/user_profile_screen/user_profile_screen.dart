@@ -7,7 +7,7 @@ import 'package:swissdent/data/user_info/interactor/user_info_interactor.dart';
 import 'package:swissdent/screens/user_profile_screen/bloc/user_profile_screen_bloc.dart';
 import 'package:swissdent/screens/user_profile_screen/bloc/user_profile_screen_event.dart';
 import 'package:swissdent/screens/user_profile_screen/bloc/user_profile_screen_state.dart';
-import 'package:swissdent/screens/user_profile_screen/widget/user_profile_photo.dart';
+import 'package:swissdent/screens/user_profile_screen/widget/user_profile_photo/user_profile_photo.dart';
 import 'package:swissdent/widget/appbar.dart';
 import 'package:swissdent/widget/chat_button.dart';
 import 'package:swissdent/widget/swissdent_button.dart';
@@ -84,18 +84,23 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody(
+    BuildContext context,
+  ) {
     return BlocConsumer<UserProfileScreenBloc, UserProfileScreenState>(
-      listener: (BuildContext context, state) {
-      },
+      listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         return SingleChildScrollView(
           // child: Container(),
           child: Column(
             children: [
               UserProfilePhoto(
-                photoPath: "",
-              ),
+                  photoPath: state.photoPath,
+                  onPhotoSelect: (path) {
+                    setState(() {
+                      print(path);
+                    });
+                  }),
               _buildCommonData(context, state),
               SizedBox(
                 height: 32,
@@ -112,7 +117,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     style: semiBold17WhiteStyle,
                   ),
                   buttonColor: codeButtonColor,
-                  onTap: (){
+                  onTap: () {
                     sendSaveChangesEvent(context);
                   },
                 ),
@@ -142,7 +147,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             onSubmitted: (text) {
               onSubmitted(context, surname);
             },
-            onType: (name){
+            onType: (name) {
               sendTypeNameEvent(context, name);
             },
             hint: nameHint,
@@ -156,7 +161,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             onSubmitted: (text) {
               onSubmitted(context, num);
             },
-            onType: (surname){
+            onType: (surname) {
               sendTypeSurnameEvent(context, surname);
             },
             hint: surnameHint,
@@ -181,8 +186,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             focusNode: email,
             hint: emailHint,
             defaultText: state.userEmail,
-            onType: (email){
-              sendTypeEmailEvent(context,email);
+            onType: (email) {
+              sendTypeEmailEvent(context, email);
             },
           ),
         ],
@@ -205,7 +210,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
           SwissdentDefaultTextField(
             focusNode: password,
-            onType: (newPassword){
+            onType: (newPassword) {
               sendTypeNewPasswordEvent(context, newPassword);
             },
             onSubmitted: (text) {
@@ -219,8 +224,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           SwissdentDefaultTextField(
             focusNode: repeatPassword,
             hint: repeatNewPassword,
-            onType: (confirmNewPassword){
-              sendTypeConfirmNewPasswordEvent(context,confirmNewPassword);
+            onType: (confirmNewPassword) {
+              sendTypeConfirmNewPasswordEvent(context, confirmNewPassword);
             },
           ),
         ],
@@ -231,23 +236,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void onSubmitted(BuildContext context, FocusNode nextFocus) {
     FocusScope.of(context).requestFocus(nextFocus);
   }
-  void sendTypeNameEvent(BuildContext context, String name){
+
+  void sendTypeNameEvent(BuildContext context, String name) {
     BlocProvider.of<UserProfileScreenBloc>(context).add(TypeNameEvent(name));
   }
-  void sendTypeSurnameEvent(BuildContext context, String surname){
-    BlocProvider.of<UserProfileScreenBloc>(context).add(TypeSurnameEvent(surname));
-  }
-  void sendTypeEmailEvent(BuildContext context, String email){
-    BlocProvider.of<UserProfileScreenBloc>(context).add(TypeEmailEvent(email));
-  }
-  void sendTypeNewPasswordEvent(BuildContext context, String newPassword){
-    BlocProvider.of<UserProfileScreenBloc>(context).add(TypeNewPasswordEvent(newPassword));
-  }
-  void sendTypeConfirmNewPasswordEvent(BuildContext context, String confirmNewPassword){
-    BlocProvider.of<UserProfileScreenBloc>(context).add(TypeConfirmNewPasswordEvent(confirmNewPassword));
-  }
-  void sendSaveChangesEvent(BuildContext context,){
-    BlocProvider.of<UserProfileScreenBloc>(context).add(SaveChangesEvent());
+
+  void sendTypeSurnameEvent(BuildContext context, String surname) {
+    BlocProvider.of<UserProfileScreenBloc>(context)
+        .add(TypeSurnameEvent(surname));
   }
 
+  void sendTypeEmailEvent(BuildContext context, String email) {
+    BlocProvider.of<UserProfileScreenBloc>(context).add(TypeEmailEvent(email));
+  }
+
+  void sendTypeNewPasswordEvent(BuildContext context, String newPassword) {
+    BlocProvider.of<UserProfileScreenBloc>(context)
+        .add(TypeNewPasswordEvent(newPassword));
+  }
+
+  void sendTypeConfirmNewPasswordEvent(
+      BuildContext context, String confirmNewPassword) {
+    BlocProvider.of<UserProfileScreenBloc>(context)
+        .add(TypeConfirmNewPasswordEvent(confirmNewPassword));
+  }
+  void sendUpdatePhotoPathEvent(
+      BuildContext context, String photoPath) {
+    BlocProvider.of<UserProfileScreenBloc>(context)
+        .add(UpdatePhotoPathEvent(photoPath));
+  }
+
+  void sendSaveChangesEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<UserProfileScreenBloc>(context).add(SaveChangesEvent());
+  }
 }
