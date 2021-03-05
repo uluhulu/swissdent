@@ -29,7 +29,8 @@ void initDi() {
   );
   getIt.registerSingleton<UserInfoInteractor>(
     UserInfoInteractor(
-      repository: getIt<UserInfoRepository>(),
+      userInfoRepository: getIt<UserInfoRepository>(),
+      signInRepository: getIt<SignInRepository>(),
     ),
   );
 }

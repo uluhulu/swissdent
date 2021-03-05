@@ -91,6 +91,7 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
       try {
         final registerResponse = await signInInteractor
             .register(formatter.maskText(phoneNumber));
+
         smsCode = registerResponse.code;
         print(smsCode);
       } on NetworkException catch (e) {
@@ -221,7 +222,6 @@ class GetCodeScreenBloc extends Bloc<GetCodeScreenEvent, GetCodeScreenState> {
   ) async* {
     if (event is PhoneUpdateEvent) {
       phoneNumber = event.phoneNumber;
-      print("номер обновлен $phoneNumber");
       yield UpdateNumberState(
         getCodeButtonIsAvaliable: getCodeButtonIsAvaliable,
         timerAvaliable: timerAvaliable,

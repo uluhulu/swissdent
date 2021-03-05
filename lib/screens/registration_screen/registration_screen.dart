@@ -87,6 +87,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         if (state is RegistrationSucceedState) {
           showPasswordBottomSheet(context);
         }
+        if (state is RegistrationNotSucceedState) {
+          _showErrorSnackBar(context, state.errorMessage);
+        }
       },
       builder: (BuildContext context, state) {
         return Column(
@@ -196,6 +199,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ],
     );
   }
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: errorSnackbarColor,
+        content: Text(
+          errorMessage,
+          style: semiBold17WhiteStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
 
   void showPasswordBottomSheet(BuildContext blocContext) {
     showModalBottomSheet<void>(
@@ -216,6 +231,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void sendTypeEmailEvent(BuildContext context, String email) {
+    print('sendTypeEmailEvent: $email');
     BlocProvider.of<RegistrationScreenBloc>(context).add(TypeEmailEvent(email));
   }
 

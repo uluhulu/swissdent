@@ -170,7 +170,7 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
           child: SwissdentNumTextField(
             defaultText: state.phoneNumber,
             focusNode: phone,
-            customController: numberController,
+            // customController: numberController,
             onSubmitted: (text) {
               onSubmitted(context, smsCode);
             },
@@ -357,8 +357,6 @@ class _GetCodeScreenState extends State<GetCodeScreen> {
         RestoreScreen(),
       ),
     );
-
-    print("полученный номер $phoneNumber");
 
     BlocProvider.of<GetCodeScreenBloc>(context).add(
       PhoneUpdateEvent(phoneNumber),

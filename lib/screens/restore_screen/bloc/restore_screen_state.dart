@@ -1,20 +1,30 @@
-class RestoreScreenState{
+class RestoreScreenState {
   final bool restoreButtonIsAvailable;
-
-  RestoreScreenState({this.restoreButtonIsAvailable});
-}
-class RestoreSucceedState extends RestoreScreenState{
   final String phoneNumber;
-  RestoreSucceedState( {this.phoneNumber,
+
+  RestoreScreenState({
+    this.restoreButtonIsAvailable,
+    this.phoneNumber,
+  });
+}
+
+class RestoreSucceedState extends RestoreScreenState {
+  RestoreSucceedState({
+    String phoneNumber,
     bool restoreButtonIsAvailable,
   }) : super(
-    restoreButtonIsAvailable: restoreButtonIsAvailable,
-  );
+          restoreButtonIsAvailable: restoreButtonIsAvailable,
+          phoneNumber: phoneNumber,
+        );
 }
-class RestoreNotSucceedState extends RestoreScreenState{
+
+class RestoreNotSucceedState extends RestoreScreenState {
+  final String errorMessage;
+
   RestoreNotSucceedState({
     bool restoreButtonIsAvailable,
+    this.errorMessage,
   }) : super(
-    restoreButtonIsAvailable: restoreButtonIsAvailable,
-  );
+          restoreButtonIsAvailable: restoreButtonIsAvailable,
+        );
 }

@@ -9,6 +9,7 @@ import 'package:swissdent/di.dart';
 import 'package:swissdent/screens/cart_screen/cart_screen.dart';
 import 'package:swissdent/screens/help_screen/help_screen.dart';
 import 'package:swissdent/screens/main_menu_screen/bloc/main_menu_screen_bloc.dart';
+import 'package:swissdent/screens/main_menu_screen/bloc/main_menu_screen_event.dart';
 import 'package:swissdent/screens/main_menu_screen/bloc/main_menu_screen_state.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_app_bar.dart';
 import 'package:swissdent/screens/main_menu_screen/widget/main_menu_card.dart';
@@ -45,7 +46,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         );
       },
       child: BlocConsumer<MainMenuScreenBloc, MainMenuScreenState>(
-        listener: (BuildContext context, state) {},
+        listener: (BuildContext context, state) {
+          if (state is UserInfoNavigateState) _navigateToUserProfileScreen();
+          if (state is CartNavigateState) _navigateToCartScreen();
+          if (state is PersonalCabinetNavigateState)
+            _navigateToPersonalCabinetScreen();
+          if (state is ServicesNavigateState) _navigateToServicesScreen();
+          if (state is ProductsNavigateState) _navigateToProductScreen();
+          if (state is TeamNavigateState) _navigateToTeamScreen();
+          if (state is HelpNavigateState) _navigateToHelpScreen();
+        },
         builder: (BuildContext context, state) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -56,7 +66,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   padding: EdgeInsets.zero,
                   children: [
                     _buildUserCard(context, state),
-                    _buildMainMenuScreenCard(context,state),
+                    _buildMainMenuScreenCard(context, state),
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 24.0, left: 16, right: 16, bottom: 37),
@@ -75,62 +85,61 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             ],
           );
         },
-
       ),
     );
   }
 
-  Widget _buildUserCard(BuildContext context, state){
+  Widget _buildUserCard(BuildContext context, state) {
     return UserCard(
       productCount: 3,
-      userName: 'User User',
-      userEmail: 'user@mail.com',
+      userName: "${state.userName} ${state.userSurname}",
+      userEmail: '${state.userEmail}',
       navigateToCartScreen: () {
-        _navigateToCartScreen();
+        sendCartNavigateEvent(context);
       },
       navigateToUserProfileScreen: () {
-        _navigateToUserProfileScreen();
+        sendUserInfoNavigateEvent(context);
       },
       avatarPath:
-      'https://www.denofgeek.com/wp-content/uploads/2019/11/star-wars-the-mandalorian-baby-yoda.png?fit=1401%2C734',
+          'https://www.denofgeek.com/wp-content/uploads/2019/11/star-wars-the-mandalorian-baby-yoda.png?fit=1401%2C734',
     );
   }
-  Widget _buildMainMenuScreenCard(BuildContext context, state){
+
+  Widget _buildMainMenuScreenCard(BuildContext context, state) {
     return Column(
       children: [
         MainMenuCard(
           iconPath: iconPerson,
           cardText: personalCabinet,
           onTap: () {
-            _navigateToPersonalCabinetScreen();
+            sendPersonalCabinetNavigateEvent(context);
           },
         ),
         MainMenuCard(
             iconPath: iconServices,
             cardText: services,
             onTap: () {
-              _navigateToServicesScreen();
-            }
-        ),
+              sendServicesNavigateEvent(context);
+            }),
         MainMenuCard(
           iconPath: iconProducts,
           cardText: products,
           onTap: () {
-            _navigateToProductScreen();
+            sendProductsNavigateEvent(context);
           },
         ),
         MainMenuCard(
           iconPath: iconTeam,
           cardText: team,
           onTap: () {
-            _navigateToTeamScreen();
+            sendTeamNavigateEvent(context);
           },
         ),
         MainMenuCard(
           iconPath: iconHelp,
           cardText: help,
           onTap: () {
-            _navigateToHelpScreen();
+            sendHelpNavigateEvent(context);
           },
         ),
       ],
@@ -163,5 +172,47 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
 
   void _navigateToUserProfileScreen() {
     Navigator.of(context).push(buildRoute(UserProfileScreen()));
+  }
+
+  void sendUserInfoNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(UserInfoNavigateEvent());
+  }
+
+  void sendCartNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(CartNavigateEvent());
+  }
+
+  void sendPersonalCabinetNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context)
+        .add(PersonalCabinetNavigateEvent());
+  }
+
+  void sendServicesNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(ServicesNavigateEvent());
+  }
+
+  void sendProductsNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(ProductsNavigateEvent());
+  }
+
+  void sendTeamNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(TeamNavigateEvent());
+  }
+  void sendHelpNavigateEvent(
+    BuildContext context,
+  ) {
+    BlocProvider.of<MainMenuScreenBloc>(context).add(HelpNavigateEvent());
   }
 }
